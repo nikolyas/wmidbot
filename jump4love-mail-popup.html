@@ -1,0 +1,90 @@
+<div class="home">
+	<div class="header">
+		<h1 class="logo"><a href="http://wmid.com.ua">WMID.com.ua Bot программы для брачных агенств для золушки, дрима, свадьбы, джампа</a></h1>
+		<div class="clear10"></div>
+	</div>
+	<div class="content">
+		<div class="leftColumn">
+			<ul class="navi">
+				<li><a href="http://wmidbot.com/?page=help" target="_blank">Справка</a></li>
+				<li><a href="http://wmidbot.com/?page=dayactive" target="_blank">Продлить активацию</a></li>
+				<li><a href="#" id="blacklist">Черный список</a></li>
+				<li><a href="#" id="writerslist">Писатели</a></li>
+			</ul>
+			<div class="clear10"></div>
+			<div class="active">
+				Переменные:<br />
+				<b>{Login}</b> логин<br />
+				<b>{Age}</b> возраст
+			</div>
+			<div class="clear10"></div>
+			<div class="active">
+				Оплачено до:<br /><b id="payed"></b>
+			</div>
+			<div class="clear10"></div>
+		</div>
+		<div class="rightColumn" id="mainside">
+			<b class="title">Тема</b> <a href="#" id="addt">Добавить</a> <a href="#" id="editt">Править</a> <a href="#" id="delt">Удалить</a>
+			<div class="clear5"></div>
+			<select class="sel_100" id="subject">
+				<option value="0">-нет тем-</option>
+			</select>
+			<div class="clear10"></div>
+			<textarea class="text_ms" id="text" placeholder="Введите текст письма"></textarea>
+			<div class="clear10"></div>
+			<b class="title">Цель</b>
+			<div class="clear5"></div>
+			<select class="sel_100" id="goal">
+				<option value="search">Поиск</option>
+				<option value="favorites">По фаворитам</option>
+			</select>
+			<div class="clear10"></div>
+			<b class="title">Фотки</b>
+			<div class="clear5"></div>
+			<select class="sel_100" id="attach">
+				<option value="0">-без фотографии-</option>
+			</select> 
+			<div class="clear10"></div>
+			<table style="width:75%" class="table_1">
+				<tr>
+					<td>
+						<b class="title">Взраст от</b>
+						<div class="clear5"></div>
+						<input type="number" id="age-from" value="20" min="20" max="100" style="width:50px" />
+					</td>
+					<td class="center"><b>&mdash;</b></td>
+					<td>
+						<b class="title">до</b>
+						<div class="clear5"></div>
+						<input type="number" id="age-to" value="60" min="20" max="100" style="width:50px" />
+					</td>
+				</tr>
+			</table>
+			<div class="clear10"></div>
+			<a href="#" class="Btn_big" id="start"><b>Начать рассылку</b></a>
+			<a href="#" class="Btn_big_red" id="stop" style="display:none;"><b>Остановить рассылку</b></a>
+			<div class="clear5"></div>
+			<img src="" alt="" id="preview">
+		</div>
+		<div class="rightColumn" style="display:none" id="blackside">
+			<div class="clear10"></div>
+			<b class="title">Черный список</b>
+			<div class="clear5"></div>
+			<select id="black" size="15" style="width:100%" multiple></select>
+			<div class="clear10"></div>
+			<a href="#" id="addb" class="Btn_normal" title="Добавить"><b>+</b></a> <a href="#" id="editb" class="Btn_normal"><b>Править</b></a> <a href="#" id="delb" class="Btn_normal" style="background:#e14747;"><b>Удалить</b></a>
+		</div>
+		<div class="rightColumn" style="display:none" id="writersside">
+			<div class="clear10"></div>
+			<b class="title">Список писателей</b>
+			<div class="clear5"></div>
+			<select id="writers" size="15" style="width:100%" multiple></select>
+			<div class="clear10"></div>
+			<a href="#" id="addw" class="Btn_normal" title="Добавить"><b>+</b></a> <a href="#" id="editw" class="Btn_normal"><b>Править</b></a> <a href="#" id="delw" class="Btn_normal" style="background:#e14747;"><b>Удалить</b></a>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script type="text/javascript">//<![CDATA[
+eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('f q=$("1w").14("q"),2=q.2,9=$("#9"),g=$("#N-1d"),e=$("#N-1a"),8=$("#8"),6=$("#6"),s=$("#s"),E=$("#E"),J=$("#J"),l=$("#l"),U=$("#U"),7=$("#7"),L=$("#L"),B=$("#B"),F=$("#F"),X=5(){f a=$("#8 i:1N");3(8.T("i").y()>1){8.m("P",x);a.6("-темы-")}b{8.m("P",C);a.6("-нет тем-")}},1b=5(){3(2.p O 2)$.1H(2[2.p],{6:6.4(),g:g.4(),e:e.4()})},1f=5(){J.A();E.G();$("#6,#N-1d,#N-1a,#s,#8,#1g,#Z,#l").m("P",C)},1l=5(){E.A();J.G();$("#6,#N-1d,#N-1a,#s,#1g,#Z,#l").m("P",x);X()},c=5(){13({15:"K",2:2})},19=5(a){13({15:"1D",1k:a})};$("#1B").6(1y.1x(0,16)).m("R","Осталось: "+1A);$("#1g").d(5(){3(B.1p(":1r")){B.12(F).G();L.A()}b{L.12(F).G();B.A()}o!1});$("#Z").d(5(){3(F.1p(":1r")){B.12(F).G();L.A()}b{L.12(B).G();F.A()}o!1});$("#1v").d(5(){f n=I("Введите 1i (можно несколько, через запятую)");3(n!==18){$.j(n.11(/\\D+/),5(k,v){3(9.T("[Y="+v+"]").y()==0){$("<i>").6(v).w(9);9.4(v);2.9[v]=""}});c()}o!1});$("#1C").d(5(){f t=$("#9 :z"),6=[];3(t.y()>0){t.j(5(){6.1n($(h).4())});6=I("Отредактируйте запись:",6.1j(", "));3(6!==18){t.j(5(){S 2.9[$(h).4()]}).M();$.j(6.11(/\\D+/),5(k,v){3(9.T("[Y="+v+"]").y()==0){$("<i>").6(v).w(9);9.4(v);2.9[v]=""}});c()}}o!1});$("#1E").d(5(){f t=$("#9 :z");t.j(5(){S 2.9[$(h).4()]}).M();c();o!1});$("#1F").d(5(){f n=I("Введите 1i (можно несколько, через запятую)");3(n!==18){$.j(n.11(/\\D+/),5(k,v){1J.1L(v);3(7.T("[Y="+v+"]").y()==0){$("<i>").6(v).w(7);7.4(v);2.7[v]=""}});c()}o!1});$("#1t").d(5(){f t=$("#7 :z"),6=[];3(t.y()>0){t.j(5(){6.1n($(h).4())});6=I("Отредактируйте запись:",6.1j(", "));3(6!==18){t.j(5(){S 2.7[$(h).4()]}).M();$.j(6.11(/\\D+/),5(k,v){3(7.T("[Y="+v+"]").y()==0){$("<i>").6(v).w(7);7.4(v);2.7[v]=""}});c()}}o!1});$("#1u").d(5(){f t=$("#7 :z");t.j(5(){S 2.7[$(h).4()]}).M();c();o!1});$.j(2,5(k,v){3(k==W(k))$("<i>").4(k).6(v.R).w(8)});f Q=x;3(2.s)s.4(2.s);b Q=C;3(2.9)$.j(2.9,5(k,v){$("<i>").6(v?v:k).4(k).w(9)});b 2.9={};3(2.7)$.j(2.7,5(k,v){$("<i>").6(v?v:k).4(k).w(7)});b 2.7={};g.u(5(){2.g=W($(h).4());3(2.g>=W(e.4()))e.4(2.g);c()});e.u(5(){2.e=W($(h).4());3(2.e<=W(g.4()))g.4(2.e);c()});s.u(5(){2.s=$(h).4();c()});6.u(5(){3(2.p O 2){2[2.p].6=$(h).4();c()}});$.j(q.l,5(k,v){$("<i>").6(v[0]).14("17",v[1]).w(l)});l.u(5(){f a=$(":z",h),v=$(h).4(),K=2.l!=v;3(v==0)U.G();b U.A().m("17",a.14("17"));3(K){2.l=v;c()}});3(2.l)l.4(2.l);b Q=C;l.u();U.d(5(){1Q.1z($(h).14("17"))});8.u(5(){f v=$(h).4(),K=2.p!=v,1e=$("#1m,#1h,#1o,#E");3(K)1b();3(v=="0"){1e.m("P",C);6.4(6.m("1c"));g.4(g.m("1c"));e.4(e.m("1c"));19(0)}b 3(!(v O 2))$("i:z",h).M();b{g.4(2[v].g);e.4(2[v].e);6.4(2[v].6);19(2[v].1q);1e.m("P",x)}3(K){2.p=v;c()}});3(2.p)8.4(2.p);b Q=C;8.u();3(Q){}$("#1G").d(5(){f n=I("Введите тему письма");3(n){$("<i>").4(2.10).6(n).w(8);2[2.10]={R:n,6:6.4(),g:g.4(),e:e.4(),1k:",",1q:0,1I:0};X();3(q.H)2.10++;b 8.4(2.10++).u();c()}o x});$("#1o").d(5(){1b();c()});$("#1h").d(5(){3(!q.H){f v=8.4(),t=$("#8 i:z"),n;3(v>0){n=I("Введите новую тему письма",t.6());3(n&&v O 2){t.6(n);2[v].R=n;c()}}}o x});$("#1m").d(5(){3(!q.H){f v=8.4(),t=$("#8 i:z");3(v>0&&(!(v O 2)||1K("Вы действительно хотите удалить письмо \\""+t.6()+"\\"?"))){f a=t.1s().y()>0?t.1s():t.1M();t.M();S 2[v];8.4(a.4()).u();X()}}o x});3(q.H)1f();E.d(5(){3(!(2.p O 2))V("Выберите тему для рассылки");b 3(q.1O)V("На сегодня лимит рассылки исчерпан. Приходите завтра.");b 3(2[2.p].6=="")V("Введите текст письма!");b 3(2[2.p].R=="")V("Введите тему письма!");b 3(2.s=="7"&&$.1P(2.7)){V("Заполните писателей");$("#Z").d()}b 13({15:"E"},5(r){3(r){q.H=C;1f()}})});J.d(5(){13({15:"J"},5(r){3(r){q.H=x;1l()}})});X();',62,115,'||storage|if|val|function|text|writers|subject|black||else|SaveStorage|click|at|var|af|this|option|each||attach|prop||return|active|init||goal||change||appendTo|false|size|selected|show|blackside|true||start|writersside|hide|runned|prompt|stop|save|mainside|remove|age|in|disabled|resave|title|delete|find|preview|alert|parseInt|EnableSubject|value|writerslist|last|split|add|SM|data|type||src|null|Status|to|SaveTemplate|defaultValue|from|controls|Start|blacklist|editt|ID|join|sent|Stop|delt|push|savet|is|cnt|visible|next|editw|delw|addb|body|substr|rdate|open|remain|payed|editb|status|delb|addw|addt|extend|offlinepage|console|confirm|log|prev|first|limit|isEmptyObject|window'.split('|'),0,{}))
+//]]></script>
