@@ -22,7 +22,7 @@
 var init=$("body").data("init");
 $("#get-test").click(function(){
 	var th=$(this);
-	$.get("http://zolushka.wmid.com.ua/get.php?mode=js&get=test&plugin=zolushka-chat&name="+init.name).done(function(){
+	$.get("http://zolushka.wmid.com.ua/get.php?mode=js&get=test&plugin=zolushka-mail&name="+init.name).done(function(){
 		th.remove();
 	});
 	return !1;
