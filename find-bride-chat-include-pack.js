@@ -1,4 +1,3 @@
-console.log("!"+name+"!");
 (function($){
 	$("#ichat_camera_div").after("<div class=\"ichat_gf_block\"><span id=\"infotext\">Рассылка остановлена</span><br /><code id=\"infohelp\" title=\"Отправлено <- ожидает\">0 &lt;- 0</code></div>");
 
@@ -208,6 +207,7 @@ console.log("!"+name+"!");
 							function(r)
 							{
 								$("<div>").html(r.general.data).find(".ichat_loaddata_item_span").each(function(){
+									console.log($(this).prop("onclick"));
 									sentids+=parseInt($(this).prop("onclick").match(/(\d+)/)[1])+",";
 								}).end().remove();
 
