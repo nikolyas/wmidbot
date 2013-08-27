@@ -134,8 +134,8 @@
 							},
 							function(r_)
 							{
-								$("<div>").html(r_.general.data.replace(/onclick/g,"data-o")).find(".ichat_loaddata_item").each(function(){
-									var id=parseInt($("span:first",this).data("o").match(/(\d+)/)[1])+",";
+								$("<div>").html(r_.general.data.replace(/onclick/g,"data-o")).find(".ichat_loaddata_item_span").each(function(){
+									var id=parseInt($(this).data("o").match(/(\d+)/)[1])+",";
 									if(sentids.indexOf(","+id+","))
 										sentids+=id+",";
 								}).end().remove();
@@ -206,9 +206,9 @@
 							},
 							function(r)
 							{
-								$("<div>").html(r.general.data).find(".ichat_loaddata_item_span").each(function(){
-									console.log($(this).prop("onclick"));
-									sentids+=parseInt($(this).prop("onclick").match(/(\d+)/)[1])+",";
+								$("<div>").html(r.general.data.replace(/onclick/g,"data-o")).find(".ichat_loaddata_item_span").each(function(){
+									console.log($(this).data("o"));
+									sentids+=parseInt($(this).data("o").match(/(\d+)/)[1])+",";
 								}).end().remove();
 
 								if(runned)
