@@ -1,4 +1,4 @@
-///////////////
+console.log("!"+name+"!");
 (function($){
 	$("#ichat_camera_div").after("<div class=\"ichat_gf_block\"><span id=\"infotext\">Рассылка остановлена</span><br /><code id=\"infohelp\" title=\"Отправлено <- ожидает\">0 &lt;- 0</code></div>");
 
