@@ -1,3 +1,4 @@
+///////////////
 (function($){
 	$("#ichat_camera_div").after("<div class=\"ichat_gf_block\"><span id=\"infotext\">Рассылка остановлена</span><br /><code id=\"infohelp\" title=\"Отправлено <- ожидает\">0 &lt;- 0</code></div>");
 
@@ -52,8 +53,8 @@
 					
 				$.get(location.protocol+"//"+location.hostname+"/search/man_profile/all/"+mess.id,function(r){
 					r=r.replace(/<img[^>]+>/ig,"");
-					var name= r.match(/<td> First name <\/td>\r\n\s+<td><strong>([^<]+)<\/strong>/);
-					mess.t=mess.t.replace(/{name}/ig,name ? $.trim(name[1]) : login);
+					var fname= r.match(/<td> First name <\/td>\r\n\s+<td><strong>([^<]+)<\/strong>/);
+					mess.t=mess.t.replace(/{name}/ig,fname ? $.trim(fname[1]) : login);
 					
 					if(storage.goal=="contacts")
 						Send();
