@@ -235,7 +235,7 @@ var EWMID = {
 		call(message);
 	},
 	get_info: function(){
-		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/info.js",EWMID.set_info);
+		//$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/info.js",EWMID.set_info);
 	},
 	get_blecklist: function(){
 		WMID.send('get_blist_chat','',function(response){ EWMID.set_blecklist(response.blist);});
