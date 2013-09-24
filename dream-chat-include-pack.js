@@ -16,10 +16,10 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 		localStorage.setItem("receiver", receiver);
 		localStorage.setItem("user", user);
 	});
-	chrome.extension.sendMessage({command: "set_db",object:user}, function(response) {});
+	//chrome.extension.sendMessage({command: "set_db",object:user}, function(response) {});
 });
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+/*chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.command){
 		case 'get_man':
 			window.location.href = '#/'+request.object;
@@ -31,15 +31,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		break;
 		case 'get_user': 
 			if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
-				var n;
-				$('head script').each(function (i, v) {
-					if ($(v).html().indexOf('zelf') != -1) {
-						var a = $.trim($(v).html().split('var zelf = ChatUser.convert(').join('').split(');').join(''));
-						n = JSON.parse(a)
-					}
-				});
-				$.cookie('user_id', n.id, { path: '/' });
-				sendResponse({user: n.id});
 				if($.cookie('sinc')==null){
 					var date = new Date();
 					var minutes = 60;
@@ -168,3 +159,4 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 $('body').prepend('<div id="count_send"></div>');
 
+*/
