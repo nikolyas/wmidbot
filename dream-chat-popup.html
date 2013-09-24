@@ -18,9 +18,8 @@
             <div class="clear10"></div>
             <div class="clear10"></div>
             <div class="active">
-                <b>Дней активации</b><div class="clear5"></div>
+                <b>Активация до</b><div class="clear5"></div>
                 Чат: <b class="count" id="active_day"></b><div class="clear5"></div>
-                Письма: <b class="count" id="activemob_day"></b>
             </div>
             <div class="clear10"></div>
         </div>
@@ -358,18 +357,7 @@ var EWMID = {
 	set_activechat: function(d){
 		d = d.split(',');
 		$('#active_day').text(d[2]+'.'+d[1]+'.'+d[0]);
-		/*$('#active_day').text(d);
-		EWMID.var_activechat = d;
-		if(EWMID.var_activechat=='0'){
-			$('.what_chat').text('чате');
-			$('.rightColumn').hide();
-			$('.rightColumn.no_act').show();
-		}*/
 	},
-	/*set_activemail:function(d){
-		EWMID.var_activemail = d;
-		$('#activemob_day').text(d);
-	},*/
 	set_age: function(){
 		$('#age_from, #age_to').html('');
 		for(i=EWMID.var_age_from;i<=EWMID.var_age_to;i++){
