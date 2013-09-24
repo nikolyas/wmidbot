@@ -1,1 +1,280 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(4($){$(".12-1a:1X").1Y("<m 1y=\\"12-1a\\"><m 1y=\\"12-1m\\"><1v 5=\\"1f\\">Рассылка остановлена</1v> <1i 5=\\"1k\\" 1N=\\"Отправлено <- ожидает\\">0 &1C;- 0</1i></m></m>");B f=q,1h=$("#1k"),X=$("#1f"),Z="1I-1M-"+J,3=1u.1A(Z),7=[],1w=4(){1K{1u.1L(Z,1x.18(3))}1O(e){2(e==2h)1c("Локальное хранилище переполнено")}},j=4(a){1h.9(a+" <- "+7.o)},z,13,h=",",g=",",8=0,x,10=4(){2(7.o>0){B c=7.1D();2($.1E(c.5,[1F,1G,1H])==-1)$.K(l.N+"//"+l.Q+"/T/",{U:1,W:"2a",2f:"2g",6:c.5,2i:c.t},4(a){2(a.16=="17"){c.F(E);B b=1b.1z("1J");b.9="2(!(\\""+c.5+"\\" 14 n.s) || !n.s["+c.5+"] || n.s["+c.5+"].u < "+a.M.u+")n.s["+c.5+"]={u:"+a.M.u+",1R:1};n.1T("+1x.18(a.M)+");";1b.1m.1U(b).1V.1W(b)}w c.F(q)},"O").27(4(){c.F(q)});w c.F(q)}2(f)2(3.P!="i"&&7.o==0){x();1c("Рассылка завершена")}w z=R(10,S)},y=4(r,b){2(7.o>0){z=R(4(){y(r,b)},S);1B}$.V(r.i.A,4(k,v){v.6=1d(v.6);2(3.1e<=v.Y&&v.Y<=3.1g&&g.C(","+v.6+",")==-1&&h.C(","+v.6+",")==-1&&!(v.6 14 3.D)){g+=v.6+",";7.1j({5:v.6,t:3.9.p(/{1l}/11,v.1P).p(/{1Q}/11,v.Y),F:4(a){2(a){h+=v.6+",";++8}j(8)}});2(f)j(8)}});2(f){b=r.16!="17"||r.i.A.o==0||r.i.1n.8<=r.i.1n.1S?1:b+1;13=R(4(){$.K(l.N+"//"+l.Q+"/T/",{U:"1",W:"1o",1p:b,1q:0},4(r){y(r,b)},"O")},S)}};x=4(){2(f){f=q;1r(z);1r(13);h=",";g=",";7=[]}j(8);X.9("Рассылка остановлена").1s("1t","")};3=3?$.1Z(3)||{}:{};2(20 3.D=="21")3={D:{},P:"i",1e:22,1g:23,9:""};24=4(c,d,e){25(c.26){G"28":e({J:J,29:f,3:3});H;G"2b":3=c.3;1w();H;G"2c":2(!f){f=E;h=",";g=",";2(3.P=="i"){$("#2d 2e[5^=\\"I-15-\\"]").V(4(){g+=$(L).19("5").p("I-15-","")+","});$.K(l.N+"//"+l.Q+"/T/",{U:"1",W:"1o",1p:1,1q:0},4(r){y(r,1)},"O")}w{$("#I-A .2j-A").2k("m").V(4(){B b=1d($(L).19("5").p("I-15-",""));2(b>0&&g.C(","+b+",")==-1&&h.C(","+b+",")==-1&&!(b 14 3.D)){g+=b+",";7.1j({5:b,t:3.9.p(/{1l}/11,$("a:2l",L).9()),F:4(a){2(a){h+=b+",";++8}j(8)}});j(8)}})}10();2(f)X.9("Идет рассылка").1s("1t","2m")}e(E);H;G"2n":x();e(E);H}}})(2o);',62,149,'||if|storage|function|id|user_id|queue|cnt|text|||||||inprogress|sentids|online|Status||location|div|chatV2|length|replace|false||_chatSubscribed||chat_id||else|Stop|Parse4Send|tos|list|var|indexOf|black|true||case|break|contact|name|post|this|data|protocol|json|goal|hostname|setTimeout|1000|chat_v2|ajax|each|mod|tinfo|user_age|key|StartSender|ig|block|top|in|user|result|ok|stringify|prop|container|document|alert|parseInt|af|infotext|at|info|code|push|infohelp|login|head|pager|users|off|clear|clearTimeout|css|color|localStorage|span|SaveStorage|JSON|class|createElement|getItem|return|lt|shift|inArray|10397|12266|101389|jump4love|script|try|setItem|chat|title|catch|user_name|age|state|num|_addMessage|appendChild|parentNode|removeChild|last|before|parseJSON|typeof|undefined|30|100|MessHandle|switch|type|fail|init|runned|messages|save|start|contacts_table|tr|file|send|QUOTA_EXCEEDED_ERR|message|item|children|first|green|stop|jQuery'.split('|'),0,{}))
+var EWMID = {
+	init: function(){
+		setTimeout(function(){
+		EWMID.get_blecklist();
+		WMID.send('get_status','',function(response){ 
+		setTimeout(function(){
+			if(response.statusobj){
+				EWMID.var_important_age_from = response.statusobj.age_from;
+				EWMID.var_important_age_to = response.statusobj.age_to;
+				if(response.statusobj.type==0){
+					EWMID.get_online();
+				}else if(response.statusobj.type==1){
+					EWMID.get_online();
+					setTimeout(EWMID.get_contacts,500);
+				}
+				$('#text_ms').html(response.statusobj.message);
+			}else{
+				EWMID.get_contacts();
+				EWMID.get_online();
+			}
+			if(response.status==0){
+				$('#start_send').show();
+				$('#end_send').hide();
+			}else if(response.status==1){
+				$('#start_send').hide();
+				$('#end_send').show();
+			}
+			if(response.statusobj){
+				$('#speed option:selected').removeAttr('selected');
+				$('#speed').val(response.statusobj.speed+1);
+			}
+		},200);
+		});
+		EWMID.get_active();
+		EWMID.build_popover();
+		EWMID.get_info();
+		},200);
+		setTimeout(function(){
+		$('#up_online').click(function(){
+			$(this).addClass('animate');
+			EWMID.get_online();
+			$('#typeSend option:selected').removeAttr('selected');
+			$('#typeSend option:eq(0)').attr('selected','selected');
+		});
+		$('#blecklist_link').click(function(){
+			$('.home').hide();
+			$('.blecklist').fadeIn();
+		});
+		$('.back').click(function(){
+			$('.Sector').hide();
+			$('.home').fadeIn();
+		});
+		$('#age_from').change(function(){
+			var val = $(this).val();
+			$('#age_to option').removeAttr('disabled');
+			$('#age_to option').each(function(){
+				if($(this).val()<val&&$(this).val()>0){ $(this).attr('disabled','disabled')}
+			});
+		});
+		$('#age_to').change(function(){
+			var val = $(this).val();
+			$('#age_from option').removeAttr('disabled');
+			$('#age_from option').each(function(){
+				if($(this).val()>val&&$(this).val()>0){ $(this).attr('disabled','disabled')}
+			});
+		});
+		$('#typeSend').change(function(){
+			var index = $(this).find('option:selected').index();
+			if(index==0){
+				EWMID.get_online();
+			}else if(index==1){
+				EWMID.get_contacts();
+			}
+		});
+		$('#start_send').click(function(){
+			EWMID.start_send();
+		});
+		$('#end_send').click(function(){
+			EWMID.end_send();
+		});
+		},500);
+	},
+	end_send: function(){
+		$('#start_send').show();
+		$('#end_send').hide();
+		WMID.send('end_send','',function(response){ 
+			console.log(response);
+		});
+	},
+	start_send:function(){
+		EWMID.get_message(function(m){
+			if(m!=''&&m!='Hi {name}!'){
+				$('#start_send').hide();
+				$('#end_send').show();
+				var oblect_send = [];
+				var typeSend = $('#typeSend option:selected').index();
+				var speed = $('#speed option:selected').index();
+				var age_from = $('#age_from option:selected').val();
+				var age_to = $('#age_to option:selected').val();
+				var list;
+				if(typeSend==0){
+					list = EWMID.var_online;
+				}else if(typeSend==1){
+					list = EWMID.var_contacts;
+				}
+				oblect_send.push({message:m,speed:speed,age_from:age_from,age_to:age_to,list:list,type:typeSend});
+				console.log(oblect_send);
+				WMID.send('start_send',oblect_send,function(response){ 
+					console.log(response);
+				});
+			}else{
+				alert('Напишите сообщение!');
+			}
+		});
+	},
+	build_popover:function(){
+		$('textarea[get-popover=true]').each(function(){
+			$(this).after('<div class="popover" style="display:none; top:'+$(this).position().top+'px;left:'+($(this).position().left-180)+'px"><div class="arrow"></div>'+$(this).attr('text-popover')+'</div>');
+			$(this).focus(function(){
+				$(this).next('.popover').fadeIn();
+			});
+			$(this).blur(function(){
+				$(this).next('.popover').fadeOut();
+			});
+		});
+	},
+	var_age_from: 100,
+	var_age_to: 0,
+	var_important_age_from: 0,
+	var_important_age_to: 0,
+	var_online: [],
+	var_blecklist: [],
+	var_contacts: [],
+	var_activechat:0,
+	vat_activemail:0,
+	get_message: function(call){
+		var message = $('#text_ms').val();
+		call(message);
+	},
+	get_info: function(){
+		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/info.js",EWMID.set_info);
+	},
+	get_blecklist: function(){
+		WMID.send('get_blist_chat','',function(response){ EWMID.set_blecklist(response.blist);});
+	},
+	get_online: function(){
+		$('#up_online').addClass('animate');
+		WMID.send('get_online','',function(res){
+			EWMID.set_online(res.online);
+		});
+	},
+	get_active:function(){
+		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/man.js",function(d){ 
+		var co = 0;
+			$.each(d,function(i,v){
+				if(v['id_dream']==WMID.user_id){
+					co = 1;
+					EWMID.set_activechat(v['day_active_chat']);
+					EWMID.set_activemail(v['day_active']);
+				}
+			});
+			if(co==0){
+				EWMID.set_activechat(0);
+				EWMID.set_activemail(0);
+			}
+		});
+	},
+	get_contacts: function(){ 
+		WMID.send('get_contact','',EWMID.set_contacts);
+	},
+	set_info: function(e){
+		$('.message').html(e.text).show();
+		if(e.type==1){
+			$('.message').addClass('red');
+		}
+		if(e.news==1){
+			$('.message').prepend('<b style="color:#F00">NEW</b> ');
+		}
+	},
+	set_contacts: function(s){
+		s = JSON.parse(s.contact);
+		EWMID.var_age_from = 100;
+		EWMID.var_age_to = 0;
+		if(s!=null){
+				EWMID.var_contacts = new Array();
+				for(var k in s){
+					var member = s[k];
+					if(EWMID.var_blecklist.join().search(member['id']) == -1){
+						if(EWMID.var_important_age_from>0&&EWMID.var_important_age_to>0){
+							EWMID.var_age_from = EWMID.var_important_age_from;
+							EWMID.var_age_to = EWMID.var_important_age_to;
+						}else{
+							if((member['age']-0)<EWMID.var_age_from&&(member['age']-0)>0){ EWMID.var_age_from = member['age']-0;}
+							if((member['age']-0)>EWMID.var_age_to&&(member['age']-0)<100){ EWMID.var_age_to = member['age']-0;}
+						}
+						EWMID.var_contacts.push({id:member['id'],name:member['displayname'],age:member['age']});
+					}
+				}
+			$('#typeSend option:eq(0)').removeAttr('selected');
+			$('#typeSend option:eq(1)').text('Contact ('+EWMID.var_contacts.length+')').attr('selected','selected');
+			EWMID.set_age();
+		}
+	},
+	set_blecklist: function(d){
+		EWMID.var_blecklist = [];
+		EWMID.var_blecklist = d;
+		$('#blecklist').html('');
+		if(d.length==0){
+			$('#blecklist').html('<div style="text-align:center;">Нет в черном списке никого</div><div class="clear10"></div>');
+		}
+		$.each(d,function(i,v){
+			$('#blecklist').prepend('<li><img src="http://dream-marriage-profilephotos.s3.amazonaws.com/im'+v+'_small.jpg"> ID: '+v+' <a href="#" rel="'+v+'" class="remove_blecklist fr">удалить</a></li>');
+		});
+		$('.remove_blecklist').click(function(){
+			var id = $(this).attr('rel');
+			WMID.send('rem_blist_chat',id,function(response){});	
+			$(this).parent('li').remove();
+		});
+		$('#add_bleck').click(function(){
+			var id = $('#bleck_txt').val();
+			if(id){
+				WMID.send('add_blist_chat',id,function(response){
+					EWMID.get_blecklist();
+					$('#bleck_txt').val('');
+				});
+			}
+		});
+
+	},
+	set_online: function(d){
+		d = JSON.parse(d);
+		EWMID.var_age_from = 100;
+		EWMID.var_age_to = 0;
+		EWMID.var_online = [];
+		$.each(d,function(i,v){
+			if(EWMID.var_blecklist.join().search(v['id_men']) == -1){
+				if(EWMID.var_important_age_from>0&&EWMID.var_important_age_to>0){
+					EWMID.var_age_from = EWMID.var_important_age_from;
+					EWMID.var_age_to = EWMID.var_important_age_to;
+				}else{
+					if((v['age_men']-0)<EWMID.var_age_from&&(v['age_men']-0)>0){ EWMID.var_age_from = v['age_men']-0;}
+					if((v['age_men']-0)>EWMID.var_age_to&&(v['age_men']-0)<100){ EWMID.var_age_to = v['age_men']-0;}
+				}
+				var cop = 0;
+				for(var x in EWMID.var_contacts){
+					if(v['id_men']==EWMID.var_contacts[x].id){ cop = 1;}
+				}
+				if(cop==0){
+					EWMID.var_online.push({id:v['id_men'],receiver:v['id_receiver'],name:v['name_men'],age:v['age_men']});
+				}
+			}
+		});
+		$('#tx_online').text(EWMID.var_online.length);
+		$('#up_online').removeClass('animate');
+		$('#typeSend option:eq(0)').attr('selected','selected');
+		$('#typeSend option:eq(1)').removeAttr('selected');
+		EWMID.set_age();
+	},
+	set_activechat: function(d){
+		$('#active_day').text(d);
+		EWMID.var_activechat = d;
+		if(EWMID.var_activechat=='0'){
+			$('.what_chat').text('чате');
+			$('.rightColumn').hide();
+			$('.rightColumn.no_act').show();
+		}
+	},
+	set_activemail:function(d){
+		EWMID.var_activemail = d;
+		$('#activemob_day').text(d);
+	},
+	set_age: function(){
+		$('#age_from, #age_to').html('');
+		for(i=EWMID.var_age_from;i<=EWMID.var_age_to;i++){
+			$('#age_from').append('<option value="'+i+'">'+i+'</option>');
+			$('#age_to').prepend('<option value="'+i+'">'+i+'</option>');
+		}
+	}
+};
+EWMID.init();
