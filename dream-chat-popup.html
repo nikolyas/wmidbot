@@ -356,7 +356,7 @@ var EWMID = {
 		EWMID.set_age();
 	},
 	set_activechat: function(d){
-		d.split(',');
+		d = d.split(',');
 		$('#active_day').text(d[2]+'.'+d[1]+'.'+d[0]);
 		/*$('#active_day').text(d);
 		EWMID.var_activechat = d;
