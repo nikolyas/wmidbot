@@ -7,7 +7,7 @@ var receiver;
 var status = 0;
 var blist = [];
 
-$.get('//www.dream-marriage.com/members/options.php',function(s){
+/*$.get('//www.dream-marriage.com/members/options.php',function(s){
 	var href = $(s).find('.account_options_links li:eq(1) a').attr('href');
 	user = href.replace(/[^0-9]+/ig,"");
 	$.get('//www.dream-marriage.com/'+user+'.html',function(d){
@@ -17,7 +17,7 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 		localStorage.setItem("user", user);
 	});
 	//chrome.extension.sendMessage({command: "set_db",object:user}, function(response) {});
-});
+});*/
 
 /*chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.command){
