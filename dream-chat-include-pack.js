@@ -1,11 +1,11 @@
-var status_obj;
+/*var status_obj;
 var nss = 0;
 var interval;
 var request_man = [];
 var user;
 var receiver;
 var status = 0;
-var blist = [];
+var blist = [];*/
 
 /*$.get('//www.dream-marriage.com/members/options.php',function(s){
 	var href = $(s).find('.account_options_links li:eq(1) a').attr('href');
