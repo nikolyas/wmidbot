@@ -1,4 +1,4 @@
-var status_obj;
+/*var status_obj;
 var nss = 0;
 var interval;
 var request_man = [];
@@ -168,3 +168,4 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 $('body').prepend('<div id="count_send"></div>');
 
+*/
