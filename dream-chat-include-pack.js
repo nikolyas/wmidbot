@@ -159,11 +159,12 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 $('body').prepend('<div id="count_send"></div>');
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-	if(request.type=='init')
+	if(request.type=='init'){
 	ChatUser= {
 		convert: function(dat){
 			sendResponse({name: dat.id});
 		}
 	};
 	eval($.trim($('head script:eq(14)').html()));
+	}
 });
