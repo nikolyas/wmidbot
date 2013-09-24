@@ -1,3 +1,11 @@
+var WMID = {
+	send: function(command, object, callback){
+		chrome.tabs.getSelected(null, function(tab) {
+		  chrome.tabs.sendMessage(tab.id, {command: command, object:object}, callback);
+		});
+	}
+};
+
 var EWMID = {
 	init: function(){
 		setTimeout(function(){
