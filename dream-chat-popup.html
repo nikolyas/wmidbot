@@ -248,7 +248,7 @@ var EWMID = {
 		});
 	},
 	get_active:function(){
-		console.log(1111,localStorage.getItem("dream_chat"));
+		EWMID.set_activechat(localStorage.getItem("dream_chat"));
 		/*$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/man.js",function(d){ 
 		var co = 0;
 			$.each(d,function(i,v){
@@ -356,18 +356,19 @@ var EWMID = {
 		EWMID.set_age();
 	},
 	set_activechat: function(d){
-		$('#active_day').text(d);
+		$('#active_day').text(d[2]+'.'+d[1]+'.'+d[0]);
+		/*$('#active_day').text(d);
 		EWMID.var_activechat = d;
 		if(EWMID.var_activechat=='0'){
 			$('.what_chat').text('чате');
 			$('.rightColumn').hide();
 			$('.rightColumn.no_act').show();
-		}
+		}*/
 	},
-	set_activemail:function(d){
+	/*set_activemail:function(d){
 		EWMID.var_activemail = d;
 		$('#activemob_day').text(d);
-	},
+	},*/
 	set_age: function(){
 		$('#age_from, #age_to').html('');
 		for(i=EWMID.var_age_from;i<=EWMID.var_age_to;i++){
