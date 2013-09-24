@@ -100,7 +100,6 @@ var EWMID = {
 	init: function(){
 		setTimeout(function(){
 		EWMID.get_blecklist();
-		WMID.send('get_user','',function(response){ });
 		WMID.send('get_status','',function(response){ 
 		setTimeout(function(){
 			if(response.statusobj){
@@ -249,7 +248,8 @@ var EWMID = {
 		});
 	},
 	get_active:function(){
-		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/man.js",function(d){ 
+		console.log(1111,date);
+		/*$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/man.js",function(d){ 
 		var co = 0;
 			$.each(d,function(i,v){
 				if(v['id_dream']==WMID.user_id){
@@ -262,7 +262,7 @@ var EWMID = {
 				EWMID.set_activechat(0);
 				EWMID.set_activemail(0);
 			}
-		});
+		});*/
 	},
 	get_contacts: function(){ 
 		WMID.send('get_contact','',EWMID.set_contacts);
