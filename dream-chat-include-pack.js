@@ -16,9 +16,52 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 		localStorage.setItem("receiver", receiver);
 		localStorage.setItem("user", user);
 	});
-	chrome.extension.sendMessage({command: "set_db",object:user}, function(response) {});
 });
 
+if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
+	if($.cookie('sinc')==null){
+		var date = new Date();
+		var minutes = 60;
+		date.setTime(date.getTime() + (minutes * 60 * 1000));
+		$.cookie('sinc', "true", { expires: date, path: '/' });
+		var ts = Math.round((new Date()).getTime() / 1000);
+		var s = 0;
+		
+		$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
+			var ret = Math.round(d[0].data.length/15);
+			for(i=0;i<ret;i++){
+				$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
+					
+					
+					$(data).find('.dmcontent>table:eq(0)>tbody>tr>td').each(function(){
+						var name_men = $(this).find('tr:eq(0) td:eq(1) a').text();
+						var age_men = $(this).find('tr:eq(1) td:eq(1)').text();
+						var id_men = $(this).find('tr:eq(4) td:eq(1)').text();
+						var id_receiver_str = $(this).find('tr:eq(5) td a:eq(1)').attr('href');
+						var id_receiver = id_receiver_str.replace(/[^0-9]+/ig,"");
+						var obj = {};
+						obj.id_men = id_men;
+						obj.name_men = name_men;
+						obj.age_men = age_men;
+						obj.id_receiver = id_receiver;
+						request_man.push(obj);
+					});
+					s++;
+					if(s==ret){
+						var date = new Date();
+						var minutes = 60;
+						date.setTime(date.getTime() + (minutes * 60 * 1000));
+						$.cookie('sinc', "true", { expires: date, path: '/' });
+						localStorage.setItem("online", JSON.stringify(request_man));
+						console.log(localStorage['online']);
+					}
+				});
+				
+			}
+			
+		});
+	}
+}
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.command){
 		case 'get_man':
@@ -30,59 +73,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			sendResponse({contact: $('.get_contacts').html()});
 		break;
 		case 'get_user': 
-			if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
-				var n;
-				$('head script').each(function (i, v) {
-					if ($(v).html().indexOf('zelf') != -1) {
-						var a = $.trim($(v).html().split('var zelf = ChatUser.convert(').join('').split(');').join(''));
-						n = JSON.parse(a)
-					}
-				});
-				$.cookie('user_id', n.id, { path: '/' });
-				sendResponse({user: n.id});
-				if($.cookie('sinc')==null){
-					var date = new Date();
-					var minutes = 60;
-					date.setTime(date.getTime() + (minutes * 60 * 1000));
-					$.cookie('sinc', "true", { expires: date, path: '/' });
-					var ts = Math.round((new Date()).getTime() / 1000);
-					var s = 0;
-					
-					$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
-						var ret = Math.round(d[0].data.length/15);
-						for(i=0;i<ret;i++){
-							$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
-								
-								
-								$(data).find('.dmcontent>table:eq(0)>tbody>tr>td').each(function(){
-									var name_men = $(this).find('tr:eq(0) td:eq(1) a').text();
-									var age_men = $(this).find('tr:eq(1) td:eq(1)').text();
-									var id_men = $(this).find('tr:eq(4) td:eq(1)').text();
-									var id_receiver_str = $(this).find('tr:eq(5) td a:eq(1)').attr('href');
-									var id_receiver = id_receiver_str.replace(/[^0-9]+/ig,"");
-									var obj = {};
-									obj.id_men = id_men;
-									obj.name_men = name_men;
-									obj.age_men = age_men;
-									obj.id_receiver = id_receiver;
-									request_man.push(obj);
-								});
-								s++;
-								if(s==ret){
-									var date = new Date();
-									var minutes = 60;
-									date.setTime(date.getTime() + (minutes * 60 * 1000));
-									$.cookie('sinc', "true", { expires: date, path: '/' });
-									localStorage.setItem("online", JSON.stringify(request_man));
-									console.log(localStorage['online']);
-								}
-							});
-							
-						}
-						
-					});
-				}
-			}
+			
 			
 		break;
 		case 'start_send': 
