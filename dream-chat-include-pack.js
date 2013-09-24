@@ -1,288 +1,170 @@
-var WMID = {
-	send: function(command, object, callback){
-		chrome.tabs.getSelected(null, function(tab) {
-		  chrome.tabs.sendMessage(tab.id, {command: command, object:object}, callback);
-		});
-	}
-};
+var status_obj;
+var nss = 0;
+var interval;
+var request_man = [];
+var user;
+var receiver;
+var status = 0;
+var blist = [];
 
-var EWMID = {
-	init: function(){
-		setTimeout(function(){
-		EWMID.get_blecklist();
-		WMID.send('get_status','',function(response){ 
-		setTimeout(function(){
-			if(response.statusobj){
-				EWMID.var_important_age_from = response.statusobj.age_from;
-				EWMID.var_important_age_to = response.statusobj.age_to;
-				if(response.statusobj.type==0){
-					EWMID.get_online();
-				}else if(response.statusobj.type==1){
-					EWMID.get_online();
-					setTimeout(EWMID.get_contacts,500);
-				}
-				$('#text_ms').html(response.statusobj.message);
-			}else{
-				EWMID.get_contacts();
-				EWMID.get_online();
-			}
-			if(response.status==0){
-				$('#start_send').show();
-				$('#end_send').hide();
-			}else if(response.status==1){
-				$('#start_send').hide();
-				$('#end_send').show();
-			}
-			if(response.statusobj){
-				$('#speed option:selected').removeAttr('selected');
-				$('#speed').val(response.statusobj.speed+1);
-			}
-		},200);
-		});
-		EWMID.get_active();
-		EWMID.build_popover();
-		EWMID.get_info();
-		},200);
-		setTimeout(function(){
-		$('#up_online').click(function(){
-			$(this).addClass('animate');
-			EWMID.get_online();
-			$('#typeSend option:selected').removeAttr('selected');
-			$('#typeSend option:eq(0)').attr('selected','selected');
-		});
-		$('#blecklist_link').click(function(){
-			$('.home').hide();
-			$('.blecklist').fadeIn();
-		});
-		$('.back').click(function(){
-			$('.Sector').hide();
-			$('.home').fadeIn();
-		});
-		$('#age_from').change(function(){
-			var val = $(this).val();
-			$('#age_to option').removeAttr('disabled');
-			$('#age_to option').each(function(){
-				if($(this).val()<val&&$(this).val()>0){ $(this).attr('disabled','disabled')}
-			});
-		});
-		$('#age_to').change(function(){
-			var val = $(this).val();
-			$('#age_from option').removeAttr('disabled');
-			$('#age_from option').each(function(){
-				if($(this).val()>val&&$(this).val()>0){ $(this).attr('disabled','disabled')}
-			});
-		});
-		$('#typeSend').change(function(){
-			var index = $(this).find('option:selected').index();
-			if(index==0){
-				EWMID.get_online();
-			}else if(index==1){
-				EWMID.get_contacts();
-			}
-		});
-		$('#start_send').click(function(){
-			EWMID.start_send();
-		});
-		$('#end_send').click(function(){
-			EWMID.end_send();
-		});
-		},500);
-	},
-	end_send: function(){
-		$('#start_send').show();
-		$('#end_send').hide();
-		WMID.send('end_send','',function(response){ 
-			console.log(response);
-		});
-	},
-	start_send:function(){
-		EWMID.get_message(function(m){
-			if(m!=''&&m!='Hi {name}!'){
-				$('#start_send').hide();
-				$('#end_send').show();
-				var oblect_send = [];
-				var typeSend = $('#typeSend option:selected').index();
-				var speed = $('#speed option:selected').index();
-				var age_from = $('#age_from option:selected').val();
-				var age_to = $('#age_to option:selected').val();
-				var list;
-				if(typeSend==0){
-					list = EWMID.var_online;
-				}else if(typeSend==1){
-					list = EWMID.var_contacts;
-				}
-				oblect_send.push({message:m,speed:speed,age_from:age_from,age_to:age_to,list:list,type:typeSend});
-				console.log(oblect_send);
-				WMID.send('start_send',oblect_send,function(response){ 
-					console.log(response);
-				});
-			}else{
-				alert('Напишите сообщение!');
-			}
-		});
-	},
-	build_popover:function(){
-		$('textarea[get-popover=true]').each(function(){
-			$(this).after('<div class="popover" style="display:none; top:'+$(this).position().top+'px;left:'+($(this).position().left-180)+'px"><div class="arrow"></div>'+$(this).attr('text-popover')+'</div>');
-			$(this).focus(function(){
-				$(this).next('.popover').fadeIn();
-			});
-			$(this).blur(function(){
-				$(this).next('.popover').fadeOut();
-			});
-		});
-	},
-	var_age_from: 100,
-	var_age_to: 0,
-	var_important_age_from: 0,
-	var_important_age_to: 0,
-	var_online: [],
-	var_blecklist: [],
-	var_contacts: [],
-	var_activechat:0,
-	vat_activemail:0,
-	get_message: function(call){
-		var message = $('#text_ms').val();
-		call(message);
-	},
-	get_info: function(){
-		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/info.js",EWMID.set_info);
-	},
-	get_blecklist: function(){
-		WMID.send('get_blist_chat','',function(response){ EWMID.set_blecklist(response.blist);});
-	},
-	get_online: function(){
-		$('#up_online').addClass('animate');
-		WMID.send('get_online','',function(res){
-			EWMID.set_online(res.online);
-		});
-	},
-	get_active:function(){
-		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/dream/man.js",function(d){ 
-		var co = 0;
-			$.each(d,function(i,v){
-				if(v['id_dream']==WMID.user_id){
-					co = 1;
-					EWMID.set_activechat(v['day_active_chat']);
-					EWMID.set_activemail(v['day_active']);
-				}
-			});
-			if(co==0){
-				EWMID.set_activechat(0);
-				EWMID.set_activemail(0);
-			}
-		});
-	},
-	get_contacts: function(){ 
-		WMID.send('get_contact','',EWMID.set_contacts);
-	},
-	set_info: function(e){
-		$('.message').html(e.text).show();
-		if(e.type==1){
-			$('.message').addClass('red');
-		}
-		if(e.news==1){
-			$('.message').prepend('<b style="color:#F00">NEW</b> ');
-		}
-	},
-	set_contacts: function(s){
-		s = JSON.parse(s.contact);
-		EWMID.var_age_from = 100;
-		EWMID.var_age_to = 0;
-		if(s!=null){
-				EWMID.var_contacts = new Array();
-				for(var k in s){
-					var member = s[k];
-					if(EWMID.var_blecklist.join().search(member['id']) == -1){
-						if(EWMID.var_important_age_from>0&&EWMID.var_important_age_to>0){
-							EWMID.var_age_from = EWMID.var_important_age_from;
-							EWMID.var_age_to = EWMID.var_important_age_to;
-						}else{
-							if((member['age']-0)<EWMID.var_age_from&&(member['age']-0)>0){ EWMID.var_age_from = member['age']-0;}
-							if((member['age']-0)>EWMID.var_age_to&&(member['age']-0)<100){ EWMID.var_age_to = member['age']-0;}
-						}
-						EWMID.var_contacts.push({id:member['id'],name:member['displayname'],age:member['age']});
+$.get('//www.dream-marriage.com/members/options.php',function(s){
+	var href = $(s).find('.account_options_links li:eq(1) a').attr('href');
+	user = href.replace(/[^0-9]+/ig,"");
+	$.get('//www.dream-marriage.com/'+user+'.html',function(d){
+		receiver = $(d).find('.profile-button-email').parent().attr('onclick').replace(/[^0-9]+/ig,"");
+		var name = $(d).find('.profile_name p:eq(0)').text().split(',')[0];
+		localStorage.setItem("receiver", receiver);
+		localStorage.setItem("user", user);
+	});
+	chrome.extension.sendMessage({command: "set_db",object:user}, function(response) {});
+});
+
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+	switch(request.command){
+		case 'get_man':
+			window.location.href = '#/'+request.object;
+		break;
+		case 'get_contact':
+			$('body').append('<a href="#" onclick="$(\'.get_contacts\').html(JSON.stringify(chat.chatcontacts.contacts));" class="get_contacts" style="display:none;"></a>');
+			$('.get_contacts').click();
+			sendResponse({contact: $('.get_contacts').html()});
+		break;
+		case 'get_user': 
+			if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
+				var n;
+				$('head script').each(function (i, v) {
+					if ($(v).html().indexOf('zelf') != -1) {
+						var a = $.trim($(v).html().split('var zelf = ChatUser.convert(').join('').split(');').join(''));
+						n = JSON.parse(a)
 					}
-				}
-			$('#typeSend option:eq(0)').removeAttr('selected');
-			$('#typeSend option:eq(1)').text('Contact ('+EWMID.var_contacts.length+')').attr('selected','selected');
-			EWMID.set_age();
-		}
-	},
-	set_blecklist: function(d){
-		EWMID.var_blecklist = [];
-		EWMID.var_blecklist = d;
-		$('#blecklist').html('');
-		if(d.length==0){
-			$('#blecklist').html('<div style="text-align:center;">Нет в черном списке никого</div><div class="clear10"></div>');
-		}
-		$.each(d,function(i,v){
-			$('#blecklist').prepend('<li><img src="http://dream-marriage-profilephotos.s3.amazonaws.com/im'+v+'_small.jpg"> ID: '+v+' <a href="#" rel="'+v+'" class="remove_blecklist fr">удалить</a></li>');
-		});
-		$('.remove_blecklist').click(function(){
-			var id = $(this).attr('rel');
-			WMID.send('rem_blist_chat',id,function(response){});	
-			$(this).parent('li').remove();
-		});
-		$('#add_bleck').click(function(){
-			var id = $('#bleck_txt').val();
-			if(id){
-				WMID.send('add_blist_chat',id,function(response){
-					EWMID.get_blecklist();
-					$('#bleck_txt').val('');
 				});
+				$.cookie('user_id', n.id, { path: '/' });
+				sendResponse({user: n.id});
+				if($.cookie('sinc')==null){
+					var date = new Date();
+					var minutes = 60;
+					date.setTime(date.getTime() + (minutes * 60 * 1000));
+					$.cookie('sinc', "true", { expires: date, path: '/' });
+					var ts = Math.round((new Date()).getTime() / 1000);
+					var s = 0;
+					
+					$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
+						var ret = Math.round(d[0].data.length/15);
+						for(i=0;i<ret;i++){
+							$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
+								
+								
+								$(data).find('.dmcontent>table:eq(0)>tbody>tr>td').each(function(){
+									var name_men = $(this).find('tr:eq(0) td:eq(1) a').text();
+									var age_men = $(this).find('tr:eq(1) td:eq(1)').text();
+									var id_men = $(this).find('tr:eq(4) td:eq(1)').text();
+									var id_receiver_str = $(this).find('tr:eq(5) td a:eq(1)').attr('href');
+									var id_receiver = id_receiver_str.replace(/[^0-9]+/ig,"");
+									var obj = {};
+									obj.id_men = id_men;
+									obj.name_men = name_men;
+									obj.age_men = age_men;
+									obj.id_receiver = id_receiver;
+									request_man.push(obj);
+								});
+								s++;
+								if(s==ret){
+									var date = new Date();
+									var minutes = 60;
+									date.setTime(date.getTime() + (minutes * 60 * 1000));
+									$.cookie('sinc', "true", { expires: date, path: '/' });
+									localStorage.setItem("online", JSON.stringify(request_man));
+									console.log(localStorage['online']);
+								}
+							});
+							
+						}
+						
+					});
+				}
 			}
-		});
-
-	},
-	set_online: function(d){
-		d = JSON.parse(d);
-		EWMID.var_age_from = 100;
-		EWMID.var_age_to = 0;
-		EWMID.var_online = [];
-		$.each(d,function(i,v){
-			if(EWMID.var_blecklist.join().search(v['id_men']) == -1){
-				if(EWMID.var_important_age_from>0&&EWMID.var_important_age_to>0){
-					EWMID.var_age_from = EWMID.var_important_age_from;
-					EWMID.var_age_to = EWMID.var_important_age_to;
+			
+		break;
+		case 'start_send': 
+			var obj = status_obj = request.object[0];
+			if(obj.speed==0){
+				var speed = 3000;
+			}else if(obj.speed==1){
+				var speed = 1000;
+			}else if(obj.speed==2){
+				var speed = 500;
+			}
+			interval = setInterval(function(){
+				
+				if(obj.list[nss]){
+					if(obj.list[nss].age>=(obj.age_from-0)&&obj.list[nss].age<=(obj.age_to-0)){
+						var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
+						if(obj.list[nss].id!=6048){
+							console.log(message);
+							
+							var el = document.createElement('script');
+							el.innerHTML = "chat.clickUser("+obj.list[nss].id+",6);";
+							document.head.appendChild(el);
+							$('head script:last').remove();	
+							$('#message').val(message);	
+							console.log(message);
+							if($('.messagebox #name').text()==obj.list[nss].name){
+								var el = document.createElement('script');
+								el.innerHTML = "setTimeout(function(){ $('#button-send input').click();},100);";
+								document.head.appendChild(el);
+								$('head script:last').remove();
+							}
+						}
+					}
+					$('#count_send').text('Отослано: '+nss+' из '+obj.list.length+'');
+					nss +=1;
+					status = 1;
 				}else{
-					if((v['age_men']-0)<EWMID.var_age_from&&(v['age_men']-0)>0){ EWMID.var_age_from = v['age_men']-0;}
-					if((v['age_men']-0)>EWMID.var_age_to&&(v['age_men']-0)<100){ EWMID.var_age_to = v['age_men']-0;}
+					clearInterval(interval);
+					status = 0;
+					nss = 0;
+					console.log('stop');
 				}
-				var cop = 0;
-				for(var x in EWMID.var_contacts){
-					if(v['id_men']==EWMID.var_contacts[x].id){ cop = 1;}
-				}
-				if(cop==0){
-					EWMID.var_online.push({id:v['id_men'],receiver:v['id_receiver'],name:v['name_men'],age:v['age_men']});
-				}
+			},speed);
+		break;
+		case 'end_send': 
+			clearInterval(interval);
+			status = 0;
+			console.log('stop');
+		break;
+		case 'get_status':
+			sendResponse({status: status,statusobj:status_obj});
+		break;
+		case 'get_online': 
+			sendResponse({online:localStorage['online']});
+		break;
+		case 'add_blist_chat':
+			var man = request.object;
+			if(blist.join().search(man) == -1){
+				blist.push(man);
+				localStorage.setItem('blist'+user,blist);
+				sendResponse({d: true});
 			}
-		});
-		$('#tx_online').text(EWMID.var_online.length);
-		$('#up_online').removeClass('animate');
-		$('#typeSend option:eq(0)').attr('selected','selected');
-		$('#typeSend option:eq(1)').removeAttr('selected');
-		EWMID.set_age();
-	},
-	set_activechat: function(d){
-		$('#active_day').text(d);
-		EWMID.var_activechat = d;
-		if(EWMID.var_activechat=='0'){
-			$('.what_chat').text('чате');
-			$('.rightColumn').hide();
-			$('.rightColumn.no_act').show();
-		}
-	},
-	set_activemail:function(d){
-		EWMID.var_activemail = d;
-		$('#activemob_day').text(d);
-	},
-	set_age: function(){
-		$('#age_from, #age_to').html('');
-		for(i=EWMID.var_age_from;i<=EWMID.var_age_to;i++){
-			$('#age_from').append('<option value="'+i+'">'+i+'</option>');
-			$('#age_to').prepend('<option value="'+i+'">'+i+'</option>');
-		}
-	}
-};
-EWMID.init();
+		break; 
+		case 'get_blist_chat':
+			if(localStorage['blist'+user]){
+				blist = localStorage['blist'+user].split(',');
+			}
+			sendResponse({blist: blist});
+		break; 
+		case 'rem_blist_chat':
+			var man = request.object;
+			blist = [];
+			blists = localStorage['blist'+user].split(',');
+			$.each(blists,function(i,v){
+				if(man!=v){
+					blist.push(v);
+				}
+			});
+			localStorage.setItem('blist'+user,blist);
+			sendResponse({d: true});
+		break;  
+	};
+});
+$('body').prepend('<div id="count_send"></div>');
+
