@@ -155,7 +155,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'get_fav':
 			sendResponse({fav:localStorage['fav']});
 		break;
-		case 'add_blist_chat':
+		case 'add_blist':
 			var man = request.object;
 			if(blist.join().search(man) == -1){
 				blist.push(man);
@@ -163,13 +163,13 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 				sendResponse({d: true});
 			}
 		break; 
-		case 'get_blist_chat':
+		case 'get_blist':
 			if(localStorage['blist'+user]){
 				blist = localStorage['blist'+user].split(',');
 			}
 			sendResponse({blist: blist});
 		break; 
-		case 'rem_blist_chat':
+		case 'rem_blist':
 			var man = request.object;
 			blist = [];
 			blists = localStorage['blist'+user].split(',');
@@ -181,6 +181,18 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			localStorage.setItem('blist'+user,blist);
 			sendResponse({d: true});
 		break;  
+		case 'add_msg':
+			var msg = request.object;
+			var ar_ms = new Array();
+			if(localStorage["msgs"]) ar_ms = EWMID.var_messages;
+			ar_ms.push(msg);
+			localStorage.setItem('msgs',JSON.stringify(ar_ms));
+			sendResponse({d: true});
+		break;  
+		case 'get_msg':
+		break;  
+		case 'rem_msg':
+		break;
 	};
 });
 $('body').prepend('<div id="count_send"></div>');
