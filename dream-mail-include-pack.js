@@ -60,13 +60,19 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 			}
 			
 		});*/
+		var ar_fav = [];
 		$.get('http://www.dream-marriage.com/members/my_favorites.php?all=1',function(){
 			$('#favList .groups').each(function(i,v){
 				var name = $(v).find('.la').html();
 				var age = $(v).find('.lc').html();
 				var id = $(v).find('.lc:eq(3)').html();
 				var receiver = $(v).find('.details tr:last a:eq(1)').attr('href').replace(/[^0-9]+/ig,"");
-				console.log(receiver);
+				var obj = {};
+				obj.id_men = id;
+				obj.name_men = name;
+				obj.age_men = age;
+				obj.id_receiver = receiver;
+				ar_fav.push(obj);
 			});
 		});
 	//}
