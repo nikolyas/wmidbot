@@ -18,42 +18,29 @@
             <div class="clear10"></div>
             <div class="clear10"></div>
             <div class="active">
-                <b>Активация чата до</b><div class="clear5"></div>
+                <b>Активация писем до</b><div class="clear5"></div>
                 <b class="count" id="active_day"></b><div class="clear5"></div>
             </div>
             <div class="clear10"></div>
         </div>
         <div class="rightColumn no_act" align="center">
-            У Вас закончились дни активации в <span class="what_chat"></span>! 
+            У Вас закончились дни активации! 
             <div class="clear10"></div>
             <div align="center"><a  href="http://wmidbot.com/?page=dayactive" target="_blank" class="Btn_normal"><b>Продлить активацию</b></a></div>
             <div class="clear10"></div>
         </div>
         <div class="rightColumn">
-            <textarea class="text_ms" id="text_ms" get-popover="true" text-popover="{name} - Имя<br>{age} - Возраст">Hi {name}!</textarea>
+        	<b class="title">Письмо</b>
+           	<select>
+            	<option>-Нет писем-</option>
+            </select>
             <div class="clear10"></div>
-            <table width="100%" class="table_1">
-                <tr>
-                    <td>
-                        <b class="title">Отсылать по</b>
-                        <div class="clear5"></div>
-                        <select class="sel_100" id="typeSend">
-                            <option value="1">Online</option>
-                            <option value="2">Contact</option>
-                        </select>
-                    </td>
-                    <td class="center">&nbsp;</td>
-                    <td>
-                        <b class="title">Скорость</b>
-                        <div class="clear5"></div>
-                        <select class="sel_100" id="speed">
-                            <option value="1">Медленно</option>
-                            <option value="2" selected>Нормально</option>
-                            <option value="3">Быстро</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+            <b class="title">Отсылать по</b>
+            <div class="clear5"></div>
+            <select class="sel_100" id="typeSend">
+                <option value="1">Online</option>
+                <option value="2">Фавориты</option>
+            </select>
             <div class="clear10"></div>
             <table width="100%" class="table_1">
                 <tr>
