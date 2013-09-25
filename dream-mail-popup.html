@@ -84,16 +84,20 @@
 <script>
 var EWMID = {
 	init:function(){
+		EWMID.get_messages();
 		EWMID.events();
 	},
 	events:function(){
 		$('#add').click(function(){
 			var msg=prompt('Введите текст сообщения!','Hi {name}!')
-			alert(msg);
+			if(msg!='Hi {name}!'){
+				localStorage.setItem('msgs');
+			}
 		});
 	},
+	var_messages:[],
 	get_messages:function(){
-	
+		EWMID.var_messages = localStorage['msgs'];
 	},
 	get_online: function(){
 	
