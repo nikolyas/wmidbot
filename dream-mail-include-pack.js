@@ -73,6 +73,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 				obj.age_men = age;
 				obj.id_receiver = receiver;
 				ar_fav.push(obj);
+				localStorage.setItem("fav", JSON.stringify(ar_fav));
 			});
 		});
 	//}
