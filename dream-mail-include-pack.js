@@ -69,8 +69,8 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 		var ts = Math.round((new Date()).getTime() / 1000);
 		var s = 0;
 		var ar_fav = [];
-		$.get('http://www.dream-marriage.com/members/my_favorites.php?all=1',function(){
-			$('#favList .groups').each(function(i,v){
+		$.get('http://www.dream-marriage.com/members/my_favorites.php?all=1',function(d){
+			$(d).find('#favList .groups').each(function(i,v){
 				var name = $(v).find('.la').html();
 				var age = $(v).find('.lc').html();
 				var id = $(v).find('.lc:eq(3)').html();
@@ -81,6 +81,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 				obj.age_men = age;
 				obj.id_receiver = receiver;
 				ar_fav.push(obj);
+				console.log(JSON.stringify(ar_fav));
 				localStorage.setItem("fav", JSON.stringify(ar_fav));
 			});
 		});
