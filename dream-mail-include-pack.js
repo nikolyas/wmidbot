@@ -164,6 +164,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			}
 		break; 
 		case 'get_blist':
+			var blist = '';
 			if(localStorage['blist'+user]!=''){
 				blist = localStorage['blist'+user].split(',');
 			}
