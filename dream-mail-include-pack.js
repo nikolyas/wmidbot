@@ -203,6 +203,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			}
 		break;  
 		case 'rem_msg':
+			localStorage["msgs"+user] = JSON.stringify(request.object);
 		break;
 	};
 });
