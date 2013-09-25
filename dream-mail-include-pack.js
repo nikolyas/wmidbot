@@ -62,7 +62,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 	}
 	if($.cookie('sincfv')==null){
 		var date = new Date();
-		var minutes = 1440;
+		var minutes = 120;
 		date.setTime(date.getTime() + (minutes * 60 * 1000));
 		$.cookie('sincfv', "true", { expires: date, path: '/' });
 		var ts = Math.round((new Date()).getTime() / 1000);
