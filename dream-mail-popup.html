@@ -87,7 +87,10 @@ var EWMID = {
 		EWMID.events();
 	},
 	events:function(){
-	
+		$('#add').click(function(){
+			var msg=prompt('Введите текст сообщения!','Hi {name}!')
+			alert(msg);
+		});
 	},
 	get_messages:function(){
 	
