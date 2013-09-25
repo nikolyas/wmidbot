@@ -6,6 +6,7 @@ var user;
 var receiver;
 var status = 0;
 var blist = [];
+var photo = '';
 
 $.get('//www.dream-marriage.com/members/options.php',function(s){
 	var href = $(s).find('.account_options_links li:eq(1) a').attr('href');
@@ -208,6 +209,14 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		break;  
 		case 'rem_msg':
 			localStorage["msgs"+user] = JSON.stringify(request.object);
+		break;
+		case 'set_photo':
+			photo = request.object;
+		break;
+		case 'get_photo':
+			if(photo){
+				sendResponse({photo: photo});
+			}
 		break;
 	};
 });
