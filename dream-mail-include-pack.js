@@ -189,6 +189,14 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			localStorage.setItem('msgs'+user,JSON.stringify(ar_ms));
 			sendResponse({d: true});
 		break;  
+		case 'edit_msg':
+			var msg = request.object.msg;
+			var id = request.object.id;
+			var ar_ms = JSON.parse(localStorage["msgs"+user]);
+			ar_ms[id] = msg;
+			localStorage.setItem('msgs'+user,JSON.stringify(ar_ms));
+			sendResponse({d: true});
+		break;  
 		case 'get_msg':
 			if(localStorage["msgs"+user]){
 				sendResponse({msg: localStorage["msgs"+user]});
