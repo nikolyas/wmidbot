@@ -159,7 +159,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			var man = request.object;
 			if(blist.join().search(man) == -1){
 				blist.push(man);
-				console.log(man);
 				localStorage.setItem('blist'+user,blist);
 				sendResponse({d: true});
 			}
