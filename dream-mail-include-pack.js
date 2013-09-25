@@ -85,7 +85,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 		});
 	}
 }
-var blist = [];
+
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	
 	switch(request.command){
@@ -158,11 +158,11 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			sendResponse({fav:localStorage['fav'+user]});
 		break;
 		case 'add_blist':
-			var man = request.object;
-			console.log(blist);
-			if(blist.join().search(man) == -1){
-				blist.push(man);
-				localStorage.setItem('blist'+user,blist);
+		 var bl = localStorage['blist'+user].split(',');
+ 			var man = request.object;
+			if(bl.join().search(man) == -1){
+				bl.push(man);
+				localStorage.setItem('blist'+user,bl);
 				sendResponse({d: true});
 			}
 		break; 
