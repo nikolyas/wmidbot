@@ -62,7 +62,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 		});*/
 		$.get('http://www.dream-marriage.com/members/my_favorites.php?all=1',function(){
 			$('#favList .groups').each(function(i,v){
-				var name = $('.la').html();
+				var name = $(v).find('.la').html();
 				console.log(name);
 			});
 		});
