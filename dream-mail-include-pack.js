@@ -65,7 +65,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 				var name = $(v).find('.la').html();
 				var age = $(v).find('.lc').html();
 				var id = $(v).find('.lc:eq(3)').html();
-				var receiver = $(v).find('.details tr:last a:eq(1)').attr('href');
+				var receiver = $(v).find('.details tr:last a:eq(1)').attr('href').replace(/[^0-9]+/ig,"");
 				console.log(receiver);
 			});
 		});
