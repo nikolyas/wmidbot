@@ -190,8 +190,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			sendResponse({d: true});
 		break;  
 		case 'get_msg':
-			var msg = JSON.parse(localStorage["msgs"+user]);
-			sendResponse({msg: msg});
+			sendResponse({msg: localStorage["msgs"+user]});
 		break;  
 		case 'rem_msg':
 		break;
