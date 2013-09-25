@@ -53,7 +53,6 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 						date.setTime(date.getTime() + (minutes * 60 * 1000));
 						$.cookie('sinc', "true", { expires: date, path: '/' });
 						localStorage.setItem("online", JSON.stringify(request_man));
-						console.log(localStorage['online']);
 					}
 				});
 				
@@ -81,7 +80,6 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 				obj.age_men = age;
 				obj.id_receiver = receiver;
 				ar_fav.push(obj);
-				console.log(JSON.stringify(ar_fav));
 				localStorage.setItem("fav", JSON.stringify(ar_fav));
 			});
 		});
