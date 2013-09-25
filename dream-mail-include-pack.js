@@ -152,6 +152,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'get_online': 
 			sendResponse({online:localStorage['online']});
 		break;
+		case 'get_fav':
+			sendResponse({online:localStorage['fav']});
+		break;
 		case 'add_blist_chat':
 			var man = request.object;
 			if(blist.join().search(man) == -1){
