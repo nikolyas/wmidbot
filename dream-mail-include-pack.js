@@ -19,7 +19,7 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 });
 
 if(window.location.href.indexOf('dream-marriage.com') > 1){
-	if($.cookie('sinc')==null){
+	//if($.cookie('sinc')==null){
 		var date = new Date();
 		var minutes = 60;
 		date.setTime(date.getTime() + (minutes * 60 * 1000));
@@ -65,7 +65,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 				console.log(i);
 			});
 		});
-	}
+	//}
 }
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.command){
