@@ -184,12 +184,14 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'add_msg':
 			var msg = request.object;
 			var ar_ms = new Array();
-			if(localStorage["msgs"+user]) ar_ms = EWMID.var_messages;
+			if(localStorage["msgs"+user]) ar_ms = JSON.parse(localStorage["msgs"+user]);
 			ar_ms.push(msg);
 			localStorage.setItem('msgs'+user,JSON.stringify(ar_ms));
 			sendResponse({d: true});
 		break;  
 		case 'get_msg':
+			var msg = JSON.parse(localStorage["msgs"+user]);
+			sendResponse({msg: msg});
 		break;  
 		case 'rem_msg':
 		break;
