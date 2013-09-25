@@ -31,9 +31,9 @@
         </div>
         <div class="rightColumn">
         	<b class="title">Письмо</b>
-            <a href="">Добавить</a>
-            <a href="">Править</a>
-            <a href="">Удалить</a>
+            <a href="#" id="add">Добавить</a>
+            <a href="#" id="edit">Править</a>
+            <a href="#" id="del">Удалить</a>
            	<select class="sel_100">
             	<option>-Нет писем-</option>
             </select>
@@ -50,13 +50,13 @@
                     <td>
                         <b class="title">Возраст</b>
                         <div class="clear5"></div>
-                        <select class="sel_100" id="age_from"></select>
+                        <input type="number" id="age-from" value="20" min="20" max="100" style="width:50px">
                     </td>
                     <td class="center"><b>-</b></td>
                     <td>
                         <b class="title">&nbsp;</b>
                         <div class="clear5"></div>
-                        <select class="sel_100" id="age_to"></select>
+                        <input type="number" id="age-to" value="60" min="20" max="100" style="width:50px">
                     </td>
                 </tr>
             </table>
@@ -81,3 +81,24 @@
     <div class="clear10"></div>
     <ul class="mans_list" id="blecklist"></ul>
 </div>
+<script>
+var EWMID = {
+	init:function(){
+		EWMID.events();
+	},
+	events:function(){
+	
+	},
+	get_messages:function(){
+	
+	},
+	get_online: function(){
+	
+	},
+	get_fav: function(){
+	
+	},
+	
+};
+EWMID.init();
+</script>
