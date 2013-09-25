@@ -64,7 +64,8 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 			$('#favList .groups').each(function(i,v){
 				var name = $(v).find('.la').html();
 				var age = $(v).find('.lc').html();
-				console.log(age);
+				var id = $(v).find('.lc:eq(3)').html();
+				console.log(id);
 			});
 		});
 	//}
