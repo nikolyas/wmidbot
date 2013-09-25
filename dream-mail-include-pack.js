@@ -60,11 +60,11 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 			
 		});
 	}
-	if($.cookie('sincfv')==null){
+	if($.cookie('sincfv'+user)==null){
 		var date = new Date();
 		var minutes = 120;
 		date.setTime(date.getTime() + (minutes * 60 * 1000));
-		$.cookie('sincfv', "true", { expires: date, path: '/' });
+		$.cookie('sincfv'+user, "true", { expires: date, path: '/' });
 		var ts = Math.round((new Date()).getTime() / 1000);
 		var s = 0;
 		var ar_fav = [];
@@ -80,7 +80,7 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 				obj.age_men = age;
 				obj.id_receiver = receiver;
 				ar_fav.push(obj);
-				localStorage.setItem("fav", JSON.stringify(ar_fav));
+				localStorage.setItem("fav"+user, JSON.stringify(ar_fav));
 			});
 		});
 	}
@@ -153,7 +153,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			sendResponse({online:localStorage['online']});
 		break;
 		case 'get_fav':
-			sendResponse({fav:localStorage['fav']});
+			sendResponse({fav:localStorage['fav'+user]});
 		break;
 		case 'add_blist':
 			var man = request.object;
@@ -184,9 +184,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'add_msg':
 			var msg = request.object;
 			var ar_ms = new Array();
-			if(localStorage["msgs"]) ar_ms = EWMID.var_messages;
+			if(localStorage["msgs"+user]) ar_ms = EWMID.var_messages;
 			ar_ms.push(msg);
-			localStorage.setItem('msgs',JSON.stringify(ar_ms));
+			localStorage.setItem('msgs'+user,JSON.stringify(ar_ms));
 			sendResponse({d: true});
 		break;  
 		case 'get_msg':
