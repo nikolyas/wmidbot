@@ -131,7 +131,7 @@ var EWMID = {
 	},
 	events:function(){
 		$('#his').click(function(){
-			WMID.send('hem_his',msg,function(res){ alert('Очищено!');});
+			WMID.send('hem_his','',function(res){ alert('Очищено!');});
 		});
 		$('#start_send').click(function(){
 			EWMID.start_send();
