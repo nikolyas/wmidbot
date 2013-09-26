@@ -166,5 +166,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		}
 	};
 	eval($.trim($('head script:eq(14)').html()));
+	eval($.trim($('head script:eq(15)').html()));
 	}
 });
