@@ -20,6 +20,7 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 });
 
 if(window.location.href.indexOf('dream-marriage.com') > 1){
+if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 	if($.cookie('sinc')==null){
 		var date = new Date();
 		var minutes = 60;
@@ -86,9 +87,96 @@ if(window.location.href.indexOf('dream-marriage.com') > 1){
 		});
 	}
 }
-
+$('body').prepend('<div id="count_send"></div>');
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-	
+	if(request.object){
+	var obj = status_obj = request.object[0];
+	function gogogo(nss){
+		console.log('statusstatus:',status);
+		if(status==1){
+		console.log(obj);
+		$('#count_send').text('Не покидайте страницу во время рассылки! Отослано: '+nss+' из '+obj.list.length+'');
+		if(obj.list[nss]){
+			console.log(obj.list[nss]);
+					/*$.get('//d.wmid.com.ua/index.php?get=message&man='+obj.list[nss].id+'&u='+user,function(d){
+						var msg_o = JSON.parse(d);
+						if(msg_o!=null){
+						if(msg_o.message){
+							
+						message = msg_o.message.split('&lt;%name%&gt;').join(obj.list[nss].name);
+						message = message.split('<%name%>').join(obj.list[nss].name);
+						message = message.split('<p>').join('\n');
+						message = message.split('</p>').join('\n');
+						
+						
+						console.log('msg_o.attachment',msg_o.attachment);
+						if((obj.list[nss].age-0)>=(obj.age_from-0)&&(obj.list[nss].age-0)<=(obj.age_to-0)){
+						$.post("//d.wmid.com.ua/index.php?get=photo_url",{att:msg_o.attachment},function(string64){
+							if(string64!=''){
+								string64 = string64.replace(/\n/g,"");
+								string64 = string64.replace(/\r/g,"");
+								var blob = window.dataURLtoBlob && window.dataURLtoBlob(string64); 
+							}
+							console.log(blob);
+							
+							var xhr = new XMLHttpRequest();
+							var reader = new FileReader();
+							xhr.open("POST", "//www.dream-marriage.com/messaging/write.php?receiver="+obj.list[nss].receiver);	 
+							var rand = Math.floor((Math.random()*1000000000)+1); 
+							var formData = new FormData();
+							formData.append("blockGirl", '0');
+							formData.append("draftid", rand);
+							formData.append("receiver", obj.list[nss].receiver);
+							formData.append("sender", receiver);
+							formData.append("replyId", '');
+							formData.append("which_message", 'advanced_message');
+							formData.append("plain_message", '');
+							formData.append("message", message);
+							if(blob){
+								formData.append("attachment", blob, msg_o.file_name);
+							}
+							formData.append("__tcAction[send]", 'Send');
+							
+							var redir = 'inbox';
+							xhr.onreadystatechange = function() {
+								if(xhr.readyState == 4){
+								if(xhr.responseText){
+									ss = xhr.responseText.replace(/<script[^>]*>|<\/script>/g,"");
+									 if($(ss)[1].innerText!='Message Inbox'){ redir = 'write';}
+									 $.post('//d.wmid.com.ua/index.php?set=log',{index_arr:nss,from:user,to:obj.list[nss].id,name:obj.list[nss].name,cronid:obj.rand,mess:msg_o.id,redir:redir},function(s){ console.log(s);});
+									 nss +=1;
+									 gogogo(nss);
+								  }
+								}
+							}
+							console.log(formData);
+							xhr.send(formData);
+						});
+						}else{
+							nss +=1;
+							gogogo(nss);
+						}
+						}
+						}else{
+							redir = 'write';
+							var msss = '';
+							if(msg_o!=null){
+								msss = msg_o.id;
+							}
+							$.post('//d.wmid.com.ua/index.php?set=log',{index_arr:nss,from:user,to:obj.list[nss].id,name:obj.list[nss].name,cronid:obj.rand,mess:msss,redir:redir},function(s){ console.log(s);});
+							nss +=1;
+							gogogo(nss);
+						}
+					});*/
+			
+		}else{
+			status = 0;
+			$('#count_send').html('Рассылка закончена!');
+			console.log('stop');
+		}
+		}
+	}
+	}
 	switch(request.command){
 		case 'get_man':
 			window.location.href = '#/'+request.object;
@@ -103,11 +191,12 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			
 		break;
 		case 'start_send': 
-			console.log(request.object);
+			status = 1;
+			gogogo(0);
 		break;
-		case 'end_send': 
-			clearInterval(interval);
+		case 'end_send':
 			status = 0;
+			$('#count_send').html('Рассылка остановлена!');
 			console.log('stop');
 		break;
 		case 'get_status':
@@ -179,6 +268,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 				sendResponse({photo: photo});
 			}
 		break;
+		case 'get_login': 
+			sendResponse({login:'yes'});
+		break;
 	};
 });
 $('body').prepend('<div id="count_send"></div>');
@@ -187,3 +279,12 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		sendResponse({name: $.trim($('body').attr('onload')).replace(/[^0-9]+/ig,"")});
 	}
 });
+}else{
+	chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+		switch(request.command){
+			case 'get_login': 
+				sendResponse({login:'no'});
+			break;
+		}
+	});
+}
