@@ -294,7 +294,9 @@ var EWMID = {
 	start_send:function(){
 		$('#start_send').hide();
 		$('#end_send').show();
-		WMID.send('start_send',{type:$('#typeSend').val(),age_from:$('#age-from').val(),age_to:$('#age-to').val(),status:1,list:JSON.stringify(EWMID.var_online)},function(res){}); 
+		list = EWMID.var_online;
+		if($('#typeSend').val()==2){ list = EWMID.var_fav;}
+		WMID.send('start_send',{type:$('#typeSend').val(),age_from:$('#age-from').val(),age_to:$('#age-to').val(),status:1,list:JSON.stringify(list)},function(res){}); 
 	},
 	stop_send:function(){
 		$('#start_send').show();
