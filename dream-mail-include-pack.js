@@ -91,6 +91,7 @@ $('body').prepend('<div id="count_send"></div>');
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	if(request.object){
 	var obj = status_obj = request.object[0];
+	console.log(request.object);
 	function gogogo(nss){
 		console.log('statusstatus:',status);
 		if(status==1){
