@@ -222,7 +222,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			sendResponse({fav:localStorage['fav'+user]});
 		break;
 		case 'add_blist':
-		 var bl = localStorage['blist'+user].split(',');
+		var bl = [];
+		if(localStorage['blist'+user]){
+		 	var bl = localStorage['blist'+user].split(',');
+		}
  			var man = request.object;
 			if(bl.join().search(man) == -1){
 				bl.push(man);
