@@ -7,6 +7,7 @@ var receiver;
 var status = 0;
 var blist = [];
 var photo = '';
+var hist = [];
 
 $.get('//www.dream-marriage.com/members/options.php',function(s){
 	var href = $(s).find('.account_options_links li:eq(1) a').attr('href');
@@ -21,6 +22,7 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 
 if(window.location.href.indexOf('dream-marriage.com') > 1){
 if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
+	$('body').prepend('<div id="count_send"></div>');
 	if($.cookie('sinc')==null){
 		var date = new Date();
 		var minutes = 60;
@@ -87,36 +89,47 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 		});
 	}
 }
-$('body').prepend('<div id="count_send"></div>');
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	if(request.object){
-	var obj = status_obj = request.object[0];
-	console.log(111,request.object);
+	var obj = status_obj = request.object;
+	if(obj.list){
+		obj.list = JSON.parse(obj.list);
+	}
 	function gogogo(nss){
+		
 		console.log('statusstatus:',status);
 		if(status==1){
-		console.log(obj);
 		$('#count_send').text('Не покидайте страницу во время рассылки! Отослано: '+nss+' из '+obj.list.length+'');
 		if(obj.list[nss]){
 			console.log(obj.list[nss]);
-					/*$.get('//d.wmid.com.ua/index.php?get=message&man='+obj.list[nss].id+'&u='+user,function(d){
-						var msg_o = JSON.parse(d);
-						if(msg_o!=null){
-						if(msg_o.message){
+			var msgs = JSON.parse(localStorage['msgs'+user]);
+			
+			if(msgs.length>0){
+				var rands = Math.floor(Math.random() * ((msgs.length-1) - 0 + 1)) + 0;
+						var msg_o = msgs[rands].msg;
+						if(msg_o&&msg_o!=''){
 							
-						message = msg_o.message.split('&lt;%name%&gt;').join(obj.list[nss].name);
-						message = message.split('<%name%>').join(obj.list[nss].name);
-						message = message.split('<p>').join('\n');
-						message = message.split('</p>').join('\n');
+						message = msg_o.split('{name}').join(obj.list[nss].name);
+						message = message.split('{age}').join(obj.list[nss].age);
+						message = message.split('{n}').join('\n');
+						
+						his = [];
+						cou = 0;
 						
 						
-						console.log('msg_o.attachment',msg_o.attachment);
+						if(localStorage['history'+user]){
+							his = JSON.parse(localStorage['history'+user]);
+						}
+						for(var x in his){
+							if(obj.list[nss].id==his[x].man&&msgs[rands].id == his[x].msg){ cou = 1;}
+						}
+						if(cou==0){
 						if((obj.list[nss].age-0)>=(obj.age_from-0)&&(obj.list[nss].age-0)<=(obj.age_to-0)){
-						$.post("//d.wmid.com.ua/index.php?get=photo_url",{att:msg_o.attachment},function(string64){
-							if(string64!=''){
-								string64 = string64.replace(/\n/g,"");
-								string64 = string64.replace(/\r/g,"");
-								var blob = window.dataURLtoBlob && window.dataURLtoBlob(string64); 
+						console.log('message',message);
+							if(photo!=''){
+								photo = photo.replace(/\n/g,"");
+								photo = photo.replace(/\r/g,"");
+								var blob = window.dataURLtoBlob && window.dataURLtoBlob(photo); 
 							}
 							console.log(blob);
 							
@@ -134,7 +147,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 							formData.append("plain_message", '');
 							formData.append("message", message);
 							if(blob){
-								formData.append("attachment", blob, msg_o.file_name);
+								formData.append("attachment", blob, 'kjlksajdasj');
 							}
 							formData.append("__tcAction[send]", 'Send');
 							
@@ -143,20 +156,28 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 								if(xhr.readyState == 4){
 								if(xhr.responseText){
 									ss = xhr.responseText.replace(/<script[^>]*>|<\/script>/g,"");
+									 console.log($(ss)[1].innerText);
 									 if($(ss)[1].innerText!='Message Inbox'){ redir = 'write';}
-									 $.post('//d.wmid.com.ua/index.php?set=log',{index_arr:nss,from:user,to:obj.list[nss].id,name:obj.list[nss].name,cronid:obj.rand,mess:msg_o.id,redir:redir},function(s){ console.log(s);});
+									 hist = [];
+									 if(localStorage['history'+user]){
+									 	hist = JSON.parse(localStorage['history'+user]);
+									 }
+									 hist.push({"man":obj.list[nss].id,"msg":msgs[rands].id});
+									localStorage.setItem('history'+user,JSON.stringify(hist));
 									 nss +=1;
-									 gogogo(nss);
+									gogogo(nss);
 								  }
 								}
 							}
 							console.log(formData);
 							xhr.send(formData);
-						});
 						}else{
 							nss +=1;
 							gogogo(nss);
 						}
+						}else{
+							nss +=1;
+							gogogo(nss);
 						}
 						}else{
 							redir = 'write';
@@ -164,12 +185,11 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 							if(msg_o!=null){
 								msss = msg_o.id;
 							}
-							$.post('//d.wmid.com.ua/index.php?set=log',{index_arr:nss,from:user,to:obj.list[nss].id,name:obj.list[nss].name,cronid:obj.rand,mess:msss,redir:redir},function(s){ console.log(s);});
+							
 							nss +=1;
 							gogogo(nss);
 						}
-					});*/
-			
+			}
 		}else{
 			status = 0;
 			$('#count_send').html('Рассылка закончена!');
@@ -179,17 +199,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 	}
 	switch(request.command){
-		case 'get_man':
-			window.location.href = '#/'+request.object;
-		break;
-		case 'get_contact':
-			$('body').append('<a href="#" onclick="$(\'.get_contacts\').html(JSON.stringify(chat.chatcontacts.contacts));" class="get_contacts" style="display:none;"></a>');
-			$('.get_contacts').click();
-			sendResponse({contact: $('.get_contacts').html()});
-		break;
-		case 'get_user': 
-			
-			
+		case 'hem_his':
+			localStorage.removeItem('history'+user);
+			sendResponse({status: 'ok'});
 		break;
 		case 'start_send': 
 			status = 1;
@@ -241,7 +253,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			var msg = request.object;
 			var ar_ms = new Array();
 			if(localStorage["msgs"+user]) ar_ms = JSON.parse(localStorage["msgs"+user]);
-			ar_ms.push(msg);
+			ar_ms.push({'id':Math.floor((Math.random()*1000000000)+1),'msg':msg});
 			localStorage.setItem('msgs'+user,JSON.stringify(ar_ms));
 			sendResponse({d: true});
 		break;  
@@ -249,7 +261,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			var msg = request.object.msg;
 			var id = request.object.id;
 			var ar_ms = JSON.parse(localStorage["msgs"+user]);
-			ar_ms[id] = msg;
+			ar_ms[id].msg = msg;
 			localStorage.setItem('msgs'+user,JSON.stringify(ar_ms));
 			sendResponse({d: true});
 		break;  
@@ -265,16 +277,13 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			photo = request.object;
 		break;
 		case 'get_photo':
-			if(photo){
-				sendResponse({photo: photo});
-			}
+			sendResponse({photo: photo,st:status});
 		break;
 		case 'get_login': 
 			sendResponse({login:'yes'});
 		break;
 	};
 });
-$('body').prepend('<div id="count_send"></div>');
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	if(request.type=='init'){
 		sendResponse({name: $.trim($('body').attr('onload')).replace(/[^0-9]+/ig,"")});
