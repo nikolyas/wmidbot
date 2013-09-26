@@ -292,7 +292,7 @@ var EWMID = {
 		$('#active_day').text(d[2]+'.'+d[1]+'.'+d[0]);
 	},
 	start_send:function(){
-		if(EWMID.var_messages>0){
+		if(EWMID.var_messages.length>0){
 		$('#start_send').hide();
 		$('#end_send').show();
 		list = EWMID.var_online;
