@@ -292,11 +292,13 @@ var EWMID = {
 		$('#active_day').text(d[2]+'.'+d[1]+'.'+d[0]);
 	},
 	start_send:function(){
+		if(EWMID.var_messages>0){
 		$('#start_send').hide();
 		$('#end_send').show();
 		list = EWMID.var_online;
 		if($('#typeSend').val()==2){ list = EWMID.var_fav;}
 		WMID.send('start_send',{type:$('#typeSend').val(),age_from:$('#age-from').val(),age_to:$('#age-to').val(),status:1,list:JSON.stringify(list)},function(res){}); 
+		}else{alert('Вы не добавили письмо!');}
 	},
 	stop_send:function(){
 		$('#start_send').show();
