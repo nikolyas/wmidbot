@@ -1,9 +1,11 @@
+window.name="LiveChatWindow";
 (function($){
 	$("#list_block").before("<div style=\"text-align:center\"><span id=\"infotext\">Рассылка остановлена</span><br /><code id=\"infohelp\" title=\"Отправлено <- ожидает\">0 &lt;- 0</code></div>");
 
 	var runned=false,
 		info=$("#infohelp"),
 		tinfo=$("#infotext"),
+		name=document.cookie.match(/LOGIN=([^;]+)/i)[1],
 		key="hanuma-chat-2-"+name,
 		storage=localStorage.getItem(key),
 		queue=[],//Очередь на отправку
@@ -46,32 +48,10 @@
 					text=text.replace(/\n/g,"\\\n\r");
 				}
 
-				script.text="(function(){var msg=\""+mess.text+"\",wurl=\"sid="+smid[0]+"&mid="+smid[1]+"&hmid="+mess.hrumenid+"&gid=\"+girlid+\"&dr=\"+mengirl+\"&n="+encodeURIComponent(mess.name)+"&msg=\"+ encodeURIComponent(msg);ajax_write(addmesurl,wurl,girlid,\""+mess.name+"\",msg);console.log(\"112334566456\");})();";
+				script.text="(function(){var msg=\""+mess.text+"\",wurl=\"sid="+smid[0]+"&mid="+smid[1]+"&hmid="+mess.hrumenid+"&gid=\"+girlid+\"&dr=\"+mengirl+\"&n="+encodeURIComponent(mess.name)+"&msg=\"+ encodeURIComponent(msg);"+mess.add+"ajax_write(addmesurl,wurl,girlid,\""+mess.name+"\",msg);})();";
 				document.body.appendChild(script).parentNode.removeChild(script);
 				mess.F(true);
 				Status(cnt);
-
-								/*
-	var wurl = "";
-
-								var nick = document.getElementById("chatnick").value;
-	var msg = document.getElementById("chatmsg").value;
-
-
-	var awgirlid = 0;
-	
-
-	 hrumenid = document.getElementById("hrumenid").value;
-   menid = document.getElementById("menid").value;
-   siteid = document.getElementById("siteid").value;
-   awgirlid = girlid;
-	 wurl = "sid=" + siteid + "&mid=" + menid + "&hmid=" + hrumenid + "&gid=" + girlid + "&dr=" + mengirl + "&n=" + encodeURIComponent(nick) + "&msg=" + encodeURIComponent(msg);
-
-	document.getElementById("chatmsg").value = "";
-	
-	if(msg.length>0)
-	{ajax_write(addmesurl,wurl,awgirlid,nick,msg);}
-								*/
 			}
 
 			if(runned)
@@ -101,6 +81,7 @@
 					name=html.match(/<strong>Имя:<\/strong>&nbsp;([^<]+)/),
 					country=html.match(/<strong>Страна:<\/strong>&nbsp;([^<]+)/),
 					age=html.match(/<strong>Возраст:<\/strong>&nbsp;([^<]+)/),
+					add=$(this).find(".startchatbutton").attr("onclick").toString(),
 					text;
 
 				name=name ? name[1] : "";
@@ -117,6 +98,7 @@
 						siteidmenid:siteidmenid,
 						hrumenid:id,
 						text:text,
+						add:add,
 						F:function(success){
 							if(success)
 							{
@@ -200,6 +182,7 @@
 										name:name,
 										siteidmenid:siteidmenid,
 										hrumenid:id,
+										add:"",
 										text:storage.text.replace(/{name}/ig,name),
 										F:function(success){
 											if(success)
