@@ -27,7 +27,7 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 		var date = new Date();
 		var minutes = 60;
 		date.setTime(date.getTime() + (minutes * 60 * 1000));
-		$.cookie('sinc', "true", { expires: date, path: '/' });
+		
 		var ts = Math.round((new Date()).getTime() / 1000);
 		var s = 0;
 		
