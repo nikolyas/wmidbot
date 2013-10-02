@@ -68,7 +68,7 @@ window.name="LiveChatWindow";
 		{
 			if(queue.length>0)
 			{
-				tos=setTimeout(function(){ Parse4Send(r,page); },1000);
+				tos=setTimeout(Parse4Send,1000);
 				return;
 			}
 
