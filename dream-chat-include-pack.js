@@ -115,8 +115,8 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 								}
 							}else{
 								var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
-								console.log(message);
-								/*$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid='+user,{
+								
+								$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid='+user,{
 											__tcAction:sendMessage,
 											chatid:'',
 											message:message,
@@ -124,7 +124,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 											pagehash:Chat.PAGEHASH,
 											idslug:Chat.IDSLUG,
 											auto_invite:'off'
-								},function(){});*/
+								},function(){
+									console.log(message);
+								});
 							}
 						}
 					}
