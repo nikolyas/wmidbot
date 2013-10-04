@@ -95,7 +95,7 @@
     <div class="clear10"></div>
     <ul class="mans_list" id="blecklist"></ul>
 </div>
-<!--<script>
+<script>
 var WMID = {
 	send: function(command, object, callback){
 		chrome.tabs.getSelected(null, function(tab) {
@@ -103,10 +103,9 @@ var WMID = {
 		});
 	}
 }
-WMID.init();
 var EWMID = {
 	init: function(){
-		/*EWMID.get_blecklist();
+		EWMID.get_blecklist();
 		WMID.send('get_status','',function(response){ 
 		setTimeout(function(){
 			if(response.statusobj){
@@ -129,15 +128,15 @@ var EWMID = {
 			}else if(response.status==1){
 				$('#start_send').hide();
 				$('#end_send').show();
-			}*/
-			/*if(response.statusobj.fake==1){
+			}
+			if(response.statusobj.fake==1){
 				$('#fake').attr('checked','checked')
 			}
 			$('#speed option:selected').removeAttr('selected');
-			$('#speed option:eq('+response.statusobj.speed+')').attr('selected','selected');*/
-		//},200);
-		//});
-		/*setTimeout(function(){
+			$('#speed option:eq('+response.statusobj.speed+')').attr('selected','selected');
+		},200);
+		});
+		setTimeout(function(){
 			EWMID.get_active();
 			EWMID.get_activemob();
 		},100);
@@ -213,7 +212,7 @@ var EWMID = {
 			$('#comp_emul').hide();
 			$('#mobile_emul').show();
 		}
-		},2000);*/
+		},2000);
 	},
 	end_send: function(){
 		$('#start_send').show();
@@ -464,4 +463,4 @@ var EWMID = {
 	}
 };
 EWMID.init();
-</script>-->
+</script>
