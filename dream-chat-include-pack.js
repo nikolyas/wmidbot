@@ -16,12 +16,14 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 		localStorage.setItem("receiver", receiver);
 		localStorage.setItem("user", user);
 	});
-});
-
-if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
+	if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 	$('head script').each(function(i,v){
 		console.log($(v).find(':contains("'+user+'")'));
 	});
+	}
+});
+
+if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 	if($.cookie('sinc')==null){
 		var date = new Date();
 		var minutes = 60;
@@ -108,7 +110,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 								}
 							}else{
 								var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
-								console.log(Chat.IDSLUG);
+								//console.log(Chat.IDSLUG);
 								/*$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid='+user,{
 											__tcAction:sendMessage,
 											chatid:'',
