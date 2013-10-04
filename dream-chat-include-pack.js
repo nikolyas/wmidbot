@@ -18,7 +18,9 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 	});
 	if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 	$('head script').each(function(i,v){
-		console.log($(v).find(':contains("'+user+'")'));
+		if($(v).indexOf(user)>1){
+		console.log($(v).text())
+		}
 	});
 	}
 });
