@@ -125,11 +125,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 											idslug:Chat.IDSLUG,
 											auto_invite:'off'
 								},function(){
-									$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid='+user,{
-											__tcAction:'contactRequest',
-											data:'',
-											auto_invite:'off'
-								},function(){});
 									console.log(message);
 								});
 							}
