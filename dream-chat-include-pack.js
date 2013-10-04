@@ -20,10 +20,10 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 	if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 	$('head script').each(function(i,v){
 		if($(v).text().indexOf('Chat.PAGEHASH')>1){
-			var te = $(v).text().split('\n'),
-			pagehash = $.trim(te[4].split(' ').join(''));
+			var te = $(v).text().split('\n');
+			eval($.trim(te[4].split(' ').join('')));
 			//idslug = ;
-		console.log(pagehash)
+		console.log(Chat.PAGEHASH)
 		}
 	});
 	}
