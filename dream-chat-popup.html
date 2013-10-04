@@ -202,7 +202,7 @@ var EWMID = {
 				}else if(typeSend==1){
 					list = EWMID.var_contacts;
 				}
-				oblect_send.push({message:m,speed:speed,age_from:age_from,age_to:age_to,list:list,type:typeSend});
+				oblect_send.push({message:m,speed:speed,age_from:age_from,age_to:age_to,list:list,type:typeSend,fone:$('#fone:checked').length});
 				console.log(oblect_send);
 				WMID.send('start_send',oblect_send,function(response){ 
 					console.log(response);
