@@ -104,12 +104,13 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 									$('head script:last').remove();
 								}
 							}else{
-								console.log(user);
-								/*$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid=2993302',{
+								var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
+								console.log(Chat.IDSLUG);
+								/*$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid='+user,{
 											__tcAction:sendMessage,
 											chatid:'',
-											message:'Hi! Hoe are you?',
-											targetid:'124551',
+											message:message,
+											targetid:obj.list[nss].id,
 											pagehash:'51cb7bc94ea8169911416093b30d7547',
 											idslug:'2993302_1380988905_f8eb7b14f70b574f014c3768ef998bcd',
 											auto_invite:'off'
