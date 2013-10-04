@@ -117,7 +117,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 								var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
 								
 								$.post('http://www.dream-marriage.com/chat/ajax.php?ts='+new Date().getTime()+'&pid='+user,{
-											__tcAction:sendMessage,
+											__tcAction:'sendMessage',
 											chatid:'',
 											message:message,
 											targetid:obj.list[nss].id,
