@@ -106,7 +106,7 @@ var WMID = {
 WMID.init();
 var EWMID = {
 	init: function(){
-		EWMID.get_blecklist();
+		/*EWMID.get_blecklist();
 		WMID.send('get_status','',function(response){ 
 		setTimeout(function(){
 			if(response.statusobj){
@@ -129,14 +129,14 @@ var EWMID = {
 			}else if(response.status==1){
 				$('#start_send').hide();
 				$('#end_send').show();
-			}
+			}*/
 			/*if(response.statusobj.fake==1){
 				$('#fake').attr('checked','checked')
 			}
 			$('#speed option:selected').removeAttr('selected');
 			$('#speed option:eq('+response.statusobj.speed+')').attr('selected','selected');*/
-		},200);
-		});
+		//},200);
+		//});
 		setTimeout(function(){
 			EWMID.get_active();
 			EWMID.get_activemob();
