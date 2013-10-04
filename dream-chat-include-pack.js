@@ -89,17 +89,15 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 				
 				if(obj.list[nss]){
 					if(obj.list[nss].age>=(obj.age_from-0)&&obj.list[nss].age<=(obj.age_to-0)){
-						var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
 						if(obj.list[nss].id!=6048){
-							console.log(message);
 							
 							var el = document.createElement('script');
 							el.innerHTML = "chat.clickUser("+obj.list[nss].id+",6);";
 							document.head.appendChild(el);
 							$('head script:last').remove();	
-							$('#message').val(message);	
-							console.log(message);
 							if($('.messagebox #name').text()==obj.list[nss].name){
+								var message = obj.message.split('{name}').join(obj.list[nss].name).split('{age}').join(obj.list[nss].age);
+								$('#message').val(message);	
 								var el = document.createElement('script');
 								el.innerHTML = "setTimeout(function(){ $('#button-send input').click();},100);";
 								document.head.appendChild(el);
