@@ -106,7 +106,7 @@ var WMID = {
 var EWMID = {
 	init: function(){
 		EWMID.get_blecklist();
-		WMID.send('get_status','',function(response){ 
+		/*WMID.send('get_status','',function(response){ 
 		setTimeout(function(){
 			if(response.statusobj){
 				EWMID.var_important_age_from = response.statusobj.age_from;
@@ -135,14 +135,22 @@ var EWMID = {
 			$('#speed option:selected').removeAttr('selected');
 			$('#speed option:eq('+response.statusobj.speed+')').attr('selected','selected');
 		},200);
-		});
-		setTimeout(function(){
-			EWMID.get_active();
-			EWMID.get_activemob();
-		},100);
+		});*/
+		EWMID.get_active();
 		EWMID.build_popover();
-		EWMID.get_info();
-		setTimeout(function(){
+		EWMID.get_event();
+		/*setTimeout(function(){
+		
+		if($.cookie('emul')=='mobile'){
+			$('#mobile_emul').hide();
+			$('#comp_emul').show();
+		}else{
+			$('#comp_emul').hide();
+			$('#mobile_emul').show();
+		}
+		},2000);*/
+	},
+	get_event: function(){
 		$('#up_online').click(function(){
 			$(this).addClass('animate');
 			EWMID.get_online();
@@ -205,14 +213,6 @@ var EWMID = {
 			$('#comp_emul').hide();
 			$('#mobile_emul').show();
 		});
-		if($.cookie('emul')=='mobile'){
-			$('#mobile_emul').hide();
-			$('#comp_emul').show();
-		}else{
-			$('#comp_emul').hide();
-			$('#mobile_emul').show();
-		}
-		},2000);
 	},
 	end_send: function(){
 		$('#start_send').show();
@@ -265,17 +265,11 @@ var EWMID = {
 	var_online: [],
 	var_blecklist: [],
 	var_contacts: [],
-	var_active:0,
-	vat_active_mob:0,
 	get_message: function(call){
 		var message = $('#text_ms').val();
 		call(message);
 	},
-	get_info: function(){
-		$.getJSON("https://raw.github.com/liginet/wmidbot2/master/svadba/info.js",EWMID.set_info);
-	},
 	get_blecklist: function(){
-		//$.getJSON("http://svadba."+WMID.url+"/index.php?get=blecklist&girl="+WMID.user_id,EWMID.set_blecklist);
 		WMID.send('get_blist','',function(response){ EWMID.set_blecklist(response.blist);});
 	},
 	get_online: function(){
@@ -283,30 +277,10 @@ var EWMID = {
 		$.getJSON("http://m.svadba.com/online/?select=25000",EWMID.set_online);
 	},
 	get_active:function(){
-		if(tumbler==true){
-			$.get("http://svadba."+WMID.url+"/index.php?get=active&girl="+WMID.user_id,EWMID.set_active);
-		}else{
-			EWMID.set_active($.cookie('active'));
-		}
-	},
-	get_activemob:function(){
-		if(tumbler==true){
-			$.get("http://svadba."+WMID.url+"/index.php?get=active_mob&girl="+WMID.user_id,EWMID.set_activemob);
-		}else{
-			EWMID.set_activemob($.cookie('active_mob'));
-		}
+		EWMID.set_active(localStorage['svadba_chat']);
 	},
 	get_contacts: function(){
 		$.getJSON('http://chat.svadba.com/updates/contacts/everyone/',EWMID.set_contacts);
-	},
-	set_info: function(e){ console.log(e);
-		$('.message').html(e.text).show();
-		if(e.type==1){
-			$('.message').addClass('red');
-		}
-		if(e.news==1){
-			$('.message').prepend('<b style="color:#F00">NEW</b> ');
-		}
 	},
 	set_contacts: function(s){
 		EWMID.var_age_from = 100;
@@ -409,29 +383,6 @@ var EWMID = {
 	},
 	set_active: function(d){
 		$('#active_day').text(d);
-		EWMID.var_active = d;
-		if(d==0){
-			$('.what_chat').text('обычном чате');
-			if($.cookie('emul')!='mobile'){
-				$('.rightColumn').hide();
-				$('.no_act').show();
-			}
-		}
-	},
-	set_activemob:function(d){
-		EWMID.var_active_mob = d;
-		if(d==0){
-			$('#mob').remove();
-			$('.what_chat').text('мобильном чате');
-			if($.cookie('emul')=='mobile'){
-				$('.rightColumn').hide();
-				$('.no_act').show();
-			}
-		}
-		if(EWMID.var_active==0&&EWMID.var_active_mob==0){
-			$('.what_chat').text('чате');
-		}
-		$('#activemob_day').text(d);
 	},
 	set_age: function(){
 		$('#age_from, #age_to').html('');
