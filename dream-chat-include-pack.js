@@ -21,7 +21,7 @@ $.get('//www.dream-marriage.com/members/options.php',function(s){
 	$('head script').each(function(i,v){
 		if($(v).text().indexOf('Chat.PAGEHASH')>1){
 			var te = $(v).text().split('\n'),
-			pagehash = $.trim(te[3].split(' ').join(''));
+			pagehash = $.trim(te[4].split(' ').join(''));
 			//idslug = ;
 		console.log(pagehash)
 		}
