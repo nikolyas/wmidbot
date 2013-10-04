@@ -6,6 +6,7 @@ var user;
 var receiver;
 var status = 0;
 var blist = [];
+var Chat = {};
 
 $.get('//www.dream-marriage.com/members/options.php',function(s){
 	var href = $(s).find('.account_options_links li:eq(1) a').attr('href');
