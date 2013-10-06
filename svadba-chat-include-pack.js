@@ -87,6 +87,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			}
 		break; 
 		case 'get_blist':
+		console.log(localStorage['blist'+$.cookie('user_id')]);
 			if(localStorage['blist'+$.cookie('user_id')]){
 				blist = localStorage['blist'+$.cookie('user_id')].split(',');
 			}
