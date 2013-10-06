@@ -19,16 +19,15 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			if(request.object){
 				var pisal = request.object.split(',');
 				var pi_arr = [];
+				if(localStorage['pisal_list']){
+					pi_arr = JSON.parse(localStorage['pisal_list']);
+				}
 				if(pisal.length>0){
 					$.each(pisal,function(i,v){
-						pi_arr.push($.trim(v));
+						if(pi_arr.join().search($.trim(v)) == -1){
+							pi_arr.push($.trim(v));
+						}
 					});
-					if(localStorage['pisal_list']){
-						var old_pi = localStorage['pisal_list'].split(',');
-						$.each(old_pi,function(i,v){
-							pi_arr.push(old_pi);
-						});
-					}
 					localStorage.setItem('pisal_list'+$.cookie('user_id'),pi_arr);
 				}
 			}
