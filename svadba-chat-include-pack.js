@@ -28,7 +28,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 							pi_arr.push($.trim(v));
 						}
 					});
-					localStorage.setItem('pisal_list'+$.cookie('user_id'),pi_arr);
+					localStorage.setItem('pisal_list'+$.cookie('user_id'),JSON.stringify(pi_arr));
 				}
 			}
 		break;
