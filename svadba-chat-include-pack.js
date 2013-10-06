@@ -23,6 +23,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 					pi_arr = JSON.parse(localStorage['pisal_list']);
 				}
 				if(pisal.length>0){
+					console.log(pi_arr);
 					$.each(pisal,function(i,v){
 						if(pi_arr.join().search($.trim(v)) == -1){
 							pi_arr.push($.trim(v));
