@@ -15,11 +15,23 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'get_man':
 			window.location.href = '#/'+request.object;
 		break;
-		case 'set_online':
-			online = request.object;
-		break;
-		case 'get_online':
-			sendResponse({online:online});
+		case 'set_pisal':
+			if(request.object){
+				var pisal = request.object.split(',');
+				var pi_arr = [];
+				if(pisal.length>0){
+					$.each(pisal,function(i,v){
+						pi_arr.push($.trim(v));
+					});
+					if(localStorage['pisal_list']){
+						var old_pi = localStorage['pisal_list'].split(',');
+						$.each(old_pi,function(i,v){
+							pi_arr.push(old_pi);
+						});
+					}
+					localStorage.setItem('pisal_list'+$.cookie('user_id'),pi_arr);
+				}
+			}
 		break;
 		case 'set_emul':
 		console.log(request.object);
