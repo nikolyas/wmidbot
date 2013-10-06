@@ -19,8 +19,8 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			if(request.object){
 				var pisal = request.object.split(',');
 				var pi_arr = [];
-				if(localStorage['pisal_list']){
-					pi_arr = JSON.parse(localStorage['pisal_list']);
+				if(localStorage['pisal_list']+$.cookie('user_id')){
+					pi_arr = JSON.parse(localStorage['pisal_list']+$.cookie('user_id'));
 				}
 				if(pisal.length>0){
 					console.log(pi_arr);
