@@ -86,11 +86,11 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 				sendResponse({d: true});
 			}
 		break; 
-		case 'get_blist':
+		case 'get_blist':console.log('blist',localStorage['blist'+$.cookie('user_id')]);
 			if(localStorage['blist'+$.cookie('user_id')]){
 				blist = localStorage['blist'+$.cookie('user_id')].split(',');
 			}
-			console.log(blist);
+			console.log('blist',blist);
 			sendResponse({blist: blist});
 		break; 
 		case 'rem_blist':
