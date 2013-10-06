@@ -4,6 +4,7 @@ var n = 0;
 var interval;
 var mans_invite = [];
 var blist = [];
+var online = [];
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.command){
@@ -13,6 +14,12 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		break;
 		case 'get_man':
 			window.location.href = '#/'+request.object;
+		break;
+		case 'set_online':
+			online = request.object;
+		break;
+		case 'get_online':
+			sendResponse({online:online});
 		break;
 		case 'set_emul':
 		console.log(request.object);
@@ -26,8 +33,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			if(window.location.host=='m.svadba.com'){
 				sendResponse({user: $.cookie('user_id')});  
 			}else{
-				//localStorage.setItem('uid',$('#user-info p:eq(1)').text());
-				//$.cookie('user_id', $('#user-info p:eq(1)').text(), { path: '/' });
 				$.cookie('user_id', $('#user-info p:eq(1)').text(), { domain: '.svadba.com', path: '/' });
 				sendResponse({user: $('#user-info p:eq(1)').text()});
 			}
