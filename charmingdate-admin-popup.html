@@ -9,6 +9,7 @@
 				<li><a href="http://wmidbot.com/?page=help" target="_blank">Справка</a></li>
 				<li><a href="http://wmidbot.com/?page=dayactive" target="_blank">Продлить активацию</a></li>
 				<li><a href="#" id="blacklist">Черный список</a></li>
+				<li><a href="#" id="black2list">Черный список МЖ</a></li>
 				<li><a href="#" id="writerslist">Писатели</a></li>
 			</ul>
 			<div class="clear10"></div>
@@ -65,6 +66,14 @@
 			<div class="clear10"></div>
 			<a href="#" id="addb" class="Btn_normal" title="Добавить"><b>+</b></a> <a href="#" id="editb" class="Btn_normal"><b>Править</b></a> <a href="#" id="delb" class="Btn_normal" style="background:#e14747;"><b>Удалить</b></a>
 		</div>
+		<div class="rightColumn" style="display:none" id="black2side">
+			<div class="clear10"></div>
+			<b class="title">Черный список</b>
+			<div class="clear5"></div>
+			<select id="black2" size="15" style="width:100%" multiple></select>
+			<div class="clear10"></div>
+			<a href="#" id="addb2" class="Btn_normal" title="Добавить"><b>+</b></a> <a href="#" id="editb2" class="Btn_normal"><b>Править</b></a> <a href="#" id="delb2" class="Btn_normal" style="background:#e14747;"><b>Удалить</b></a>
+		</div>
 		<div class="rightColumn" style="display:none" id="writersside">
 			<div class="clear10"></div>
 			<b class="title">Список писателей</b>
@@ -80,6 +89,7 @@
 var init=$("body").data("init"),
 	storage=init.storage,
 	black=$("#black"),
+	black2=$("#black2"),
 	subject=$("#subject"),
 	text=$("#text"),
 	goal=$("#goal"),
@@ -88,6 +98,7 @@ var init=$("body").data("init"),
 	writers=$("#writers"),
 	mainside=$("#mainside"),
 	blackside=$("#blackside"),
+	black2side=$("#black2side"),
 	writersside=$("#writersside"),
 	sender=$("#sender"),
 	situation=$("#situation"),
@@ -114,13 +125,13 @@ var init=$("body").data("init"),
 	{
 		stop.show();
 		start.hide();
-		$("#text,#age-from,#age-to,#goal,#subject,#blacklist,#writerslist").prop("disabled",true);
+		$("#text,#age-from,#age-to,#goal,#subject,#blacklist,#black2list,#writerslist").prop("disabled",true);
 	},
 	Stop=function()
 	{
 		start.show();
 		stop.hide();
-		$("#text,#age-from,#age-to,#goal,#blacklist,#writerslist").prop("disabled",false);
+		$("#text,#age-from,#age-to,#goal,#blacklist,#black2list,#writerslist").prop("disabled",false);
 		EnableSubject();
 	},
 	SaveStorage=function()
@@ -145,13 +156,27 @@ $("#payed").text(rdate.substr(0,16)).prop("title","Осталось: "+remain);
 $("#blacklist").click(function(){
 	if(blackside.is(":visible"))
 	{
-		blackside.add(writersside).hide();
+		blackside.add(writersside).add(black2side).hide();
 		mainside.show();
 	}
 	else
 	{
-		mainside.add(writersside).hide();
+		mainside.add(writersside).add(black2side).hide();
 		blackside.show();
+	}
+	return !1;
+});
+
+$("#black2list").click(function(){
+	if(black2side.is(":visible"))
+	{
+		black2side.add(writersside).add(blackside).hide();
+		mainside.show();
+	}
+	else
+	{
+		mainside.add(writersside).add(blackside).hide();
+		black2side.show();
 	}
 	return !1;
 });
@@ -159,12 +184,12 @@ $("#blacklist").click(function(){
 $("#writerslist").click(function(){
 	if(writersside.is(":visible"))
 	{
-		blackside.add(writersside).hide();
+		blackside.add(black2side).add(writersside).hide();
 		mainside.show();
 	}
 	else
 	{
-		mainside.add(blackside).hide();
+		mainside.add(blackside).add(black2side).hide();
 		writersside.show();
 	}
 	return !1;
@@ -225,6 +250,68 @@ $("#delb").click(function(){
 	return !1;
 });
 //[E] Черный список
+
+//Черный список 2 (соответствие мужика телке)
+$("#addb2").click(function(){
+	var n=prompt("Введите М+Ж в формате \"CM00 C00\" (можно несколько, через запятую)");
+	if(n!==null)
+	{
+		$.each(n.split(","),function(k,v){
+			var man=v.match(/(CM\d+)/),
+				woman=v.match(/(C\d+)/);
+
+			if(man && woman && black2.find("[value=\""+man[1]+" "+woman[1]+"\"]").size()==0)
+			{
+				$("<option>").text(man[1]+" "+woman[1]).appendTo(black2);
+				black2.val(man[1]+" - "+woman[1]);
+				storage.black2[ man[1]+" "+woman[1] ]="";
+			}
+		});
+		SaveStorage();
+	}
+	return !1;
+});
+
+$("#editb2").click(function(){
+	var t=$("#black2 :selected"),
+		text=[];
+	if(t.size()>0)
+	{
+		t.each(function(){
+			text.push( $(this).val() );
+		});
+		text=prompt("Отредактируйте запись:",text.join(", "));
+		if(text!==null)
+		{
+			t.each(function(){
+				delete storage.black2[ $(this).val() ]; 
+			}).remove();
+			$.each(text.split(","),function(k,v){
+				var man=v.match(/(CM\d+)/),
+					woman=v.match(/(C\d+)/);
+
+				if(man && woman && black2.find("[value=\""+man[1]+" "+woman[1]+"\"]").size()==0)
+				{
+					$("<option>").text(man[1]+" "+woman[1]).appendTo(black2);
+					black2.val(man[1]+" "+woman[1]);
+					storage.black2[ man[1]+" "+woman[1] ]="";
+				}
+			});
+			SaveStorage();
+		}
+	}
+	return !1;
+});
+
+$("#delb2").click(function(){
+	var t=$("#black2 :selected");
+	t.each(function(){
+		delete storage.black2[ $(this).val() ]; 
+	}).remove();
+	SaveStorage();
+	return !1;
+});
+//[E] Черный список 2
 
 //Страница писателей
 $("#addw").click(function(){
@@ -302,6 +389,13 @@ if(storage.black)
 	});
 else
 	storage.black={};
+	
+if(storage.black2)
+	$.each(storage.black2,function(k,v){
+		$("<option>").text(v ? v : k).val(k).appendTo(black2);
+	});
+else
+	storage.black2={};
 
 if(storage.writers)
 	$.each(storage.writers,function(k,v){

@@ -109,7 +109,7 @@
 						age:parseInt($("td:eq(4)",this).text())
 					};
 
-				if(message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && !(id in storage.black))
+				if(message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && !(id in storage.black) && !((id+" "+storage.sender) in storage.black2))
 				{
 					inprogress+=id+",";
 
@@ -183,7 +183,7 @@
 
 	LoadStorage();
 	if(!("black" in storage))
-		storage={last:1,active:0,black:{},writers:{},goal:"search",sender:"",situation:1};
+		storage={last:1,active:0,black:{},black2:{},writers:{},goal:"search",sender:"",situation:1};
 
 	$("<div>").load("/clagt/woman/women_profiles_posted.php?groupshow=4&listnum=1000 #DataGrid1",function(){
 	
@@ -235,7 +235,7 @@
 								cnt=0;
 								$.each(storage.writers,function(id){
 									id=parseInt(id);
-									if(id>0 && !(id in storage.black) && message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1)
+									if(id>0 && !(id in storage.black) && !((id+" "+storage.sender) in storage.black2) && message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1)
 									{
 										inprogress+=id+",";
 										queue.push({
