@@ -123,6 +123,12 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 						for(var x in his){
 							if(obj.list[nss].id==his[x].man&&msgs[rands].id == his[x].msg){ cou = 1;}
 						}
+						if(localStorage['blist'+user]){
+							var bl = localStorage['blist'+user].split(',');
+						}
+						for(var x in bl){
+							if(obj.list[nss].id==bl[x]){ cou = 1;}
+						}
 						if(cou==0){
 						if((obj.list[nss].age-0)>=(obj.age_from-0)&&(obj.list[nss].age-0)<=(obj.age_to-0)){
 						console.log('message',message);
