@@ -73,7 +73,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'set_emul':
 		break;
 		case 'get_user': 
-		console.log($('#user-info p:eq(1)').text());
 				$.cookie('user_id', $('#user-info p:eq(1)').text(), { domain: '.globalcompanions.com', path: '/' });
 				sendResponse({user: $('#user-info p:eq(1)').text()});
 		break;
@@ -128,7 +127,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 					}
 					n +=1;
 					status = 1;
-					$('#count_send').text('Отослано: '+n+' из '+postlist.length+'');
+					$('#count_send').text('Sent: '+n+' from '+postlist.length+'');
 				}else{
 					clearInterval(interval);
 					status = 0;
@@ -263,7 +262,7 @@ setInterval(function(){
 
 							var smiles = ['O:)',':)',';)'];
 							var msg = smiles[Math.floor(Math.random()*smiles.length)];
-							$.get('http://chat.svadba.com/chat/#/'+request[i].updates[s].girl.chats[c]['client-id'],function(ss){ console.log('get_man');});
+							$.get('http://point.globalcompanions.com/chat/#/'+request[i].updates[s].girl.chats[c]['client-id'],function(ss){ console.log('get_man');});
 							
 							var client = request[i].updates[s].girl.chats[c]['client-id'];
 
@@ -271,7 +270,7 @@ setInterval(function(){
 								if (mans_chat.join().search(client) == -1) {
 									setTimeout(function(){ 
 										if(window.location.hash!='#/'+client){
-											$.post("http://chat.svadba.com/send-message/"+client,{tag:client,source:'lc',message:msg},function(ss){ console.log('post'); });
+											$.post("http://point.globalcompanions.com/send-message/"+client,{tag:client,source:'lc',message:msg},function(ss){ console.log('post'); });
 										}
 									},30000);
 									mans_chat.push(client);
@@ -286,7 +285,7 @@ setInterval(function(){
 							}else{
 								setTimeout(function(){ 
 									if(window.location.hash!='#/'+client){
-										$.post("http://chat.svadba.com/send-message/"+client,{tag:client,source:'lc',message:msg},function(ss){ console.log('post');	});
+										$.post("http://point.globalcompanions.com/send-message/"+client,{tag:client,source:'lc',message:msg},function(ss){ console.log('post');	});
 									}
 								},30000);
 								
