@@ -454,7 +454,7 @@ var EWMID = {
 			localStorage.setItem('age_from',EWMID.var_age_from);
 			localStorage.setItem('age_to',EWMID.var_age_to);
 			var date = new Date();
-			date.setTime(date.getTime() + (10 * 60 * 1000));
+			date.setTime(date.getTime() + (60 * 60 * 1000));
 			$.cookie('s_online','true', { expires: date, path: '/' });
 			if(callback){
 				callback(true);
