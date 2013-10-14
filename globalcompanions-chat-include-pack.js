@@ -73,7 +73,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		case 'set_emul':
 		break;
 		case 'get_user': 
-				$.cookie('user_id', $('#user-info p:eq(1)').text(), { domain: '.svadba.com', path: '/' });
+				$.cookie('user_id', $('#user-info p:eq(1)').text(), { domain: '.globalcompanions.com', path: '/' });
 				sendResponse({user: $('#user-info p:eq(1)').text()});
 		break;
 		case 'start_send': 
