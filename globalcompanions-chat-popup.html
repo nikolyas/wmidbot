@@ -313,7 +313,7 @@ var EWMID = {
 					$.get('http://www.globalcompanions.com/Login/Men/Online.aspx?pageNum='+i,function(d){
 						$(d).find('ul.man-list li').each(function(s,v){
 							var id = $(v).find('a[id*="_GoChat_"]').attr('href').replace(/[^\d]/gi,"");
-							var id_public = $(v).find('a[id$="_ManCard_ViewManMeetLink"]').attr('href').split('&');
+							var id_public = $(v).find('a[id*="ViewManMeetLink"]').attr('href').split('&');
 							id_public = id_public[0].split('=');
 							id_public = id_public[1];
 							var photo = true;
