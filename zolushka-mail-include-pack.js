@@ -1,1 +1,357 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(6($){$("#2x",1o).3e($("<1u>",1o).1Q({"3b-34":"33"}).1e("<1f q=\\"16\\">Рассылка</1f>: <1Z q=\\"20\\" 1w=\\"Отправлено <- ожидает <- осталось\\">неизвестно</1Z>"));o l=A,1i=A,1P="2W-2V-2-"+z,4,7,K=[],1M=6(){4=2h.2U(1P);4=4?$.2S(4)||{}:{};7=("1p"18 4&&4.1p 18 4)?4[4.1p]:A},T=6(){2R{2h.2Q(1P,2P.2O(4))}2i(e){5(e==2K)1Y("Локальное хранилище переполнено")}},1j,1k,1x=27,B=[],1H=",",G=0,D=1W 2J(),1d,1a=1,1c,22=$("#20",1o),16=$("#16",1o),11=6(a,b){22.8(a+" <- "+B.1l+" <- "+4["-"+z][D])},1m=6(){o c=B.2H(),1F=6(){$.V(9.N+"//"+9.I+"/1b/24.J?1C="+c.q+"&2a=2c",6(r){o b=r.M(/q="17" 1h="([^"]+)"/),1S=r.M(/q="1T" 1h="([^"]+)"/),O={17:b[1],1A:c.s,1z:c.t.H(/\\n/g,"\\r\\n"),1T:1S[1],"21.x":2G,"21.y":12},Z=r.M(/<1f q="2C">\\S+ \\(([^)]+)\\)<\\/1f>/);Z=Z?Z[1]:"";O.1A=O.1A.H(/\\{z\\}/19,Z);O.1z=O.1z.H(/\\{z\\}/19,Z);5(4.K!=0)O.2z="2y";$.2g(9.N+"//"+9.I+"/1b/24.J?1C="+c.q+"&2a=2c",O,6(a){5(a.p("2w 1b 2v Y")!=-1){o m=a.M(/2t=(\\d+)/);5(4.K==0||!m)c.F(1B);u $.V(9.N+"//"+9.I+"/1b/2s.J?2r="+4.K+"&2p="+m[1],6(){c.F(1B)},"8")}u c.F(A)},"8")},"8")};5(c)5(4.w=="1r")1F();u{$.V(9.N+"//"+9.I+"/23/23.J?1C="+c.q,6(r){r=r.H(/<1n[^>]*>|<\\/1n>/g,"");o a=r.p("<Q"),E=r.p(">",a+1),X=r.p("</Q>",E+1);r=r.1L(E+1,X);r=r.H(/<28[^>]+>/19,"");r=$("<1u>").1e(r);5(4.w=="29"&&(r.W("#2o").2b("1w")+"").p("2l")==0)c.F(A);u 5(r.W("#2k").8()!="2N 2j")1F();u c.F(A);r.1R()},"8")}5(l)5(c)1m();u 1j=1g(1m,27)},P=6(f,g,h,i){5(B.1l>0){1j=1g(6(){P(f,g,h,i)},2m);2n}o j=C(7.2q),1E=C(7.1E),1D=6(c){c=c.H(/<1n[^>]*>|<\\/1n>/g,"");o d=c.p("<Q"),E=c.p(">",d+1),X=c.p("</Q>",E+1);c=c.1L(E+1,X);c=c.H(/<28[^>]+>/19,"");c=$("<1u>").1e(c);c.W("1V.2u").1s(6(){o b=C($.15($(".1v:2e",10).8())),1t={2A:$.15($(".2B",10).8()),1y:C($.15($(".1v:2D",10).8())),2E:C($.15($(".1v:25(1)",10).8())),2F:C($.15($(".1v:25(2)",10).8()))};5(j<=1t.1y&&1t.1y<=1E&&7.Y.p(","+b+",")==-1&&1H.p(","+b+",")==-1&&!(b 18 4.1q)){1H+=b+",";o s=7.1w,t=7.8;$.1s(1t,6(k,v){o R=1W 2I("{"+k+"}","19");s=s.H(R,v);t=t.H(R,v)});B.1G({q:b,s:s,t:t,F:6(a){5(a){7.Y+=b+",";7.G++;5(--4["-"+z][D]<=0)1c();T()}11(7.G)}});5(l)11(7.G)}});5(l){h=C(c.W("#1I").2L());o e=C(c.W("#2M").8());5(h<e)1k=1g(6(){P(f,g,++h,A)},1x);u{h=1;1k=1g(6(){$.V(9.N+"//"+9.I+"/1J/1K.J?4.w="+4.w,{},6(r){o a=r.M(/q="17" 1h="([^"]+)"/),g=r.M(/L=([^"]+)/);5(a&&g)P(a[1],g[1],1,r)},"8")},1x)}5(4.w=="2d"&&h>7.U){7.U=h;T()}u 1a=h}c.1R()};5(i)1D(i);u $.2g(9.N+"//"+9.I+"/1J/1K.J?1X="+4.w+"&L="+g,{2T:"1I",17:f,1I:h},1D,"8")},1U=6(){5(1N 7.U=="1O")7.U=0;$.V(9.N+"//"+9.I+"/1J/1K.J?1X="+4.w,{},6(r){o a=r.M(/q="17" 1h="([^"]+)"/),L=r.M(/L=([^"]+)/);5(a&&L)5(4.w=="2d"&&7.U>1)P(a[1],L[1],7.U,A);u 5(1a>1)P(a[1],L[1],1a,A);u P(a[1],L[1],1,r)},"8")};D.2X(D.2Y()/2Z-3);D=D.30()+"-"+(D.31()+1)+"-"+D.32();1c=6(){5(l){l=A;2f(1j);2f(1k)}16.8("Рассылка остановлена").1Q("26","")};1M();5(!("1q"18 4))4={2e:1,1p:0,1q:{},1r:{},K:0,w:"29"};5(1N 4["-"+z]=="1O"||1N 4["-"+z][D]=="1O"){4["-"+z]={};4["-"+z][D]=35;T()}u 1i=4["-"+z]>0;$.V(9.N+"//"+9.I+"/1b/36.J",6(a){o b=a.p("<Q"),E=a.p(">",b+1),X=a.p("</Q>",E+1);a=a.1L(E+1,X);a=$("<1u>").1e(a);a.W("#37 1V[q]").1s(6(){K.1G($(10).2b("q"))});a.1R()},"8");1d=4.w;38=6(b,c,d){39(b.3a){13"3c":d({z:z,1i:1i,K:K,3d:l,4:4});14;13"3f":11(b.Y);14;13"3g":4=b.4;T();14;13"3h":5(!l){1M();5(7){l=1B;5(1d!=4.w){3i=",";B=[];G=0;1d=4.w;1a=1}5(4.w=="1r"){G=0;$.1s(4.1r,6(a){a=C(a);5(a>0&&!(a 18 4.1q)&&7.Y.p(","+a+",")==-1){B.1G({q:a,s:7.1w,t:7.8,F:6(){7.Y+=a+",";7.G++;11(++G);5(--4["-"+z][D]<=0||B.1l==0)1c();5(B.1l==0)1Y("Рассылка завершена");T()}});11(G)}})}u 1U();1m();5(l)16.8("Идет рассылка").1Q("26","3j")}}d(l);14;13"3k":1c();d(!l);14}}})(3l);',62,208,'||||storage|if|function|message|text|location|||||||||||||||var|indexOf|id||||else||goal|||name|false|queue|parseInt||ind2||cnt|replace|hostname|aspx|attach|vsid|match|protocol|params|Parse4Send|form|||SaveStorage|offlinepage|get|find|ind3|sent|uname|this|Status||case|break|trim|infostatus|__VIEWSTATE|in|ig|lastpage|email|Stop|oldgoal|html|span|setTimeout|value|limit|tos|top|length|StartSender|script|maindocument|active|black|writers|each|repl|div|ProfileCardRightTD|title|ibp|age|uxBody|uxSubject|true|toid|Fcontent|at|Send|push|inprogress|ddlPages|searches|search|substring|LoadStorage|typeof|undefined|key|css|remove|test|uxTest|StartParser|table|new|searchtype|alert|code|infohelp|uxSubmit|info|profile|sendmail|eq|color|500|img|online|func|prop|send|advanced|last|clearTimeout|post|localStorage|catch|Member|uxMemberlevel|Remove|1000|return|ucProfileBar_uxFavorites|msgid|af|emailattachment|attachment_attach|MsgID|ProfileCardMainTable|was|Your|PagePanel|on|uxAttachment|login|ProfileCardUserName|uxUserName|first|height|weight|42|shift|RegExp|Date|QUOTA_EXCEEDED_ERR|val|lblPageCount|Bronze|stringify|JSON|setItem|try|parseJSON|__EVENTTARGET|getItem|mail|zolushka|setHours|getTimezoneOffset|60|getFullYear|getMonth|getDate|2em|size|999|attachmentminder|The_GridView|MessHandle|switch|type|font|init|runned|prepend|setstatus|save|start|inpogress|green|stop|jQuery'.split('|'),0,{}))
+(function($){
+	$("#PagePanel",maindocument).prepend( $("<div>",maindocument).css({"font-size":"2em"}).html("<span id=\"infostatus\">Рассылка</span>: <code id=\"infohelp\" title=\"Отправлено <- ожидает <- осталось\">неизвестно</code>") );
+
+	var runned=false,
+		limit=false,
+		key="zolushka-mail-2-"+name,
+		storage,
+		message,
+		attach=[],
+		LoadStorage=function()
+		{
+			storage=localStorage.getItem(key);
+			storage=storage ? $.parseJSON(storage)||{} : {};
+			message=("active" in storage && storage.active in storage) ? storage[storage.active] : false;
+		},
+		SaveStorage=function()
+		{
+			try
+			{
+				localStorage.setItem(key,JSON.stringify(storage));
+			}
+			catch(e)
+			{
+				if(e==QUOTA_EXCEEDED_ERR)
+					alert("Локальное хранилище переполнено");
+			}
+		},
+
+		tos,top,//TimeOut parser & sender
+		ibp=500,//Интервал перехода между страницами
+		queue=[],//Очередь на отправку
+		inprogress=",",//Те, кто уже в очереди
+		cnt=0,//Отправлено
+		D=new Date(),//Лимит отправки 999 писем
+		oldgoal,//Прошлая цель
+		lastpage=1,//Последняя страница обработки
+		Stop,
+
+		info=$("#infohelp",maindocument),
+		infostatus=$("#infostatus",maindocument),
+		Status=function(sent,leave)
+		{
+			info.text(sent+" <- "+queue.length+" <- "+storage["-"+name][D]);
+		},
+
+		StartSender=function()
+		{
+			var mess=queue.shift(),
+				Send=function()
+				{
+					$.get(location.protocol+"//"+location.hostname+"/email/sendmail.aspx?toid="+mess.id+"&func=send",function(r){
+						var gvs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
+							test=r.match(/id="uxTest" value="([^"]+)"/),
+							params={__VIEWSTATE:gvs[1],uxSubject:mess.s,uxBody:mess.t.replace(/\n/g,"\r\n"),uxTest:test[1],"uxSubmit.x":42,"uxSubmit.y":12},
+
+							//Замена имени
+							uname=r.match(/<span id="uxUserName">\S+ \(([^)]+)\)<\/span>/);
+							uname=uname ? uname[1] : "";
+							params.uxSubject=params.uxSubject.replace(/\{name\}/ig,uname);
+							params.uxBody=params.uxBody.replace(/\{name\}/ig,uname);
+
+						if(storage.attach!=0)
+							params.uxAttachment="on";
+
+						$.post(location.protocol+"//"+location.hostname+"/email/sendmail.aspx?toid="+mess.id+"&func=send",params,function(pr){
+							if(pr.indexOf("Your email was sent")!=-1)
+							{
+								var m=pr.match(/MsgID=(\d+)/);
+								if(storage.attach==0 || !m)
+									mess.F(true);
+								else
+									$.get(location.protocol+"//"+location.hostname+"/email/attachment_attach.aspx?emailattachment="+storage.attach+"&msgid="+m[1],function(){ mess.F(true); },"text");
+							}
+							else
+								mess.F(false);
+						},"text");
+					},"text");
+				};
+
+			if(mess)
+				if(storage.goal=="writers")
+					Send();
+				else
+				{
+					$.get(location.protocol+"//"+location.hostname+"/profile/profile.aspx?toid="+mess.id,function(r){
+						r=r.replace(/<script[^>]*>|<\/script>/g,"");
+						var ind1=r.indexOf("<form"),
+							ind2=r.indexOf(">",ind1+1),
+							ind3=r.indexOf("</form>",ind2+1);
+						r=r.substring(ind2+1,ind3);
+						r=r.replace(/<img[^>]+>/ig,"");
+						r=$("<div>").html(r);
+
+						if(storage.goal=="online" && (r.find("#ucProfileBar_uxFavorites").prop("title")+"").indexOf("Remove")==0)//При рассылке по онлайну игнорируем тех, кто в списке пар и фаворитов
+							mess.F(false);
+						else if(r.find("#uxMemberlevel").text()!="Bronze Member")
+							Send();
+						else
+							mess.F(false);
+
+						r.remove();
+					},"text");
+				}
+
+			if(runned)
+				if(mess)
+					StartSender();
+				else
+					tos=setTimeout(StartSender,500);
+		},
+		Parse4Send=function(vs,vsid,page,content)
+		{
+			if(queue.length>0)
+			{
+				tos=setTimeout(function(){ Parse4Send(vs,vsid,page,content); },1000);
+				return;
+			}
+			var af=parseInt(message.af),
+				at=parseInt(message.at),
+				Fcontent=function(men)
+				{
+					men=men.replace(/<script[^>]*>|<\/script>/g,"");
+					var ind1=men.indexOf("<form"),
+						ind2=men.indexOf(">",ind1+1),
+						ind3=men.indexOf("</form>",ind2+1);
+					men=men.substring(ind2+1,ind3);
+					men=men.replace(/<img[^>]+>/ig,"");
+					men=$("<div>").html(men);
+
+					men.find("table.ProfileCardMainTable").each(function(){
+						var id=parseInt($.trim($(".ProfileCardRightTD:last",this).text())),
+							repl={
+								login:$.trim($(".ProfileCardUserName",this).text()),
+								age:parseInt($.trim($(".ProfileCardRightTD:first",this).text())),
+								height:parseInt($.trim($(".ProfileCardRightTD:eq(1)",this).text())),
+								weight:parseInt($.trim($(".ProfileCardRightTD:eq(2)",this).text()))
+							};
+
+						if(af<=repl.age && repl.age<=at && message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && !(id in storage.black))
+						{
+							inprogress+=id+",";
+
+							var s=message.title,
+								t=message.text;
+
+							$.each(repl,function(k,v){
+								var R=new RegExp("{"+k+"}","ig");
+								s=s.replace(R,v);
+								t=t.replace(R,v);
+							});
+							queue.push({
+								id:id,
+								s:s,
+								t:t,
+								F:function(st){
+									if(st)
+									{
+										message.sent+=id+",";
+										message.cnt++;
+										if(--storage["-"+name][D]<=0)
+											Stop();
+										SaveStorage();
+									}
+									Status(message.cnt);
+								}
+							});
+							if(runned)
+								Status(message.cnt);
+						}
+					});
+
+					if(runned)
+					{
+						page=parseInt(men.find("#ddlPages").val());
+						var pages=parseInt(men.find("#lblPageCount").text());
+						if(page<pages)
+							top=setTimeout(function(){ Parse4Send(vs,vsid,++page,false); },ibp);
+						else
+						{
+							page=1;
+							top=setTimeout(function(){
+
+								$.get(location.protocol+"//"+location.hostname+"/searches/search.aspx?storage.goal="+storage.goal,{},function(r){
+									var vs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
+										vsid=r.match(/vsid=([^"]+)/);
+									if(vs && vsid)
+										Parse4Send(vs[1],vsid[1],1,r);
+								},"text");
+
+							},ibp);
+						}
+						
+						if(storage.goal=="advanced" && page>message.offlinepage)
+						{
+							message.offlinepage=page;
+							SaveStorage();
+						}
+						else
+							lastpage=page;
+					}
+
+					men.remove();
+				};
+
+			if(content)
+				Fcontent(content);
+			else
+				$.post(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+storage.goal+"&vsid="+vsid,{__EVENTTARGET:"ddlPages",__VIEWSTATE:vs,ddlPages:page},Fcontent,"text");
+		},
+		StartParser=function()
+		{
+			if(typeof message.offlinepage=="undefined")
+				message.offlinepage=0;
+			$.get(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+storage.goal,{},function(r){
+				var vs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
+					vsid=r.match(/vsid=([^"]+)/);
+
+				if(vs && vsid)
+					if(storage.goal=="advanced" && message.offlinepage>1)
+						Parse4Send(vs[1],vsid[1],message.offlinepage,false);
+					else if(lastpage>1)
+						Parse4Send(vs[1],vsid[1],lastpage,false);
+					else
+						Parse4Send(vs[1],vsid[1],1,r);
+			},"text");
+		};
+
+	D.setHours( D.getTimezoneOffset()/60-3 );
+	D=D.getFullYear()+"-"+(D.getMonth()+1)+"-"+D.getDate();
+
+	Stop=function()
+	{
+		if(runned)
+		{
+			runned=false;
+			clearTimeout(tos);
+			clearTimeout(top);
+		}
+		infostatus.text("Рассылка остановлена").css("color","");
+	};
+
+	LoadStorage();
+	if(!("black" in storage))
+		storage={last:1,active:0,black:{},writers:{},attach:0,goal:"online"};
+
+	if(typeof storage["-"+name]=="undefined" || typeof storage["-"+name][D]=="undefined")
+	{
+		storage["-"+name]={};
+		storage["-"+name][D]=999;
+		SaveStorage();
+	}
+	else
+		limit=storage["-"+name]>0;
+
+	$.get(location.protocol+"//"+location.hostname+"/email/attachmentminder.aspx",function(phs){
+		var ind1=phs.indexOf("<form"),
+			ind2=phs.indexOf(">",ind1+1),
+			ind3=phs.indexOf("</form>",ind2+1);
+		phs=phs.substring(ind2+1,ind3);
+		phs=$("<div>").html(phs);
+		phs.find("#The_GridView table[id]").each(function(){
+			attach.push($(this).prop("id"));
+		});
+		phs.remove();
+	},"text");
+
+	oldgoal=storage.goal;
+	MessHandle=function(obj,sender,CB)
+	{
+		switch(obj.type)
+		{
+			case "init":
+				CB({
+					name:name,
+					limit:limit,
+					attach:attach,
+					runned:runned,
+					storage:storage
+				});
+			break;
+			case "setstatus":
+				Status(obj.sent);
+			break;
+			case "save":
+				storage=obj.storage;
+				SaveStorage();
+			break;
+			case "start":
+				if(!runned)
+				{
+					LoadStorage();
+					if(message)
+					{
+						runned=true;
+						if(oldgoal!=storage.goal)
+						{
+							inpogress=",";
+							queue=[];
+							cnt=0;
+							if(oldgoal=="advanced")
+							{
+								message.offlinepage=1;
+								SaveStorage();
+							}
+							oldgoal=storage.goal;
+							lastpage=1;
+						}
+						if(storage.goal=="writers")
+						{
+							cnt=0;
+							$.each(storage.writers,function(id){
+								id=parseInt(id);
+								if(id>0 && !(id in storage.black) && message.sent.indexOf(","+id+",")==-1)
+								{
+									queue.push({
+										id:id,
+										s:message.title,
+										t:message.text,
+										F:function(success){
+											message.sent+=id+",";
+											message.cnt++;
+
+											if(success)
+												++cnt;
+											Status(cnt);
+
+											if(--storage["-"+name][D]<=0 || queue.length==0)
+												Stop();
+
+											if(queue.length==0)
+												alert("Рассылка завершена");
+
+											SaveStorage();//Только для учета отправленных
+										}
+									});
+									Status(cnt);
+								}
+							});
+						}
+						else
+							StartParser();
+						StartSender();
+
+						if(runned)//Рассылка могла стопануться так и не начавшись
+							infostatus.text("Идет рассылка").css("color","green");
+					}
+				}
+				CB(runned);
+			break;
+			case "stop":
+				Stop();
+				CB(!runned);
+			break;
+		}
+	};
+	
+})(jQuery);
