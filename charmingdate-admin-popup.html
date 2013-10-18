@@ -23,6 +23,7 @@
 				Оплачено до:<br /><b id="payed"></b>
 			</div>
 			<div class="clear10"></div>
+			<img src="" id="preview" alt="Preview" style="display:none" />
 		</div>
 		<div class="rightColumn" id="mainside">
 			<b class="title">Тема</b> <a href="#" id="addt">Добавить</a> <a href="#" id="editt">Править</a> <a href="#" id="delt">Удалить</a>
@@ -45,6 +46,14 @@
 			<select class="sel_100" id="sender">
 				<option value="0" selected>-выберите отправителя-</option>
 			</select>
+			<div id="photo-container">
+				<div class="clear10"></div>
+				<b class="title">Фотография</b>
+				<div class="clear5"></div>
+				<select class="sel_100" id="photo" size="5" multiple>
+					<option>-выберите отправителя-</option>
+				</select>
+			</div>
 			<div class="clear10"></div>
 			<b class="title">Situation</b>
 			<div class="clear5"></div>
@@ -101,6 +110,9 @@ var init=$("body").data("init"),
 	black2side=$("#black2side"),
 	writersside=$("#writersside"),
 	sender=$("#sender"),
+	photo=$("#photo"),
+	phcon=$("#photo-container"),
+	preview=$("#preview"),
 	situation=$("#situation"),
 	EnableSubject=function()
 	{
@@ -421,10 +433,37 @@ goal.change(function(){
 	SaveStorage();
 });
 
-sender.change(function(){
-	storage.sender=$(this).val();
-	SaveStorage();
-});
+sender.change(function(e,p1){
+	if(!p1)
+		storage.sender=$(this).val();
+
+	photo.empty();
+	var optgroups={};
+	if(storage.sender in init.photos)
+		$.each(init.photos[ storage.sender ],function(i,v){
+			if(!(v[2] in optgroups))
+				optgroups[ v[2] ]=$("<optgroup>").attr("label",v[2]);
+			optgroups[ v[2] ].append( $("<option>").text(v[0]).data("src",v[1]) );
+		});
+
+	if($.isEmptyObject(optgroups))
+		phcon.hide();
+	else
+	{
+		phcon.show();
+		$.each(optgroups,function(i,v){
+			photo.append( v );
+		});
+	}
+
+	if(!p1)
+		SaveStorage();
+}).trigger("change",[true]);
+
+if(storage.photos)
+	photo.val(storage.photos);
+else
+	resave=true;
 
 situation.change(function(){
 	storage.situation=$(this).val();
@@ -438,8 +477,20 @@ text.change(function(){
 		SaveStorage();
 	}
 });
-//[E] События изменения контролов рассылки
 
+var pto;
+photo.on("mouseenter","option",function(){
+	clearTimeout(pto);
+	preview.show().attr("src",$(this).data("src"));
+}).on("mouseleave","option",function(){
+	pto=setTimeout(function(){
+		preview.hide();
+	},2000);
+}).change(function(){
+	storage.photos=$(this).val();
+	SaveStorage();
+});
+//[E] События изменения контролов рассылки
 
 //Управление переключателем тем
 subject.change(function(){

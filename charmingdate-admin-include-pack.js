@@ -35,6 +35,7 @@
 		Stop,
 
 		senders=[],//Отправители
+		photos={},//Фотки: girl:photoid:["toupload","href","album"],
 
 		info=$("#infohelp"),
 		infostatus=$("#infostatus"),
@@ -53,7 +54,8 @@
 					{
 						greet:storage.situation,
 						body:mess.t,
-						attachfilephoto:"",
+						attachfilephoto:storage.photos.length>0 ? storage.photos.join("|")+"|" : "",
+						//C817587-eeb4f417a7c013e4d9b0cfc1a5904f56|C817587-b55b9a6f509633c5ecfcc167d82e2058|
 						provision:"Y",
 						hidden:"",
 						title:"",
@@ -183,12 +185,61 @@
 
 	LoadStorage();
 	if(!("black" in storage))
-		storage={last:1,active:0,black:{},writers:{},goal:"search",sender:"",situation:1};
+		storage={last:1,active:0,black:{},writers:{},goal:"search",sender:"",situation:1,photos:[]};
 
 	$("<div>").load("/clagt/woman/women_profiles_posted.php?groupshow=4&listnum=1000 #DataGrid1",function(){
-	
+
+		var cntdwn=0;
 		$(this).find("tr:gt(0)").find("td:eq(2) a").not(".noprivlink").each(function(){
-			senders.push( $(this).text() );
+			var girl=$(this).text();
+			senders.push(girl);
+
+			$.get("/clagt/woman/women_album.php?womanid="+girl,function(r){
+				var body=r.replace(/<script[^>]*>|<\/script>/g,""),
+					ind1=body.indexOf("<body"),
+					ind2=body.indexOf(">",ind1+1),
+					ind3=body.indexOf("</body>",ind2+1);
+				body=body.substring(ind2+1,ind3);
+				body=body.replace(/(src="[^"]+")/ig,"data-$1");
+				body=$("<div>").html(body);
+
+				body.find("td.albumfont").closest("table").find("a:first").each(function(){
+					var album=$(this).closest("table").find("td.albumfont").text();
+
+					cntdwn++;
+					$.get("/clagt/woman/"+$(this).attr("href"),function(r2){
+						var body_=r2.replace(/<script[^>]*>|<\/script>/g,""),
+							ind1_=body_.indexOf("<body"),
+							ind2_=body_.indexOf(">",ind1_+1),
+							ind3_=body_.indexOf("</body>",ind2_+1);
+						body_=body_.substring(ind2_+1,ind3_);
+						body_=body_.replace(/(src="[^"]+")/ig,"data-$1");
+						body_=$("<div>").html(body_);
+
+						body_.find("a[href^=\"women_album_large.php?photoid\"]").each(function(){
+							var th=$(this),
+								photoid=th.attr("href").match(/photoid=([A-Z]+)&/i)[1],
+								img=th.find("img").data("src");
+
+							if(!(girl in photos))
+								photos[ girl ]={};
+							photos[ girl ][ photoid ]=[ img.match(new RegExp("/("+girl+"\-[a-z0-9]+)","i"))[1], img, album ];
+						});
+
+						if(--cntdwn==0)
+						{
+							$("<div>").css({position:"fixed",top:0,right:0,"background-color":"green","z-index":9999}).width("100px").height("100px").click(function(){
+								$(this).remove();
+							}).appendTo("body");
+							//console.log(photos);
+						}
+					}).fail(function(){
+						--cntdwn;
+					});
+				});
+
+				body.remove();
+			});
 		});
 		senders=senders.sort();
 		$(this).remove();
@@ -204,6 +255,7 @@
 					name:name,
 					runned:runned,
 					senders:senders,
+					photos:photos,
 					storage:storage
 				});
 			break;
