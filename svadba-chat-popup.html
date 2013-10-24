@@ -127,7 +127,7 @@ var EWMID = {
 		EWMID.get_blecklist();
 		EWMID.get_pisal();
 		EWMID.get_contacts();
-		EWMID.get_online(function(){EWMID.set_age();EWMID.set_country(); $('#hidden_load').hide();});
+		EWMID.get_online(function(){$('#hidden_load').hide();EWMID.set_age();EWMID.set_country(); console.log(111); });
 		WMID.send('get_status','',function(r){ 
 			if(r.status==0){
 				$('#start_send').show(); $('#end_send').hide();
