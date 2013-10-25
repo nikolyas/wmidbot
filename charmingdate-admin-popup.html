@@ -155,11 +155,11 @@ var init=$("body").data("init"),
 		SM({type:"status",sent:sent});
 	};
 
-if(init.senders.length>0)
+if(!$.isEmptyObject(init.senders))
 {
 	sender.empty();
 	$.each(init.senders,function(i,v){
-		$("<option>").text(v).appendTo(sender);
+		$("<option>").text(v+" ("+i+")").val(i).appendTo(sender);
 	});
 }
 

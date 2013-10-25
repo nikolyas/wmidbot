@@ -34,7 +34,7 @@
 		nextpage=false,//Следующая страница, которая должна быть обработана
 		Stop,
 
-		senders=[],//Отправители
+		senders={},//Отправители
 		photos={},//Фотки: girl:photoid:["toupload","href","album"],
 
 		info=$("#infohelp"),
@@ -192,7 +192,7 @@
 		var cntdwn=0;
 		$(this).find("tr:gt(0)").find("td:eq(2) a").not(".noprivlink").each(function(){
 			var girl=$(this).text();
-			senders.push(girl);
+			senders[girl]=$(this).closest("tr").find("td:eq(3)").text();
 
 			$.get("/clagt/woman/women_album.php?womanid="+girl,function(r){
 				var body=r.replace(/<script[^>]*>|<\/script>/g,""),
@@ -231,7 +231,6 @@
 							$("<div>").css({position:"fixed",top:0,right:0,"background-color":"green","z-index":9999}).width("100px").height("100px").click(function(){
 								$(this).remove();
 							}).appendTo("body");
-							//console.log(photos);
 						}
 					}).fail(function(){
 						--cntdwn;
@@ -241,7 +240,6 @@
 				body.remove();
 			});
 		});
-		senders=senders.sort();
 		$(this).remove();
 	});
 
