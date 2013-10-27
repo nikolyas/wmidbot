@@ -9,6 +9,7 @@
 				<li><a href="http://wmidbot.com/?page=help" target="_blank">Справка</a></li>
 				<li><a href="http://wmidbot.com/?page=dayactive" target="_blank">Продлить активацию</a></li>
 				<li><a href="#" id="blecklist">Черный список</a></li>
+				<li><a href="#" id="emptychatlist">Очистить контакт-лист</a></li>
 			</ul>
 			<div class="clear10"></div>
 			<div class="active">
@@ -67,5 +68,171 @@
 	</div>
 </div>
 <script type="text/javascript">//<![CDATA[
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('j m=$("14").10("m"),2=m.2,6=$("#6"),8=$("#g-z"),9=$("#g-u"),5=$("#5"),a=$("#a"),e=$("#e"),f=$("#f"),E=4(){f.O();e.R();$("#5,#g-z,#g-u,#a").C("G",l)},P=4(){e.O();f.R();$("#5,#g-z,#g-u,#a").C("G",M)},b=4(){w({A:"18",2:2})};$("#17").5(15.12(0,16)).C("Y","Осталось: "+X);$("#V").i(4(){$(".U").T();s!1});$("#11").i(4(){j n=I("Введите S (можно несколько, через запятую)");7(n!==L){$.h(n.N(/\\D+/),4(k,v){7(6.Q("[J="+v+"]").B()==0){$("<y>").5(v).x(6);6.3(v);2.6[v]=""}});b()}s!1});$("#W").i(4(){j t=$("#6 :K"),5=[];7(t.B()>0){t.h(4(){5.Z($(c).3())});5=I("Отредактируйте запись:",5.1a(", "));7(5!==L){t.h(4(){H 2.6[$(c).3()]}).F();$.h(5.N(/\\D+/),4(k,v){7(6.Q("[J="+v+"]").B()==0){$("<y>").5(v).x(6);6.3(v);2.6[v]=""}});b()}}s!1});$("#13").i(4(){j t=$("#6 :K");t.h(4(){H 2.6[$(c).3()]}).F();b();s!1});j d=M;7(2.8)8.3(2.8);q d=l;7(2.9)9.3(2.9);q d=l;7(2.5)5.3(2.5);q d=l;7(2.a)a.3(2.a);q d=l;7(d){2.5=5.3();2.a=a.3();2.9=9.3();2.8=8.3();b()}7(2.6)$.h(2.6,4(k,v){$("<y>").5(v?v:k).3(k).x(6)});8.p(4(){2.8=o($(c).3());7(2.8>=o(9.3()))9.3(2.8);b()});9.p(4(){2.9=o($(c).3());7(2.9<=o(8.3()))8.3(2.9);b()});a.p(4(){2.a=$(c).3();b()});7(m.19)E();e.i(4(){w({A:"e"},4(r){7(r)E()})});f.i(4(){w({A:"f"},4(r){7(r)P()})});5.p(4(){2.5=$(c).3();b()});',62,73,'||storage|val|function|text|black|if|af|at|goal|SaveStorage|this|resave|start|stop|age|each|click|var||true|init||parseInt|change|else||return||to||SM|appendTo|option|from|type|size|prop||Start|remove|disabled|delete|prompt|value|selected|null|false|split|show|Stop|find|hide|ID|toggle|rightColumn|blecklist|editb|remain|title|push|data|addb|substr|delb|body|rdate||payed|save|runned|join'.split('|'),0,{}))
+var init=$("body").data("init"),
+	storage=init.storage,
+	black=$("#black"),
+	af=$("#age-from"),
+	at=$("#age-to"),
+	text=$("#text"),
+	goal=$("#goal"),
+	start=$("#start"),
+	stop=$("#stop"),
+	Start=function()
+	{
+		stop.show();
+		start.hide();
+		$("#text,#age-from,#age-to,#goal").prop("disabled",true);
+	},
+	Stop=function()
+	{
+		start.show();
+		stop.hide();
+		$("#text,#age-from,#age-to,#goal").prop("disabled",false);
+	},
+	SaveStorage=function()
+	{
+		SM({type:"save",storage:storage});
+	};
+
+$("#payed").text(rdate.substr(0,16)).prop("title","Осталось: "+remain);
+$("#blecklist").click(function(){
+	$(".rightColumn").toggle();
+	return !1;
+});
+
+$("#addb").click(function(){
+	var n=prompt("Введите ID (можно несколько, через запятую)");
+	if(n!==null)
+	{
+		$.each(n.split(/\D+/),function(k,v){
+			if(black.find("[value="+v+"]").size()==0)
+			{
+				$("<option>").text(v).appendTo(black);
+				black.val(v);
+				storage.black[v]="";
+			}
+		});
+		SaveStorage();
+	}
+	return !1;
+});
+
+$("#editb").click(function(){
+	var t=$("#black :selected"),
+		text=[];
+	if(t.size()>0)
+	{
+		t.each(function(){
+			text.push( $(this).val() );
+		});
+		text=prompt("Отредактируйте запись:",text.join(", "));
+		if(text!==null)
+		{
+			t.each(function(){
+				delete storage.black[ $(this).val() ]; 
+			}).remove();
+			$.each(text.split(/\D+/),function(k,v){
+				if(black.find("[value="+v+"]").size()==0)
+				{
+					$("<option>").text(v).appendTo(black);
+					black.val(v);
+					storage.black[v]="";
+				}
+			});
+			SaveStorage();
+		}
+	}
+	return !1;
+});
+
+$("#delb").click(function(){
+	var t=$("#black :selected");
+	t.each(function(){
+		delete storage.black[ $(this).val() ]; 
+	}).remove();
+	SaveStorage();
+	return !1;
+});
+
+$("#emptychatlist").click(function(e){
+	e.preventDefault();
+	SM({type:"clean"},function(r){});
+});
+
+var resave=false;
+
+if(storage.af)
+	af.val(storage.af);
+else
+	resave=true;
+
+if(storage.at)
+	at.val(storage.at);
+else
+	resave=true;
+
+if(storage.text)
+	text.val(storage.text);
+else
+	resave=true;
+
+if(storage.goal)
+	goal.val(storage.goal);
+else
+	resave=true;
+
+if(resave)
+{
+	storage.text=text.val();
+	storage.goal=goal.val();
+	storage.at=at.val();
+	storage.af=af.val();
+	SaveStorage();
+}
+
+if(storage.black)
+	$.each(storage.black,function(k,v){
+		$("<option>").text(v ? v : k).val(k).appendTo(black);
+	});
+
+af.change(function(){
+	storage.af=parseInt($(this).val());
+	if(storage.af>=parseInt(at.val()))
+		at.val(storage.af);
+	SaveStorage();
+});
+
+at.change(function(){
+	storage.at=parseInt($(this).val());
+	if(storage.at<=parseInt(af.val()))
+		af.val(storage.at);
+	SaveStorage();
+});
+
+goal.change(function(){
+	storage.goal=$(this).val();
+	SaveStorage();
+});
+
+if(init.runned)
+	Start();
+	
+start.click(function(){
+	SM({type:"start"},function(r){
+		if(r)
+			Start();
+	});
+});
+
+stop.click(function(){
+	SM({type:"stop"},function(r){
+		if(r)
+			Stop();
+	});
+});
+
+text.change(function(){
+	storage.text=$(this).val();
+	SaveStorage();
+});
 //]]></script>

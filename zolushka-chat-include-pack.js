@@ -1,1 +1,213 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(4($){$("#1U").1L().26("<14><1a 21=\\"i-2d:2g;1B:19 0 19;1Y-20:1.25\\"><U z=\\"Y\\">Рассылка остановлена</U><2j /><16 z=\\"18\\" 1F=\\"Отправлено <- ожидает\\">0 &1G;- 0</16></1a></14>");8 g=K,y=$("#24").1r(),E=$("#27").1r(),W=$("#18"),S=$("#Y"),R="1z-1A-2-"+y,3=1n.1E(R),j=[],1m=4(){1H{1n.1J(R,N.M(3))}1Z(e){7(e==22)T("Локальное хранилище переполнено")}},o=4(a){W.i(a+" <- "+j.J)},G,F,h=",",m=",",l=0,D,L=4(){7(j.J>0){8 a=j.1C();a(t)}7(3.B!="H"&&j.J==0){D();T("Рассылка завершена")}17 7(g)G=X(L,1I)},I=4(){$.1K(Z.1N+"//"+Z.1O+"/1P/1Q.1R/1S",{1T:0,2A:"1X"},4(r){$.p(r,4(k,v){7(3.1o<=v.1w&&v.1w<=3.1x&&m.s(","+v.5+",")==-1&&h.s(","+v.5+",")==-1&&!(v.5 V 3.u)){m+=v.5+",";8 c=3.i;$.p(v,4(a,b){c=c.9(10 11("{"+a+"}","12"),b)});j.13(4(){h+=v.5+",";l++;8 a=C.15("1y");v.O=E;v.P=K;c=c.9(/"/g,"\\\\\\"");c=c.9(/\\r\\n/g,"\\n");c=c.9(/\\r/g,"\\n");c=c.9(/\\n/g,"\\\\\\n\\r");a.i="(4(){8 6="+N.M(v)+";6.1b=1c(6);1M(6);1d(6.1e);1f("+v.5+",\\""+c+"\\");1g("+v.5+",\\""+c+"\\");})();";C.1h.1i(a).1j.1k(a);o(l)});o(l)}})},"1V").1W(4(){$("#1l A > A").p(4(){8 a=q($(Q).1p("z").1q(/^(\\d+)/)[1]);7(h.s(","+a+","))h+=a+","});F=X(I,23)})};D=4(){7(g){g=K;1s(G);1s(F);h=",";m=",";j=[]}o(l);S.i("Рассылка остановлена").1t("1u","")};3=3?$.1v(3)||{}:{};7(28 3.u=="29")3={u:{},B:"H",1o:2a,1x:2b,i:""};2c=4(d,e,f){2e(d.2f){x"2h":f({y:y,2i:g,3:3});w;x"2k":3=d.3;1m();w;x"2l":7(!g){g=t;h=",";m=",";7(3.B=="H"){$("#1l A > A").p(4(){h+=q($(Q).1p("z").1q(/^(\\d+)/)[1])+","});I()}17{$(3.B=="2m"?"#2n":"#2o,#2p").2q().p(4(){8 v=$.1v($(Q).2r("6"));v.5=q(v.5);7(m.s(","+v.5+",")==-1&&h.s(","+v.5+",")==-1&&!(v.5 V 3.u)){m+=v.5+",";8 c=3.i;$.p(v,4(a,b){c=c.9(10 11("{"+a+"}","12"),b)});j.13(4(){h+=v.5+",";l++;8 a=C.15("1y");v.O=E;c=c.9(/"/g,"\\\\\\"");c=c.9(/\\r\\n/g,"\\n");c=c.9(/\\r/g,"\\n");c=c.9(/\\n/g,"\\\\\\n\\r");a.i="(4(){8 6="+N.M(v)+";6.P=6.P.2s().2t() ? t : q(6.O)!=q(2u.2v);2w(6.5);6.1b=1c(6);2x(6);1d(6.1e);1f("+v.5+",\\""+c+"\\");1g("+v.5+",\\""+c+"\\");})();";C.1h.1i(a).1j.1k(a);o(l)});o(l)}})}L();7(g)S.i("Идет рассылка").1t("1u","2y")}f(t);w;x"2z":D();f(t);w}}})(1D);',62,161,'|||storage|function|AccountNumber|data|if|var|replace||||||||sentids|text|queue||cnt|inprogress||Status|each|parseInt||indexOf|true|black||break|case|name|id|div|goal|document|Stop|myid|top|tos|online|StartParser|length|false|StartSender|stringify|JSON|LastMessageAccount|IsTwoWayChat|this|key|tinfo|alert|span|in|info|setTimeout|infotext|location|new|RegExp|ig|push|tr|createElement|code|else|infohelp|7px|td|EntryType|Chat_ChatListEntry_EntryType|Chat_OnlineList_Refresh|accountNumber|Chat_PostMessage_AddMessageToDialogs|Chat_PostMessage_SendData|head|appendChild|parentNode|removeChild|Chat_RightPanel_ChatList|SaveStorage|localStorage|af|prop|match|val|clearTimeout|css|color|parseJSON|Age|at|script|zolushka|chat|padding|shift|jQuery|getItem|title|lt|try|2000|setItem|post|parent|Chat_ChatListEntry_Build|protocol|hostname|services|ChatService|asmx|GetOnlineList|sort|Chat_OnlineStatus|json|done|DESC|font|catch|size|style|QUOTA_EXCEEDED_ERR|10000|myUN|2em|after|myAN|typeof|undefined|30|100|MessHandle|align|switch|type|center|init|runned|br|save|start|noans|Chat_RightPanel_ChatList_FemaleRequests|Chat_RightPanel_ChatList_MaleSentChats|Chat_RightPanel_ChatList_FemaleSentChats|children|attr|toString|bool|Chat_myStatus|account|Chat_GetDialog|Chat_ChatListEntry_Update|green|stop|sortDirection'.split('|'),0,{}))
+(function($){
+	$("#Chat_OnlineStatus").parent().after("<tr><td style=\"text-align:center;padding:7px 0 7px;font-size:1.2em\"><span id=\"infotext\">Рассылка остановлена</span><br /><code id=\"infohelp\" title=\"Отправлено <- ожидает\">0 &lt;- 0</code></td></tr>");
+
+	var runned=false,
+		name=$("#myUN").val(),
+		myid=$("#myAN").val(),
+		info=$("#infohelp"),
+		tinfo=$("#infotext"),
+		key="zolushka-chat-2-"+name,
+		storage=localStorage.getItem(key),
+		queue=[],//Очередь на отправку
+		SaveStorage=function()
+		{
+			try
+			{
+				localStorage.setItem(key,JSON.stringify(storage));
+			}
+			catch(e)
+			{
+				if(e==QUOTA_EXCEEDED_ERR)
+					alert("Локальное хранилище переполнено");
+			}
+		},
+		Status=function(sent)
+		{
+			info.text(sent+" <- "+queue.length);
+		},
+
+		tos,top,//TimeOut parser & sender
+		sentids=",",//Те, кто уже в чат-листе
+		inprogress=",",//Те, кто уже в очереди
+		cnt=0,//Отправлено, очередь на отправку
+		Stop,
+		StartSender=function()
+		{
+			if(queue.length>0)
+			{
+				var mess=queue.shift();
+				mess(true);
+			}
+
+			if(runned)
+				if(storage.goal!="online" && queue.length==0)
+				{
+					Stop();
+					alert("Рассылка завершена");
+				}
+				else
+					tos=setTimeout(StartSender,2000);
+		},
+		StartParser=function()
+		{
+			$.post(
+				location.protocol+"//"+location.hostname+"/services/ChatService.asmx/GetOnlineList",
+				{
+					sort:0,
+					sortDirection:"DESC"
+				},
+				function(r)
+				{
+					$.each(r,function(k,v){
+						if(storage.af<=v.Age && v.Age<=storage.at && inprogress.indexOf(","+v.AccountNumber+",")==-1 && sentids.indexOf(","+v.AccountNumber+",")==-1&& !(v.AccountNumber in storage.black))
+						{
+							inprogress+=v.AccountNumber+",";
+
+							var text=storage.text;
+							$.each(v,function(kk,vv){
+								text=text.replace(new RegExp("{"+kk+"}","ig"),vv);
+							});
+
+							queue.push(function(){
+								sentids+=v.AccountNumber+",";
+								cnt++;
+
+								//Помещаем в чат
+								var script=document.createElement("script");
+								v.LastMessageAccount=myid;
+								v.IsTwoWayChat=false;
+								text=text.replace(/"/g,"\\\"");
+								text=text.replace(/\r\n/g,"\n");
+								text=text.replace(/\r/g,"\n");
+								text=text.replace(/\n/g,"\\\n\r");
+								script.text="(function(){var data="+JSON.stringify(v)+";data.EntryType=Chat_ChatListEntry_EntryType(data);Chat_ChatListEntry_Build(data);Chat_OnlineList_Refresh(data.accountNumber);Chat_PostMessage_AddMessageToDialogs("+v.AccountNumber+",\""+text+"\");Chat_PostMessage_SendData("+v.AccountNumber+",\""+text+"\");})();";
+								document.head.appendChild(script).parentNode.removeChild(script);
+
+								Status(cnt);
+							});
+							Status(cnt);
+						}
+					});
+				},
+				"json"
+			).done(function(){
+				$("#Chat_RightPanel_ChatList div > div").each(function(){
+					var id=parseInt($(this).prop("id").match(/^(\d+)/)[1]);
+					if(sentids.indexOf(","+id+","))
+						sentids+=id+",";
+				});
+				top=setTimeout(StartParser,10000);
+			});
+		};
+	Stop=function()
+	{
+		if(runned)
+		{
+			runned=false;
+			clearTimeout(tos);
+			clearTimeout(top);
+			sentids=",";
+			inprogress=",";
+			queue=[];
+		}
+		Status(cnt);
+		tinfo.text("Рассылка остановлена").css("color","");
+	};
+
+	storage=storage ? $.parseJSON(storage)||{} : {};
+	if(typeof storage.black=="undefined")
+		storage={black:{},goal:"online",af:30,at:100,text:""};
+
+	MessHandle=function(obj,sender,CB)
+	{
+		switch(obj.type)
+		{
+			case "init":
+				CB({
+					name:name,
+					runned:runned,
+					storage:storage
+				});
+			break;
+			case "save":
+				storage=obj.storage;
+				SaveStorage();
+			break;
+			case "start":
+				if(!runned)
+				{
+					runned=true;
+					sentids=",";
+					inprogress=",";
+					if(storage.goal=="online")
+					{
+						$("#Chat_RightPanel_ChatList div > div").each(function(){
+							sentids+=parseInt($(this).prop("id").match(/^(\d+)/)[1])+",";
+						});
+						StartParser();
+					}
+					else
+					{
+						$(storage.goal=="noans" ? "#Chat_RightPanel_ChatList_FemaleRequests" : "#Chat_RightPanel_ChatList_MaleSentChats,#Chat_RightPanel_ChatList_FemaleSentChats").children().each(function(){
+							var v=$.parseJSON( $(this).attr("data") );
+							v.AccountNumber=parseInt(v.AccountNumber);
+
+							if(inprogress.indexOf(","+v.AccountNumber+",")==-1 && sentids.indexOf(","+v.AccountNumber+",")==-1 && !(v.AccountNumber in storage.black))
+							{
+								inprogress+=v.AccountNumber+",";
+
+								var text=storage.text;
+								$.each(v,function(kk,vv){
+									text=text.replace(new RegExp("{"+kk+"}","ig"),vv);
+								});
+
+								queue.push(function(){
+									sentids+=v.AccountNumber+",";
+									cnt++;
+
+									//Помещаем в чат
+									var script=document.createElement("script");
+
+									v.LastMessageAccount=myid;
+
+									text=text.replace(/"/g,"\\\"");
+									text=text.replace(/\r\n/g,"\n");
+									text=text.replace(/\r/g,"\n");
+									text=text.replace(/\n/g,"\\\n\r");
+								
+									script.text="(function(){var data="+JSON.stringify(v)+";data.IsTwoWayChat=data.IsTwoWayChat.toString().bool() ? true : parseInt(data.LastMessageAccount)!=parseInt(Chat_myStatus.account);Chat_GetDialog(data.AccountNumber);data.EntryType=Chat_ChatListEntry_EntryType(data);Chat_ChatListEntry_Update(data);Chat_OnlineList_Refresh(data.accountNumber);Chat_PostMessage_AddMessageToDialogs("+v.AccountNumber+",\""+text+"\");Chat_PostMessage_SendData("+v.AccountNumber+",\""+text+"\");})();";
+									document.head.appendChild(script).parentNode.removeChild(script);
+
+									Status(cnt);
+								});
+								Status(cnt);
+							}
+						});
+					}
+
+					StartSender();
+					if(runned)//Рассылка могла стопануться так и не начавшись
+						tinfo.text("Идет рассылка").css("color","green");
+				}
+				CB(true);
+			break;
+			case "stop":
+				Stop();
+				CB(true);
+			break;
+			case "clean":
+				var script=document.createElement("script");
+				script.text="(function(){";
+
+				$("#Chat_RightPanel_ChatList .chatlistentry").each(function(){
+					script.text+="Chat_ChatList_Close("+parseInt($(this).attr("id"))+");";
+				});
+
+				script.text+="})()";
+				document.head.appendChild(script).parentNode.removeChild(script);
+				CB(true);
+			break;
+		}
+	}
+	
+})(jQuery);
