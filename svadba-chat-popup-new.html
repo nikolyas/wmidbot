@@ -24,6 +24,7 @@ $("#get-test").click(function(){
 	var th=$(this);
 	$.get("http://wmidbot.com/set_test.php?plugin=svadba-chat&name="+init.name).done(function(){
 		th.remove();
+		alert('Запрос в обработке! Ожидайте 5 минут, после чего перезагрузите страницу и еще раз нажмите на человечка.');
 	});
 	return !1;
 });
