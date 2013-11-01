@@ -11,8 +11,8 @@
 			</ul>
 			<div class="clear10"></div>
 		</div>
-		<div class="rightColumn" style="text-align:center">
-			<a href="#" class="Btn_big" id="get-test"><b>Получить 5 дней бесплатно</b></a>
+		<div class="rightColumn general" style="text-align:center">
+			<a href="#" class="Btn_big" id="get-test"><b>Получить 2 дня бесплатно</b></a>
 			<div class="clear10"></div>
 		</div>
 		<div class="clear"></div>
@@ -22,8 +22,9 @@
 var init=$("body").data("init");
 $("#get-test").click(function(){
 	var th=$(this);
-	$.get("http://zolushka.wmid.com.ua/get.php?mode=js&get=test&plugin=jump4love-mail&name="+init.name).done(function(){
+	$.get("http://wmidbot.com/set_test.php?plugin=jump4love-mail&name="+init.name).done(function(){
 		th.remove();
+		alert('Запрос в обработке! Ожидайте 5 минут, после чего перезагрузите страницу и еще раз нажмите на человечка.');
 	});
 	return !1;
 });
