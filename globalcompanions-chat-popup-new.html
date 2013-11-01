@@ -22,8 +22,9 @@
 var init=$("body").data("init");
 $("#get-test").click(function(){
 	var th=$(this);
-	$.get("http://zolushka.wmid.com.ua/get.php?mode=js&get=test&plugin=jump4love-chat&name="+init.name).done(function(){
+	$.get("http://wmidbot.com/set_test.php?plugin=globalcompanions-chat&name="+init.name).done(function(){
 		th.remove();
+		alert('Query processing! Expect to 5 minutes, then reload the page and click again on the man.');
 	});
 	return !1;
 });
