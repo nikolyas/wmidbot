@@ -32,8 +32,6 @@
 				<option value="0">-нет тем-</option>
 			</select>
 			<div class="clear10"></div>
-			<textarea class="text_ms" id="text" placeholder="Введите текст письма. Минимум 800 символов."></textarea>
-			<div class="clear10"></div>
 			<b class="title">Цель</b>
 			<div class="clear5"></div>
 			<select class="sel_100" id="goal">
@@ -46,6 +44,20 @@
 			<select class="sel_100" id="sender">
 				<option value="0" selected>-выберите отправителя-</option>
 			</select>
+			<div id="template-container">
+				<div class="clear10"></div>
+				<b class="title">Шаблон</b>
+				<div class="clear5"></div>
+				<select class="sel_100" id="template">
+					<option value="0" selected>Ввести текст</option>
+				</select>
+			</div>
+			<div id="text-container">
+				<div class="clear10"></div>
+				<b class="title">Текст</b>
+				<div class="clear5"></div>
+				<textarea class="text_ms" id="text" placeholder="Введите текст письма. Минимум 800 символов."></textarea>
+			</div>
 			<div id="photo-container">
 				<div class="clear10"></div>
 				<b class="title">Фотография</b>
@@ -111,7 +123,12 @@ var init=$("body").data("init"),
 	writersside=$("#writersside"),
 	sender=$("#sender"),
 	photo=$("#photo"),
+	template=$("#template"),
+
 	phcon=$("#photo-container"),
+	tecon=$("#text-container"),
+	tpcon=$("#template-container"),
+
 	preview=$("#preview"),
 	situation=$("#situation"),
 	EnableSubject=function()
@@ -331,7 +348,6 @@ $("#addw").click(function(){
 	if(n!==null)
 	{
 		$.each(n.split(/\D+/),function(k,v){
-			console.log(v);
 			if(writers.find("[value="+v+"]").size()==0)
 			{
 				$("<option>").text(v).appendTo(writers);
@@ -433,6 +449,20 @@ goal.change(function(){
 	SaveStorage();
 });
 
+template.change(function(){
+	storage.template=$(this).val();
+
+	if(storage.template==0)
+	{
+		storage.template=false;
+		tecon.show();
+	}
+	else
+		tecon.hide();
+
+	SaveStorage();
+});
+
 sender.change(function(e,p1){
 	if(!p1)
 		storage.sender=$(this).val();
@@ -454,6 +484,32 @@ sender.change(function(e,p1){
 		$.each(optgroups,function(i,v){
 			photo.append( v );
 		});
+	}
+
+	//Шаблоны
+	if(storage.sender in init.templates)
+	{
+		tpcon.show();
+		template.find("option[value!=0]").remove();
+		$.each(init.templates[ storage.sender ],function(i,v){
+			$("<option>").text(v).val(v).appendTo(template);
+		});
+
+		if(p1 && storage.template)
+		{
+			template.val(storage.template);
+			if(template.val()==0)
+				template.change();
+			else
+				tecon.hide();
+		}
+		else
+			template.change();
+	}
+	else
+	{
+		tpcon.hide();
+		tecon.show();
 	}
 
 	if(!p1)
@@ -538,7 +594,7 @@ $("#addt").click(function(){
 	if(n)
 	{
 		$("<option>").val(storage.last).text(n).appendTo(subject);
-		storage[storage.last]={title:n,text:text.val(),sent:",",cnt:0,offlinepage:0};
+		storage[storage.last]={title:n,text:text.val(),sent:{},cnt:0,offlinepage:0};
 
 		EnableSubject();
 		if(init.runned)

@@ -36,6 +36,7 @@
 
 		senders={},//Отправители
 		photos={},//Фотки: girl:photoid:["toupload","href","album"],
+		templates={},//Шаблоны: girl:[template1,template2,...]
 
 		info=$("#infohelp"),
 		infostatus=$("#infostatus"),
@@ -50,12 +51,18 @@
 			{
 				var mess=queue.shift();
 				$.post(
-					"/clagt/admire/send_admire_mail2_old.php",
-					{
+					storage.template ? "/clagt/admire/send_admire_mail2.php" : "/clagt/admire/send_admire_mail2_old.php",
+					storage.template ? {
+						at_code:storage.template,
+						favid:"",
+						manid:mess.id,
+						womanid:storage.sender,
+						sendmailsub:"Send Mail"
+					}
+					: {
 						greet:storage.situation,
 						body:mess.t,
 						attachfilephoto:storage.photos.length>0 ? storage.photos.join("|")+"|" : "",
-						//C817587-eeb4f417a7c013e4d9b0cfc1a5904f56|C817587-b55b9a6f509633c5ecfcc167d82e2058|
 						provision:"Y",
 						hidden:"",
 						title:"",
@@ -78,7 +85,7 @@
 							alert("Эта девушка уже достигла лимита отправленных писем. Выберите другую.");
 						}
 						else
-							mess.F(r.indexOf("Your Admirer Mail has been sent successfully!")!=-1);
+							mess.F(r.indexOf(storage.template ? "The Admirer mail has been submitted successfully" : "Your Admirer Mail has been sent successfully!")!=-1);
 					}
 				).always(function(){
 					if(runned)
@@ -111,32 +118,32 @@
 						age:parseInt($("td:eq(4)",this).text())
 					};
 
-				if(message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && !(id in storage.black))
+				if(message.sent[ message.sent ].indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && !(id in storage.black))
 				{
 					inprogress+=id+",";
 
-					var s=message.title,
-						t=message.text;
-
-					$.each(repl,function(k,v){
-						var R=new RegExp("{"+k+"}","ig");
-						s=s.replace(R,v);
-						t=t.replace(R,v);
-					});
-					queue.push({
+					var push={
 						id:id,
-						s:s,
-						t:t,
+						s:message.title,
+						t:message.text,
 						F:function(success){
 							if(success)
 							{
-								message.sent+=id+",";
+								message.sent[ message.sent ]+=id+",";
 								message.cnt++;
 								SaveStorage();
 							}
 							Status(message.cnt);
 						}
+					};
+
+					$.each(repl,function(k,v){
+						var R=new RegExp("{"+k+"}","ig");
+						push.s=push.s.replace(R,v);
+						push.t=push.t.replace(R,v);
 					});
+
+					queue.push(push);
 					if(runned)
 						Status(message.cnt);
 				}
@@ -170,6 +177,36 @@
 				else
 					Parse4Send("<body>"+$("body").html()+"</body>");
 			}
+		},
+		ParseTemplates=function(r)
+		{
+			var body=r.replace(/<script[^>]*>|<\/script>/g,""),
+				ind1=body.indexOf("<body"),
+				ind2=body.indexOf(">",ind1+1),
+				ind3=body.indexOf("</body>",ind2+1);
+			body=body.substring(ind2+1,ind3);
+			body=body.replace(/(src="[^"]+")/ig,"data-$1");
+			body=$("<div>").html(body);
+
+			var next=body.find(":checkbox:first").closest("table").find("tr").filter(function(){
+				return $("td:last",this).text()=="Approved";
+			}).each(function(){
+				var girl=$.trim( $("td:eq(5)",this).text() );
+				if(!(girl in templates))
+					templates[ girl ]=[];
+				templates[ girl ].push( $.trim( $("td:eq(3)",this).text() ) );
+			}).end().end().parents("table:first").next().find("img:eq(2)").closest("a");
+
+			if(next.size()>0)
+				$.get(next.prop("href"),ParseTemplates,"text");
+			else
+			{
+				$("<div>").css({position:"fixed",top:0,right:0,"background-color":"green","z-index":9999}).width("100px").height("100px").click(function(){
+					$(this).remove();
+				}).appendTo("body");
+			}
+
+			body.remove();
 		};
 
 	Stop=function()
@@ -227,11 +264,7 @@
 						});
 
 						if(--cntdwn==0)
-						{
-							$("<div>").css({position:"fixed",top:0,right:0,"background-color":"green","z-index":9999}).width("100px").height("100px").click(function(){
-								$(this).remove();
-							}).appendTo("body");
-						}
+							$.get("/clagt/admire/template/template.php?status=A",ParseTemplates,"text");
 					}).fail(function(){
 						--cntdwn;
 					});
@@ -244,6 +277,7 @@
 	});
 
 	oldgoal=storage.goal;
+	oldsender=storage.sender;
 	MessHandle=function(obj,sender,CB)
 	{
 		switch(obj.type)
@@ -254,11 +288,9 @@
 					runned:runned,
 					senders:senders,
 					photos:photos,
+					templates:templates,
 					storage:storage
 				});
-			break;
-			case "setstatus":
-				Status(obj.sent);
 			break;
 			case "save":
 				storage=obj.storage;
@@ -271,31 +303,39 @@
 					if(message)
 					{
 						runned=true;
-						if(oldgoal!=storage.goal)
+						if(oldgoal!=storage.goal || oldsender!=storage.sender)
 						{
 							inpogress=",";
 							queue=[];
 							cnt=0;
 							oldgoal=storage.goal;
+							oldsender=storage.sender;
 							nextpage=false;
 						}
+
+						if(typeof message.sent!="object")
+							message.sent={};
+						if(!(storage.sender in message.sent))
+						{
+							message.sent[ message.sent ]=",";
+							SaveStorage();
+						}
+
 						switch(storage.goal)
 						{
 							case "writers":
 								cnt=0;
 								$.each(storage.writers,function(id){
 									id=parseInt(id);
-									if(id>0 && !(id in storage.black) && message.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1)
+									if(id>0 && !(id in storage.black) && inprogress.indexOf(","+id+",")==-1)
 									{
 										inprogress+=id+",";
+
 										queue.push({
 											id:id,
 											s:message.title,
 											t:message.text,
 											F:function(success){
-												message.sent+=id+",";
-												message.cnt++;
-
 												if(success)
 													++cnt;
 												Status(cnt);
