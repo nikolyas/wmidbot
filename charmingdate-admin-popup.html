@@ -654,9 +654,9 @@ if(init.runned)
 start.click(function(){
 	if(!(storage.active in storage))
 		alert("Выберите тему для рассылки");
-	else if(storage[storage.active].text==""){
-		console.log(storage); alert("Введите текст письма!");
-	}else if(storage[storage.active].title=="")
+	else if(storage[storage.active].text==""&&storage.template==false)
+		alert("Введите текст письма!");
+	else if(storage[storage.active].title=="")
 		alert("Введите тему письма!");
 	else if(storage.goal=="writers" && $.isEmptyObject(storage.writers))
 	{
