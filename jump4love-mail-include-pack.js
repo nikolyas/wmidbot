@@ -152,7 +152,12 @@
 						{
 							if(r.error=="LIMIT_EXCEED")
 							{
-								alert("На сегодня достингнут лимит в 150 писем с капчей");
+								alert("На сегодня достингнут лимит в "+e.limit+" писем с капчей");
+								run.click();
+							}
+							else if(r.error=="PAYED_EXCEED")
+							{
+								alert("Вы исчерпали письма с капчей. Пожалуйста, пополните свой счет на \nhttp://wmidbot.com");
 								run.click();
 							}
 							ReStartSender();
