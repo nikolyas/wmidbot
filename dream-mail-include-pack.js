@@ -55,8 +55,10 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 						request_man.push(obj);
 					});
 					}
-				});
-				s++;
+					
+					
+				}).always(function() {
+					s++;
 					if(s==ret){
 						var date = new Date();
 						var minutes = 60;
@@ -67,6 +69,7 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 					}else{
 						sisi(s,request_man);
 					}
+				 });
 				
 			}
 			sisi(0,request_man);
