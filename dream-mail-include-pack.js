@@ -33,7 +33,9 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 		
 		$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
 			var ret = Math.round(d[0].data.length/15);
-			function sisi(s,request_man){
+			
+			$('body').append('<div id="sincs" style="position: fixed;top: 0;right: 0;left: 0;bottom: 0;background: #fff;opacity: 0.9;font-size: 29px;text-align: center;padding-top: 209px;">Подождите...</div>');
+			function sisi(s,request_man){	
 			//for(i=0;i<ret;i++){
 				i=s;
 				$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
@@ -60,6 +62,7 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 						date.setTime(date.getTime() + (minutes * 60 * 1000));
 						$.cookie('sinc', "true", { expires: date, path: '/' });
 						localStorage.setItem("online", JSON.stringify(request_man));
+						$('#sincs').remove();
 					}else{
 						sisi(s,request_man);
 					}
