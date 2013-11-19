@@ -52,17 +52,18 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 						obj.id_receiver = id_receiver;
 						request_man.push(obj);
 					});
-					s++;
-					if(s==ret){
-						var date = new Date();
-						var minutes = 60;
-						date.setTime(date.getTime() + (minutes * 60 * 1000));
-						$.cookie('sinc', "true", { expires: date, path: '/' });
-						localStorage.setItem("online", JSON.stringify(request_man));
-					}else{
-						sisi(s);
-					}
+					
 				});
+				s++;
+				if(s==ret){
+					var date = new Date();
+					var minutes = 60;
+					date.setTime(date.getTime() + (minutes * 60 * 1000));
+					$.cookie('sinc', "true", { expires: date, path: '/' });
+					localStorage.setItem("online", JSON.stringify(request_man));
+				}else{
+					sisi(s);
+				}
 				
 			}
 			sisi(0);
