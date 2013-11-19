@@ -33,7 +33,7 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 		
 		$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
 			var ret = Math.round(d[0].data.length/15);
-			function sisi(s){
+			function sisi(s,request_man){
 			//for(i=0;i<ret;i++){
 				i=s;
 				$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
@@ -61,13 +61,13 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 						$.cookie('sinc', "true", { expires: date, path: '/' });
 						localStorage.setItem("online", JSON.stringify(request_man));
 					}else{
-						sisi(s);
+						sisi(s,request_man);
 					}
 					
 				});
 				
 			}
-			sisi(0);
+			sisi(0,request_man);
 			
 		});
 	}
