@@ -38,7 +38,7 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 				i=s;
 				$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
 					
-					
+					if(data){
 					$(data).find('.dmcontent>table:eq(0)>tbody>tr>td').each(function(){
 						var name_men = $(this).find('tr:eq(0) td:eq(1) a').text();
 						var age_men = $(this).find('tr:eq(1) td:eq(1)').text();
@@ -52,18 +52,19 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 						obj.id_receiver = id_receiver;
 						request_man.push(obj);
 					});
+					}
+					s++;
+					if(s==ret){
+						var date = new Date();
+						var minutes = 60;
+						date.setTime(date.getTime() + (minutes * 60 * 1000));
+						$.cookie('sinc', "true", { expires: date, path: '/' });
+						localStorage.setItem("online", JSON.stringify(request_man));
+					}else{
+						sisi(s);
+					}
 					
 				});
-				s++;
-				if(s==ret){
-					var date = new Date();
-					var minutes = 60;
-					date.setTime(date.getTime() + (minutes * 60 * 1000));
-					$.cookie('sinc', "true", { expires: date, path: '/' });
-					localStorage.setItem("online", JSON.stringify(request_man));
-				}else{
-					sisi(s);
-				}
 				
 			}
 			sisi(0);
