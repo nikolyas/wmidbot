@@ -14,7 +14,67 @@ if($.cookie('online')==undefined&&$('#user-info p:eq(1)').text()!=''){
 	
 }
 },3000);*/
-
+$('head').append('<style>#chat_act .message {height:11px!important;}</style>');
+function strt(request){
+			var postlist = [];
+			var obj = status_obj = request.object[0];
+			if(obj.speed==0){
+				var speed = 3000;
+			}else if(obj.speed==1){
+				var speed = 1000;
+			}else if(obj.speed==2){
+				var speed = 500;
+			}
+			var online_l = JSON.parse(localStorage['online']);
+			if(obj.list==0){
+				postlist = online_l;
+			}else if(obj.list==1){
+				postlist = [];
+				var postlist = JSON.parse(localStorage['contacts']);
+			}else if(obj.list==2){
+				postlist = [];
+				var pisal_l = JSON.parse(localStorage['pisal_list'+$.cookie('user_id')]);
+				$.each(pisal_l,function(i,v){
+					$.each(online_l,function(index,val){
+						if(v==val['id_pub']){
+							postlist.push(val);
+						}
+					});
+				});
+			}
+			var loc_b = localStorage['blist'+$.cookie('user_id')];
+			var loc_blist = [];
+			if(loc_b){ loc_blist = JSON.parse(loc_b);}
+			console.log(obj);
+			interval = setInterval(function(){
+				if(postlist[n]){
+					console.log(postlist[n]);
+					if(postlist[n].age>=(obj.age_from-0)&&postlist[n].age<=(obj.age_to-0)){
+					if((postlist[n].country==obj.country)||obj.country==0){
+						var message = obj.message.split('{name}').join(postlist[n].name).split('{age}').join(postlist[n].age);
+						if(postlist[n].id!=6){
+						if(loc_blist.join().search(postlist[n].id_pub) == -1){
+						if((obj.vip==1&&postlist[n].vip==true)||obj.vip==0){
+						if((obj.fake==1&&postlist[n].photo==true)||obj.fake==0){
+							console.log(message);
+								$.post("http://point.globalcompanions.com/send-message/"+postlist[n].id,{tag:postlist[n].id,source:'lc',message:message},function(d){});
+						}
+						}
+						}
+						}
+					}
+					}
+					n +=1;
+					status = 1;
+					$('#count_send').text('Sent: '+n+' from '+postlist.length+'');
+				}else{
+					clearInterval(interval);
+					status = 0;
+					n = 0;
+					console.log('stop');
+				}
+			},speed);
+}
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.command){
 		case 'get_invites':
@@ -77,68 +137,15 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 				sendResponse({user: $('#user-info p:eq(1)').text()});
 		break;
 		case 'start_send': 
-			var postlist = [];
-			var obj = status_obj = request.object[0];
-			if(obj.speed==0){
-				var speed = 3000;
-			}else if(obj.speed==1){
-				var speed = 1000;
-			}else if(obj.speed==2){
-				var speed = 500;
-			}
-			var online_l = JSON.parse(localStorage['online']);
-			if(obj.list==0){
-				postlist = online_l;
-			}else if(obj.list==1){
-				postlist = [];
-				var postlist = JSON.parse(localStorage['contacts']);
-			}else if(obj.list==2){
-				postlist = [];
-				var pisal_l = JSON.parse(localStorage['pisal_list'+$.cookie('user_id')]);
-				$.each(pisal_l,function(i,v){
-					$.each(online_l,function(index,val){
-						if(v==val['id_pub']){
-							postlist.push(val);
-						}
-					});
-				});
-			}
-			var loc_b = localStorage['blist'+$.cookie('user_id')];
-			var loc_blist = [];
-			if(loc_b){ loc_blist = JSON.parse(loc_b);}
-			console.log(obj);
-			interval = setInterval(function(){
-				if(postlist[n]){
-					console.log(postlist[n]);
-					if(postlist[n].age>=(obj.age_from-0)&&postlist[n].age<=(obj.age_to-0)){
-					if((postlist[n].country==obj.country)||obj.country==0){
-						var message = obj.message.split('{name}').join(postlist[n].name).split('{age}').join(postlist[n].age);
-						if(postlist[n].id!=6){
-						if(loc_blist.join().search(postlist[n].id_pub) == -1){
-						if((obj.vip==1&&postlist[n].vip==true)||obj.vip==0){
-						if((obj.fake==1&&postlist[n].photo==true)||obj.fake==0){
-							console.log(message);
-								$.post("http://point.globalcompanions.com/send-message/"+postlist[n].id,{tag:postlist[n].id,source:'lc',message:message},function(d){});
-						}
-						}
-						}
-						}
-					}
-					}
-					n +=1;
-					status = 1;
-					$('#count_send').text('Sent: '+n+' from '+postlist.length+'');
-				}else{
-					clearInterval(interval);
-					status = 0;
-					n = 0;
-					console.log('stop');
-				}
-			},speed);
+			stor = 0
+			status = 1;
+			strt(request);
+			
 		break;
 		case 'end_send': 
 			clearInterval(interval);
 			status = 0;
+			stor = 1;
 			console.log('stop');
 		break;
 		case 'get_status':
@@ -232,9 +239,95 @@ setInterval(function(){
 	});
 },2000);
 */
-var mans_chat = [];
+//var mans_chat = [];
+function set_mans(req,c){
+	var public_name = req[0].updates[0].member.name,
+		public_id = req[0].updates[0].member['public-id'],
+		id = req[0].updates[0].member['id'],
+		status = /*(c['video-allowed']==true)?'video_chat':*/'chat';
+		active = (id==window.location.hash.split('#/').join(''))?'active':'';
+		if($('#chat_act ul li#m_'+id).size()==0){
+			$('#chat_act ul').append('<li class="cl '+active+'" onclick="window.location.href=\'#/'+id+'\'" id="m_'+id+'" rel = "'+id+'"><span class="ics '+status+'"></span> '+public_name+' (ID:'+public_id+')</li>');
+		}
+		
+		$('.chat_act li').click(function(){
+			window.location.href="#/"+$(this).attr('rel');
+		});
+		$('#chat_act ul li').click(function(){
+			$('#chat_act ul li').removeClass('active');
+			$(this).addClass('active');
+		});
+		
+}
 setInterval(function(){
+	var mans_chat = [];
 	var girl = $('#user-info p:eq(1)').text();
+	$.getJSON('http://point.globalcompanions.com/updates/status/everyone/',function(s){
+	//$.getJSON('http://test1.ru/j.php?status=true',function(s){
+		if(s!=null&&s[0].updates[0].girl.chats.length>0){
+			if(s[0].updates[0].girl.chats.length>=3){
+				clearInterval(interval);
+				status = 0;
+			}
+			$('#chat_act ul li').removeClass('active');
+			$('#chat_act ul li#m_'+window.location.hash.split('#/').join('')).addClass('active');
+			for(c=0;c<s[0].updates[0].girl.chats.length;c++){
+				var public_name = '',
+					public_id = '',
+					client_id = s[0].updates[0].girl.chats[c]['client-id'],
+					smiles = ['O:)',':)',';)'],
+					msg = smiles[Math.floor(Math.random()*smiles.length)];
+					
+				$.get('http://chat.svadba.com/chat/#/'+client_id,function(ss){ console.log('get_man');});
+				
+				mans_chat.push(client_id);
+				
+				var chat_act = localStorage['chat_act'];
+				if(chat_act){ chat_act = JSON.parse(chat_act);}else{ chat_act = [];}
+				
+				if ((chat_act.length>0&&chat_act.join().search(client_id) == -1)||chat_act.length==0) {
+					setTimeout(function(){ 
+						if(window.location.hash!='#/'+client_id){
+							$.post("http://point.globalcompanions.com/send-message/"+client_id,{tag:client_id,source:'lc',message:msg},function(ss){ console.log('post'); });
+						}
+					},30000);
+					$('.au').remove();
+					$('body').append('<audio controls style="position:relative;z-index:9999;" class="au" autoplay><source src="https://wmid.googlecode.com/git/svadba/au.ogg" type="audio/ogg; codecs=vorbis"><source src="https://wmid.googlecode.com/git/svadba/au.mp3" type="audio/mpeg"></audio>');
+				}
+				if($('#chat_act ul li').size()==0){ $('#chat_act ul').html('');}
+					$.getJSON('http://point.globalcompanions.com/updates/member/'+client_id+'/?member-with='+client_id,function(ssss){ set_mans(ssss); });
+				if(window.location.hash=='#/'+client_id){
+					$('#chat_act ul #m_'+client_id+' span').removeClass('message');
+				}
+				
+			}
+			localStorage.setItem('chat_act',JSON.stringify(mans_chat));
+		}else{
+			$('#chat_act ul').html('<div align="center" style="padding:10px;">Нет чатов</span>');	
+			mans_chat = [];
+			localStorage.setItem('chat_act',JSON.stringify(mans_chat));
+			if($('#count_send').text()!=''&&status==0&&stor==0){
+				status = 1;
+				strt({object:[status_obj]});
+			}
+		}
+		
+	}).always(function(){
+		$('#chat_act ul li').each(function(i,v){
+			if(mans_chat.join().search($(v).attr('rel')) == -1){
+				$(v).remove();
+			}
+		});
+	});
+	$.getJSON('http://point.globalcompanions.com/updates/unreads/everyone/',function(s){
+	//$.getJSON('http://test1.ru/j.php?unreads=true',function(s){
+		if(s!=null){
+			if(s[0].updates[0].member.id!=girl){
+				$('#chat_act ul #m_'+s[0].updates[0].member.id+' span').addClass('message');
+			}
+		}
+	});
+	/*var girl = $('#user-info p:eq(1)').text();
 	$.getJSON('http://point.globalcompanions.com/updates/status+unreads/everyone/',function(s){
 		request = s;
 		if(typeof(request)!=null){ 
@@ -253,12 +346,7 @@ setInterval(function(){
 							var public_name = '';
 							var public_id = '';
 							public_name = request[i].updates[s].girl.chats[c]['client-id'];
-							/*for(var sd in status_obj){
-								if(request[i].updates[s].girl.chats[c]['client-id']==status_obj[sd].id){
-									public_name = status_obj[sd].name;
-									break;
-								}
-							}*/
+
 
 							var smiles = ['O:)',':)',';)'];
 							var msg = smiles[Math.floor(Math.random()*smiles.length)];
@@ -334,7 +422,7 @@ setInterval(function(){
 
 		}
 		}
-	});
+	});*/
 	
 },2000);
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
