@@ -9,7 +9,7 @@ var stor = 0;
 
 $('head').append('<style>#chat_act .message {height:11px!important;}</style>');
 $('#translate').show();
-$('#translate input[type="submit"]').css({ width: '112px', height: '27px', background: '#26ade4', textIndent: '0', lineHeight: 'auto', marginRight: '20px', fontWeight: 'bold', color: '#fff'});
+$('#translate input[type="submit"]').css({ width: '112px', height: '27px', background: '#26ade4', textIndent: '0', lineHeight: 'auto', marginRight: '20px', fontWeight: 'bold', color: '#fff'}).val('WMID Translate');
 $('#translate .popup').hide();
 
 function strt(request){
