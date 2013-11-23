@@ -5,7 +5,7 @@ var interval;
 var mans_invite = [];
 var blist = [];
 var online = [];
-var stor = 0;
+var stor = 1;
 
 $('head').append('<style>#chat_act .message {height:11px!important;}</style>');
 $('#translate').show();
@@ -76,6 +76,7 @@ function strt(request){
 					clearInterval(interval);
 					status = 0;
 					n = 0;
+					stor = 1;
 					console.log('stop');
 				}
 			},speed);
@@ -154,7 +155,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			
 		break;
 		case 'start_send': 
-			stor = 0
+			stor = 0;
 			status = 1;
 			strt(request);
 		break;
