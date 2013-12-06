@@ -34,7 +34,7 @@ if($.trim($('.menubtn:eq(1)').text())!='Log-In'){
 		$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
 			var ret = Math.round(d[0].data.length/15);
 			
-			$('body').append('<div id="sincs" style="position: fixed;top: 0;right: 0;left: 0;bottom: 0;background: #fff;opacity: 0.9;font-size: 29px;text-align: center;padding-top: 209px;">Подождите...</div>');
+			//$('body').append('<div id="sincs" style="position: fixed;top: 0;right: 0;left: 0;bottom: 0;background: #fff;opacity: 0.9;font-size: 29px;text-align: center;padding-top: 209px;">Подождите...</div>');
 			function sisi(s,request_man){	
 			//for(i=0;i<ret;i++){
 				i=s;
