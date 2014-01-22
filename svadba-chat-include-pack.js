@@ -58,12 +58,11 @@ function strt(request){
 						if((obj.fake==1&&postlist[n].photo==true)||obj.fake==0){
 						if(chat_act.join().search(postlist[n].id) == -1){
 							console.log(message);
-							console.log(postlist[n]);
 							if(window.location.host.indexOf('m.svadba.com') > -1){
 								$.post("http://m.svadba.com/chat-with/"+postlist[n].id+"/message",{message:message},function(d){});
 							}else{
 								$.post("http://chat.svadba.com/send-message/"+postlist[n].id,{tag:postlist[n].id,source:'lc',message:message},function(d){});
-								$('#sending_list').prepend('<li>'+postlist[n].name+' (ID:'+postlist[n].id+')</li>');
+								$('#sending_list').prepend('<li>'+postlist[n].name+' (ID:'+postlist[n].id_pub+')</li>');
 							}
 						}
 						}
