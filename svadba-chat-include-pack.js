@@ -217,7 +217,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 if(window.location.host.indexOf('m.svadba.com') > -1){
 	$('body').prepend('<div id="count_send"></div><style>#wrapper { overflow:visible!important;} .log-form-body { min-height:auto!important;}#contactScroll { -webkit-transform:translate3d(0px, 0px, 0px) scale(1)!important;}#count_send { color:#FFF!important; top:11!important; z-index:119999999; position:fixed!important;}</style>');
 }else{
-	$('body').prepend('<div id="chat_act"><b>Активные чаты</b><ul><div align="center" style="padding:10px;">Нет чатов</div></ul></div><div id="count_send"></div><div id="snd_a_man"><a href="#">Отсылка приглашений</a><ul id="sending_list"></ul></div>');
+	$('body').prepend('<div id="chat_act"><b>Активные чаты</b><ul><div align="center" style="padding:10px;">Нет чатов</div></ul></div><div id="count_send"></div><div id="snd_a_man"><a href="#">Отчет приглашений</a><ul id="sending_list"></ul></div>');
 	$('#snd_a_man a').click(function(){
 		if($('#snd_a_man').css('bottom')!='0px'){
 			$('#snd_a_man').css({'bottom':0,'height':'auto'});
