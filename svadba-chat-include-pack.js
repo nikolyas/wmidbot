@@ -7,7 +7,7 @@ var blist = [];
 var online = [];
 var stor = 1;
 
-$('head').append('<style>#chat_act .message {height:11px!important;} #online-opponents { top:72px!important;}</style>');
+$('head').append('<style>#chat_act .message {height:11px!important;} #online-opponents { top:72px!important;} #snd_a_man { position:absolute;left:0;top:100px;}</style>');
 $('#translate').show();
 $('#translate input[type="submit"]').css({ width: '112px', height: '27px', background: '#26ade4', textIndent: '0', lineHeight: 'auto', marginRight: '20px', fontWeight: 'bold', color: '#fff', borderRadius: '10px'}).val('WMID Translate');
 $('#translate .popup').hide();
@@ -214,7 +214,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 if(window.location.host.indexOf('m.svadba.com') > -1){
 	$('body').prepend('<div id="count_send"></div><style>#wrapper { overflow:visible!important;} .log-form-body { min-height:auto!important;}#contactScroll { -webkit-transform:translate3d(0px, 0px, 0px) scale(1)!important;}#count_send { color:#FFF!important; top:11!important; z-index:119999999; position:fixed!important;}</style>');
 }else{
-	$('body').prepend('<div id="chat_act"><b>Активные чаты</b><ul><div align="center" style="padding:10px;">Нет чатов</div></ul></div><div id="count_send"></div>');
+	$('body').prepend('<div id="chat_act"><b>Активные чаты</b><ul><div align="center" style="padding:10px;">Нет чатов</div></ul></div><div id="count_send"></div><a id="snd_a_man">Отсылка приглашений</a>');
 }
 /*setInterval(function(){
 	var local = window.location.hash;
