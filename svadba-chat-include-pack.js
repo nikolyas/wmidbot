@@ -62,7 +62,7 @@ function strt(request){
 								$.post("http://m.svadba.com/chat-with/"+postlist[n].id+"/message",{message:message},function(d){});
 							}else{
 								$.post("http://chat.svadba.com/send-message/"+postlist[n].id,{tag:postlist[n].id,source:'lc',message:message},function(d){});
-								$('#sending_list').prepend('<li>'+postlist[n].name+' (ID:'+postlist[n].id_pub+')</li>');
+								$('#sending_list').prepend('<li onclick="javascript:window.location.href=\'http://chat.svadba.com/chat/#/'+postlist[n].id+'\'">'+postlist[n].name+' (ID:'+postlist[n].id_pub+')</li>');
 							}
 						}
 						}
