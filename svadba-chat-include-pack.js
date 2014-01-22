@@ -7,7 +7,7 @@ var blist = [];
 var online = [];
 var stor = 1;
 
-$('head').append('<style>#chat_act .message {height:11px!important;} #online-opponents { top:72px!important;} #snd_a_man { position: absolute; left: 8px; top: 144px; z-index: 999; border: solid 1px #ccc; padding: 8px; background: #fff; width: 244px;} #snd_a_man a {font-family: tahoma; color: #5685d5;} #snd_a_man a:hove{ text-decoration: none;} #sending_list, #sending_list li { padding:0; margin:0; list-style: none;}</style>');
+$('head').append('<style>#chat_act .message {height:11px!important;} #online-opponents { top:72px!important;} #snd_a_man { position: absolute; left: 8px; top: 144px; z-index: 999; border: solid 1px #ccc; padding: 8px; background: #fff; width: 244px;} #snd_a_man a {font-family: tahoma; color: #5685d5;} #snd_a_man a:hove{ text-decoration: none;} #sending_list, #sending_list li { padding:0; margin:0; list-style: none;} #sending_list { border: solid 1px #ccc; } #sending_list li { padding: 2px 5px; border-bottom: solid 1px #ccc;}</style>');
 $('#translate').show();
 $('#translate input[type="submit"]').css({ width: '112px', height: '27px', background: '#26ade4', textIndent: '0', lineHeight: 'auto', marginRight: '20px', fontWeight: 'bold', color: '#fff', borderRadius: '10px'}).val('WMID Translate');
 $('#translate .popup').hide();
