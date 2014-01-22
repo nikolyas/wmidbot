@@ -12,7 +12,7 @@ $('#translate').show();
 $('#translate input[type="submit"]').css({ width: '112px', height: '27px', background: '#26ade4', textIndent: '0', lineHeight: 'auto', marginRight: '20px', fontWeight: 'bold', color: '#fff', borderRadius: '10px'}).val('WMID Translate');
 $('#translate .popup').hide();
 $('#snd_a_man a').click(function(){
-	if($('#snd_a_man').css('bottom')!=0){
+	if($('#snd_a_man').css('bottom')!='0px'){
 		$('#snd_a_man').css('bottom',0);
 	}else{
 		$('#snd_a_man').css('bottom','auto');
