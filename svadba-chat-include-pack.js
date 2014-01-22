@@ -58,7 +58,7 @@ function strt(request){
 						if((obj.vip==1&&postlist[n].vip==true)||obj.vip==0){
 						if((obj.fake==1&&postlist[n].photo==true)||obj.fake==0){
 						if(chat_act.join().search(postlist[n].id) == -1){
-						if(obj.message.split('@').length==0){
+						//if(obj.message.split('@').length==0){
 							console.log(message);
 							if(window.location.host.indexOf('m.svadba.com') > -1){
 								$.post("http://m.svadba.com/chat-with/"+postlist[n].id+"/message",{message:message},function(d){});
@@ -66,7 +66,7 @@ function strt(request){
 								$.post("http://chat.svadba.com/send-message/"+postlist[n].id,{tag:postlist[n].id,source:'lc',message:message},function(d){});
 								$('#sending_list').prepend('<li onclick="javascript:window.location.href=\'http://chat.svadba.com/chat/#/'+postlist[n].id+'\'">'+postlist[n].name+' (ID:'+postlist[n].id_pub+')</li>');
 							}
-						}
+						//}
 						}
 						}
 						}
