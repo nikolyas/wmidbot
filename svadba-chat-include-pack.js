@@ -7,7 +7,7 @@ var blist = [];
 var online = [];
 var stor = 1;
 
-$('head').append('<style>#chat_act .message {height:11px!important;}</style>');
+$('head').append('<style>#chat_act .message {height:11px!important;} #online-opponents { top:72px!important;}</style>');
 $('#translate').show();
 $('#translate input[type="submit"]').css({ width: '112px', height: '27px', background: '#26ade4', textIndent: '0', lineHeight: 'auto', marginRight: '20px', fontWeight: 'bold', color: '#fff', borderRadius: '10px'}).val('WMID Translate');
 $('#translate .popup').hide();
