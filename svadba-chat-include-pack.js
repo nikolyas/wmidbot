@@ -59,6 +59,7 @@ function strt(request){
 						if((obj.fake==1&&postlist[n].photo==true)||obj.fake==0){
 						if(chat_act.join().search(postlist[n].id) == -1){
 						if(obj.message.split('@').length==1){
+						if(obj.message.split('://').length==1&&obj.message.split('.com').length==1&&obj.message.split('.ua').length==1&&obj.message.split('.net').length==1){
 							console.log(message);
 							if(window.location.host.indexOf('m.svadba.com') > -1){
 								$.post("http://m.svadba.com/chat-with/"+postlist[n].id+"/message",{message:message},function(d){});
@@ -66,6 +67,14 @@ function strt(request){
 								$.post("http://chat.svadba.com/send-message/"+postlist[n].id,{tag:postlist[n].id,source:'lc',message:message},function(d){});
 								$('#sending_list').prepend('<li onclick="javascript:window.location.href=\'http://chat.svadba.com/chat/#/'+postlist[n].id+'\'">'+postlist[n].name+' (ID:'+postlist[n].id_pub+')</li>');
 							}
+						}else{ 
+							clearInterval(interval);
+							status = 0;
+							n = 0;
+							stor = 1;
+							console.log('stop');
+							alert('Вы хотите рассылать ссылку! Это запрещено!');
+						}
 						}else{ 
 							clearInterval(interval);
 							status = 0;
