@@ -44,6 +44,7 @@ function strt(request){
 			var loc_blist = [];
 			if(loc_b){ loc_blist = JSON.parse(loc_b);}
 			console.log(obj);
+			$('#snd_a_man').css({'bottom':0,'height':'auto'});
 			interval = setInterval(function(){
 				if(postlist[n]){
 					console.log(postlist[n]);
