@@ -48,10 +48,10 @@ function strt(request){
 			interval = setInterval(function(){
 				if(postlist[n]){
 					if(postlist[n].age>=(obj.age_from-0)&&postlist[n].age<=(obj.age_to-0)){
-					if((postlist[n].country==obj.country)||obj.country==0){
+						console.log(postlist[n].country);
+					//if((postlist[n].country==obj.country)||obj.country==0){
 						var message = obj.message.split('{name}').join(postlist[n].name).split('{age}').join(postlist[n].age);
 						
-					console.log('send',postlist[n]);
 						var chat_act = localStorage['chat_act'];
 						if(chat_act){ chat_act = JSON.parse(chat_act);}else{ chat_act = [];}
 						if(postlist[n].id!=6){
@@ -90,7 +90,7 @@ function strt(request){
 						}
 						}
 					}
-					}
+					//}
 					n +=1;
 					status = 1;
 					$('#count_send').text('Отослано: '+n+' из '+postlist.length+'');
