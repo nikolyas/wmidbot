@@ -94,12 +94,12 @@
             </table>
             <div class="clear10"></div>
             </div>
-            <div id="countr">
+            <!--<div id="countr">
             <b class="title">По странам</b>
             <div class="clear5"></div>
             <select class="sel_100" id="country"></select>
             <div class="clear10"></div>
-            </div>
+            </div>-->
             <label><input type="checkbox" id="fake"> Только с фото</label>
             <div class="clear10"></div>
             <label><input type="checkbox" id="vip"> По VIP <span style="color:#F00;">new</span></label>
@@ -127,7 +127,7 @@ var EWMID = {
 		EWMID.get_blecklist();
 		EWMID.get_pisal();
 		EWMID.get_contacts();
-		EWMID.get_online(function(){$('#hidden_load').hide();EWMID.set_age();EWMID.set_country(); console.log(111); });
+		EWMID.get_online(function(){$('#hidden_load').hide();EWMID.set_age();/*EWMID.set_country();*/ console.log(111); });
 		WMID.send('get_status','',function(r){ 
 			if(r.status==0){
 				$('#start_send').show(); $('#end_send').hide();
@@ -225,11 +225,11 @@ var EWMID = {
 			var index = $(this).find('option:selected').index();
 			EWMID.var_important_age_from = EWMID.var_important_age_to = 0;
 			if(index==0){
-				EWMID.get_online(function(){EWMID.set_age();EWMID.set_country();});
+				EWMID.get_online(function(){EWMID.set_age();/*EWMID.set_country();*/});
 				$('#fake,#vip').parent().show();
 				$('#countr,#ages').show();
 			}else if(index==1){
-				EWMID.get_contacts(function(){EWMID.set_age();EWMID.set_country();});
+				EWMID.get_contacts(function(){EWMID.set_age();/*EWMID.set_country();*/});
 				$('#fake,#vip').parent().hide();
 				$('#countr,#ages').show();
 			}else if(index==2){
