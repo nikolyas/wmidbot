@@ -40,7 +40,22 @@ if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 		$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
 			var ret = Math.round(d[0].data.length/15);
 			for(i=0;i<ret;i++){
-				$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
+				var obj = {};
+				obj.id_men = d[0].data[i].id;
+				obj.name_men = d[0].data[i].displayname;
+				obj.age_men = d[0].data[i].age;
+				//obj.id_receiver = id_receiver;
+				request_man.push(obj);
+				s++;
+				if(s==ret){
+					var date = new Date();
+					var minutes = 60;
+					date.setTime(date.getTime() + (minutes * 60 * 1000));
+					$.cookie('sinc', "true", { expires: date, path: '/' });
+					localStorage.setItem("online", JSON.stringify(request_man));
+					console.log(localStorage['online']);
+				}
+				/*$.get('http://www.dream-marriage.com/russian-women-gallery.php?all=men&online_dropdown=1&page='+i+'&ini='+i,function(data){
 					
 					
 					$(data).find('.dmcontent>table:eq(0)>tbody>tr>td').each(function(){
@@ -65,7 +80,7 @@ if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 						localStorage.setItem("online", JSON.stringify(request_man));
 						console.log(localStorage['online']);
 					}
-				});
+				});*/
 				
 			}
 			
