@@ -38,7 +38,7 @@ if(window.location.href.indexOf('dream-marriage.com/chat') > 1){
 		var s = 0;
 		
 		$.getJSON('http://www.dream-marriage.com/chat/ajax.php?ts='+ts+'&pid='+$.cookie('user_id')+'&__tcAction=onlineListRequest',function(d){
-			var ret = Math.round(d[0].data.length/15);
+			var ret = d[0].data.length;
 			for(i=0;i<ret;i++){
 				var obj = {};
 				obj.id_men = d[0].data[i].id;
